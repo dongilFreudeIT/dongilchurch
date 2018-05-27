@@ -47,3 +47,5 @@ demos/src/**/*.ngfactory.ts
 demos/src/**/*.d.ts
 demos/src/**/*.metadata.json
 demos/src/**/*.css.shim.ts
+GoogleService-Info.plist
+google-services.json
