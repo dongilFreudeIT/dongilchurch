@@ -1,0 +1,81 @@
+<ion-header>
+    <ion-navbar color="primary" no-border-bottom>
+      <button ion-button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+      <ion-title>
+        성도 관리
+      </ion-title>
+    
+        <ion-buttons end>
+            <button ion-button (click)="sendPush()">푸시 보내기</button>    
+        </ion-buttons>
+        <ion-buttons end>
+            <button ion-button (click)="showSortModal()">정렬</button>    
+        </ion-buttons>
+    </ion-navbar>
+
+    <ion-toolbar color="white" class="my-toolbar box-shadow">
+        <ion-buttons start>
+            <button ion-button (click)="selectToggle()">모두선택</button>
+          </ion-buttons>
+        <ion-searchbar
+        [(ngModel)]="searchKeyword"
+        [showCancelButton]="shouldShowCancel"
+        (ionInput)="searchUser($event)"
+        (ionCancel)="onCancel($event)">
+      </ion-searchbar>
+      </ion-toolbar>
+
+  </ion-header>
+  <ion-content>
+
+      <ion-row class="wrapper-sm b-b b-light" *ngFor="let user of userArray" (click)="goToDetail(user)">
+          <ion-col col-auto>
+            <br>
+              <ion-checkbox color="blue" style="width: 16px; height:16px" [(ngModel)]="user.selected" checked="false"></ion-checkbox>
+          </ion-col>
+          <ion-col class="text-ellipsis-flex">
+            <div class="l-h">
+              <div class=""><b>{{user.name}}</b></div>
+              <div class="text-sm text-muted text-ellipsis">{{user.place}}/{{user.subgroup}}/{{user.title}}</div>
+              <div class="text-sm text-muted text-ellipsis">{{user.birthday}}/{{user.phone}}</div>
+            </div>
+      
+            <!-- <div>
+              <button ion-button outline small><b>Say congrats</b></button>
+              <button ion-button clear small icon-left>
+                <ion-icon name="md-thumbs-up"></ion-icon>
+                <b>Like</b>
+              </button>
+            </div> -->
+          </ion-col>
+          <ion-col col-auto>
+            <!-- <ion-icon class="text-2x text-muted" name="more"></ion-icon> -->
+            <div class="" style="color:rgb(224, 33, 33)" ><b>{{user.grade}}</b></div>
+          </ion-col>
+        </ion-row>
+    
+    <!-- <ion-list>
+      <ion-item-sliding *ngFor="let user of userArray">
+      <ion-item>
+        <ion-label>
+            <span style="font-size:20px">{{user.name}}({{user.id}})</span>
+            <span style="font-size:20px; color:rgb(224, 33, 33)" float-right>{{user.grade}}</span><br>   
+            <span style="font-size:12px;">{{user.place}}/{{user.subgroup}}/{{user.title}}</span><br>
+            <span style="font-size:12px; color:rgb(66, 66, 66)">{{user.birthday}}/{{user.phone}}</span><br>
+            </ion-label>
+          <ion-checkbox color="blue" [(ngModel)]="user.selected" checked="false"></ion-checkbox>
+      </ion-item>
+          <ion-item-options side="right">
+              <button ion-button color="primary" (click)="goToDetail(user)">
+                자세히보기
+              </button>
+            </ion-item-options>
+        
+        </ion-item-sliding>
+
+    </ion-list> -->
+
+   
+  </ion-content>

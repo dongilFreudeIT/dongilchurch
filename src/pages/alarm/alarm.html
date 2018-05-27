@@ -1,0 +1,61 @@
+<ion-header>
+  <ion-navbar color="primary" no-border-bottom>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>
+      알림 리스트
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+  <!--     
+    <div>
+        <ion-row class="wrapper-sm b-b b-light" (click)="showDetail(data.serial)" *ngFor="let data of pushDataArray">
+          <ion-col class="text-ellipsis-flex">
+            <div class="l-h">
+              <div class="font-bold text-ellipsis">{{data.title}}</div>
+              <div class="text-sm text-muted">
+                  {{data.body}}
+              </div>
+            </div>
+          </ion-col>
+          <ion-col col-auto>
+            <div class="text-muted text-xs m-t-xs">{{data.registered_date}}</div>
+          </ion-col>
+        </ion-row>
+      </div> -->
+
+  <ion-row class="wrapper-sm b-b b-light" (click)="showDetail(data.serial)" *ngFor="let data of pushDataArray">
+    <!-- <ion-col col-auto>
+      <ion-avatar item-start>
+        <img class="thumb-sm" src="assets/imgs/logo_big.jpg">
+      </ion-avatar>
+    </ion-col> -->
+    <ion-col class="text-ellipsis-flex">
+      <div class="l-h">
+        <div class="">제목
+          <strong> {{data.title}}</strong>
+        </div>
+        <div class="text-sm text-muted text-ellipsis">{{data.body}}</div>
+        <!-- <div class="text-xxs text-muted">
+              <ion-icon name="ios-pin-outline"></ion-icon>
+              daegu
+            </div> -->
+      </div>
+    </ion-col>
+    <ion-col text-right col-auto>
+      <div class="span text-xs text-muted m-t-xs">{{data.registered_date}}</div>
+    </ion-col>
+  </ion-row>
+
+
+  <!-- <ion-list>
+      <button ion-item *ngFor="let data of pushDataArray" (click)="showDetail(data.serial)">
+        <span style="font-size:16px;">{{data.title}}</span>
+        <span style="font-size:12px; color:rgb(88, 88, 88)" float-right>{{data.registered_date}}</span>
+        <br>   
+        <span style="font-size:12px;">{{data.body}}</span>
+    </button>
+  </ion-list> -->
+</ion-content>

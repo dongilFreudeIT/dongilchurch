@@ -1,0 +1,113 @@
+.my-tabs .tabbar {
+    background-color: #fff;
+  }
+  
+  .my-toolbar-title{
+    text-align: center;
+  }
+  .my-toolbar {
+    .toolbar-background {
+      background-color: #fff;
+      border-color: transparent;
+
+    }
+    ion-scroll {
+      height: 42px;
+      white-space: nowrap;
+      ion-segment {
+        width: 420px;
+      }
+    }
+    ion-segment {
+      .segment-button:not(.segment-activated) {
+        color: color($colors, muted)
+      }
+    }
+  }
+  
+  .bg-gradient {
+    background-image: -webkit-gradient(linear, right bottom, left bottom, color-stop(0, #008DC9), color-stop(1, #019DA5));
+    background-image: -o-linear-gradient(left, #019DA5 0%, #008DC9 100%);
+    background-image: -moz-linear-gradient(left, #019DA5 0%, #008DC9 100%);
+    background-image: -webkit-linear-gradient(left, #019DA5 0%, #008DC9 100%);
+    background-image: -ms-linear-gradient(left, #019DA5 0%, #008DC9 100%);
+    background-image: linear-gradient(to left, #019DA5 0%, #008DC9 100%);
+  }
+  
+  .modal-gradient {
+    ion-content, .toolbar-background {
+      @extend .bg-gradient;
+    }
+  }
+  
+  .form-login {
+    margin: 16px;
+    width: calc(100% - 32px);
+  }
+  
+  .avatar-more {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    line-height: 40px;
+    font-size: 24px;
+    border: 1px solid #bbb;
+    text-align: center;
+  }
+  
+  .user-label {
+    font-size: 10px;
+    padding: 2px 4px;
+    border-radius: 2px;
+    color: color($colors, primary);
+    background-color: rgba(color($colors, primary), .2);
+  }
+  
+  /* https://stackoverflow.com/a/38786672/1186752 */
+  .input-cover {
+    position: static;
+  }
+  
+  .content-noscroll .scroll-content {
+    overflow: hidden;
+  }
+  
+  .scroll-y {
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+  
+  .button-fab {
+    position: fixed;
+    bottom: 64px;
+    right: 12px;
+    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.35), 5px 5px 10px rgba(0, 0, 0, 0.05);
+  }
+  
+  .has-fab-bottom {
+    margin-bottom: 72px;
+  }
+  
+  .thumb-xxxs {
+    width: 20px;
+    display: inline-block;
+  }
+  .title.title-md {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    transform: translateX(-50%);
+    height: 100%;
+    width: 70%;
+    text-align: center;
+}
+.item-md{
+  font-size: 1.8rem;
+}
+// .icon.icon-md{
+//   padding-right: 15px;
+// }
+// ion-icon .icon-color{
+//   // color:color($colors,  secondary);
+//   color: #008DC9;
+// }

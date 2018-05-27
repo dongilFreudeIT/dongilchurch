@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "521875318610",
+    "firebase_url": "https://dongilchurch-b89c0.firebaseio.com",
+    "project_id": "dongilchurch-b89c0",
+    "storage_bucket": "dongilchurch-b89c0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:521875318610:android:c506f67b93dda317",
+        "android_client_info": {
+          "package_name": "com.dongil.church"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "521875318610-motjp58998r3q5shaoepli7gdhpk78c8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.dongil.church",
+            "certificate_hash": "62c16a49871a6dd4b08365d22fc2f6bba026ad28"
+          }
+        },
+        {
+          "client_id": "521875318610-1ejvslgaov9g1r3pbd8umegjc0kflr5j.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBO54QStpo07hOQ0SkoV4tzESdcvc61jvE"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "521875318610-1ejvslgaov9g1r3pbd8umegjc0kflr5j.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

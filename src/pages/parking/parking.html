@@ -1,0 +1,37 @@
+<ion-header>
+  <ion-navbar color="primary" no-border-bottom>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>
+      주차장 현황
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+
+
+  <img style="width:100%" src="assets/imgs/park_map.png" />
+  <br>
+  <ion-card class="padder text-2x" *ngFor="let parking of parkingArray">
+    <div class="m-b-md m-t-sm b-b padder-v">  
+    <ion-avatar item-start>
+          <img class="thumb-sm line-lg" style="vertical-align:middle" src="assets/imgs/icon-p.png"> {{parking.name}}
+        </ion-avatar>
+      </div>
+    <!-- <ion-card-content>
+      <ion-card-title>
+        {{parking.name}}
+      </ion-card-title>
+    </ion-card-content> -->
+    
+    <div class="m-b-sm text-right ">
+      <ion-avatar item-start>
+        <img class="thumb-sm m-r-sm" src="assets/imgs/icon-parking.png"> {{parking.status}}
+      </ion-avatar>
+
+    </div>
+
+  </ion-card>
+
+</ion-content>

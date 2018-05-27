@@ -1,0 +1,60 @@
+<ion-header>
+  <ion-navbar color="primary" no-border-bottom>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title title-md>
+      동일교회
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="main-header">
+
+  <!-- <img src="assets/imgs/home.jpg" /> -->
+  <img class="home-image" src="assets/imgs/main-logo.png" />
+
+
+  <div id="authenticated">
+    <!-- <ion-grid class="home-grid">
+      <ion-row>
+        <ion-col width-50> -->
+    <!-- <button class="home-button" ion-button full outline large icon-left color="primary" (click)="goToAlarm()"><ion-icon name="chatbubbles"></ion-icon>알림 리스트</button> -->
+    <!-- </ion-col> -->
+    <!-- <ion-col> -->
+    <!-- <button class="home-button" ion-button full outline large icon-left color="primary" (click)="goToParking()"><ion-icon name="car" ></ion-icon>주차장 보기</button> -->
+    <!-- </ion-col> -->
+    <!-- </ion-row> -->
+
+    <!-- <ion-row> -->
+    <!-- <ion-col width-50> -->
+    <!-- <button class="home-button" ion-button full outline large icon-left color="primary" (click)="goToMyinfo()"><ion-icon name="contact" ></ion-icon>내정보</button> -->
+    <!-- </ion-col> -->
+    <!-- <ion-col> -->
+    <!-- <button class="home-button" ion-button full outline large icon-left color="primary" (click)="goToSetting()"><ion-icon name="settings" ></ion-icon>설정</button> -->
+    <!-- </ion-col> -->
+    <!-- </ion-row> -->
+
+    <div class="main-body">
+
+      <ion-row>
+        <ion-col style="padding:10px;">
+          <img src="assets/imgs/button-alram.png" (click)="goToAlarm()">
+        </ion-col>
+        <ion-col>
+          <img src="assets/imgs/button-parking.png" (click)="goToParking()">
+        </ion-col>
+      </ion-row>
+
+      <ion-row class="ionrow" style="padding:10px;">
+        <ion-col>
+          <img src="assets/imgs/button-home_2.png" (click)="goToHome()">
+        </ion-col>
+        <ion-col>
+            <img src="assets/imgs/button-familysite.png" (click)="goToFamilysite()">
+        </ion-col>
+      </ion-row>
+    </div>
+
+  </div>
+</ion-content>

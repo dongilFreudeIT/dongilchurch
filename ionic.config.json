@@ -1,0 +1,8 @@
+{
+  "name": "dongil_church",
+  "app_id": "",
+  "type": "ionic-angular",
+  "integrations": {
+    "cordova": {}
+  }
+}

@@ -1,0 +1,179 @@
+<ion-header no-border>
+    <ion-toolbar>
+        <ion-title></ion-title>
+        <ion-buttons end>
+            <button ion-button color="light" (click)="dismiss()">
+                <ion-icon name="md-close"></ion-icon>
+            </button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+
+
+<ion-content padding>
+
+
+    <form #form_chk method="post">
+        <input type="hidden" name="m" value="checkplusSerivce">
+        <input type="hidden" name="EncodeData" ng-value="enc_data">
+        <ion-card class="form-login">
+            <ion-item class="b-b b-light">
+                <ion-label color="primary">
+
+                </ion-label>
+                <ion-input type="text" placeholder="아이디" [(ngModel)]="user_id" name="user_id" required></ion-input>
+            </ion-item>
+
+            <ion-item class="b-b b-light">
+                <ion-label color="primary">
+
+                </ion-label>
+                <ion-input type="password" placeholder="비밀번호" [(ngModel)]="password" name="password" required></ion-input>
+            </ion-item>
+
+            <ion-item class="b-b b-light">
+                <ion-label color="primary">
+
+                </ion-label>
+                <ion-input type="password" placeholder="비밀번호 확인" [(ngModel)]="password_again" name="password_again" required></ion-input>
+            </ion-item>
+
+            <ion-item class="b-b b-light" *ngIf="!cert_flag">
+                <ion-label color="primary">
+
+                </ion-label>
+                <ion-input type="text" [(ngModel)]="user_name" name="user_name" placeholder="이 름" (click)="mobileAuth();"></ion-input>
+            </ion-item>
+            <ion-item class="b-b b-light" *ngIf="cert_flag">
+                    <ion-label color="primary" margin-left="40px">
+                        {{user_name}}
+                    </ion-label>
+                    <!-- <ion-input type="text" [(ngModel)]="user_name" name="user_name" placeholder="이 름" (click)="mobileAuth();"></ion-input> -->
+                </ion-item>
+            <ion-item class="b-b b-light" *ngIf="!cert_flag">
+                <ion-label color="primary">
+
+                </ion-label>
+                <ion-input type="number" [(ngModel)]="user_phone" name="user_phone" placeholder="휴대폰 번호" (click)="mobileAuth();"></ion-input>
+                <button ion-button color="stable" item-end (click)="mobileAuth();">본인인증</button>
+            </ion-item>
+
+            <ion-item class="b-b b-light" *ngIf="cert_flag" >
+                <ion-label color="primary" margin-left="40px">
+                    {{user_phone}}
+                </ion-label>
+                <!-- <ion-input type="number" value="{{user_phone}}" ></ion-input> -->
+            </ion-item>
+
+            <ion-item class="b-b b-light">
+                <ion-label color="primary">
+
+                </ion-label>
+                <ion-input type="text" [(ngModel)]="user_address" name="user_address" id="user_address" placeholder="주소"></ion-input>
+            </ion-item>
+
+            <ion-item class="b-b b-light">
+                <ion-label color="primary">
+                    지역
+                </ion-label>
+                <ion-select [(ngModel)]="user_place" name="user_place">
+                    <ion-option value="">지역없음</ion-option>
+                    <ion-option value="1지역">1지역</ion-option>
+                    <ion-option value="2지역">2지역</ion-option>
+                    <ion-option value="3지역">3지역</ion-option>
+                    <ion-option value="4지역">4지역</ion-option>
+                    <ion-option value="5지역">5지역</ion-option>
+                    <ion-option value="6지역">6지역</ion-option>
+                    <ion-option value="7지역">7지역</ion-option>
+                </ion-select>
+            </ion-item>
+
+            <ion-item class="b-b b-light">
+                <ion-label color="primary">
+                    기관
+                </ion-label>
+                <ion-select [(ngModel)]="user_subgroup" name="user_subgroup">
+                    <ion-option value="">기관없음</ion-option>
+                    <ion-option value="영아부">영아부</ion-option>
+                    <ion-option value="유치부">유치부</ion-option>
+                    <ion-option value="유년부">유년부</ion-option>
+                    <ion-option value="초등부">초등부</ion-option>
+                    <ion-option value="중등부">중등부</ion-option>
+                    <ion-option value="고등부">고등부</ion-option>
+                    <ion-option value="1청년부">1청년부</ion-option>
+                    <ion-option value="2청년부">2청년부</ion-option>
+                    <ion-option value="3청년부">3청년부</ion-option>
+                    <ion-option value="신혼청년부">신혼청년부</ion-option>
+                    <ion-option value="에녹소망회">에녹소망회</ion-option>
+                    <ion-option value="갈렙회">갈렙회</ion-option>
+                    <ion-option value="사라회">사라회</ion-option>
+                    <ion-option value="나오미회">나오미회</ion-option>
+                    <ion-option value="1남전도회">1남전도회</ion-option>
+                    <ion-option value="2남전도회">2남전도회</ion-option>
+                    <ion-option value="3남전도회">3남전도회</ion-option>
+                    <ion-option value="4남전도회">4남전도회</ion-option>
+                    <ion-option value="5남전도회">5남전도회</ion-option>
+                    <ion-option value="6남전도회">6남전도회</ion-option>
+                    <ion-option value="1여전도회">1여전도회</ion-option>
+                    <ion-option value="2여전도회">2여전도회</ion-option>
+                    <ion-option value="3여전도회">3여전도회</ion-option>
+                    <ion-option value="4여전도회">4여전도회</ion-option>
+                    <ion-option value="5여전도회">5여전도회</ion-option>
+                    <ion-option value="6여전도회">6여전도회</ion-option>
+                    <ion-option value="7여전도회">7여전도회</ion-option>
+                    <ion-option value="8여전도회">8여전도회</ion-option>
+                    <ion-option value="9여전도회">9여전도회</ion-option>
+                    <ion-option value="10여전도회">10여전도회</ion-option>
+                </ion-select>
+            </ion-item>
+
+            <ion-item class="b-b b-light">
+                <ion-label color="primary">
+                    직분
+                </ion-label>
+                <ion-select [(ngModel)]="user_title" name="user_title">
+                    <ion-option value="">직분없음</ion-option>
+                    <ion-option value="교역자">교역자</ion-option>
+                    <ion-option value="장로">장로</ion-option>
+                    <ion-option value="권사">권사</ion-option>
+                    <ion-option value="장립집사">장립집사</ion-option>
+                    <ion-option value="서리집사">서리집사</ion-option>
+                </ion-select>
+            </ion-item>
+
+            <ion-item class="b-b b-light">
+                <ion-label color="primary">
+                    순직책
+                </ion-label>
+                <ion-select [(ngModel)]="user_subtitle" name="user_subtitle">
+                    <ion-option value="">순직책없음</ion-option>
+                    <ion-option value="교구장">교구장</ion-option>
+                    <ion-option value="지역권사">지역권사</ion-option>
+                    <ion-option value="순장">순장</ion-option>
+                    <ion-option value="순원">순원</ion-option>
+
+                </ion-select>
+            </ion-item>
+
+        </ion-card>
+        <div class="padder">
+
+            <div class="color-white" text-center>
+                회원가입 버튼을 누르는 것으로 해당 앱의 이용약관에 동의 하는 것으로 간주합니다.
+                <br>
+                <ion-col text-right>
+                    <button ion-button clear color="light" small href="#" onclick="window.open('http://www.dongil.org/page_mxcC75', 'location=yes'); return false;">
+                        이용약관 자세히 보기
+                    </button>
+                </ion-col>
+            </div>
+            <!-- <form id="signup-form2" #signupForm="ngForm"> -->
+
+            <button id="signup-button3" ion-button block outline color="light" (click)="signup()" href-inappbrowser="/signup">
+                회원가입
+            </button>
+        </div>
+    </form>
+
+    <!-- </form> -->
+</ion-content>

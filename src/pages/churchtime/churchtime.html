@@ -1,0 +1,111 @@
+<!--
+  Generated template for the ChurchtimePage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+    <ion-navbar color="primary" no-border-bottom>
+        <button ion-button menuToggle>
+            <ion-icon name="menu"></ion-icon>
+          </button>
+    <ion-title>예배시간 설정</ion-title>
+    <ion-buttons end>
+        <button  ion-button (click)="saveTime()">
+           저장
+        </button>
+      </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content class="bg-muted">
+
+  <ion-row class="bg-white wrapper-sm m-t-sm" >
+        <ion-col col-8>
+          <div class="">
+            <div class="text-lg">1부 예배</div>
+            <div class="text-muted">주일 오전 8시~9시</div>
+          </div>
+        </ion-col>
+        <ion-col col-4>
+            <ion-toggle mode="md" [(ngModel)]="toggle_1" ></ion-toggle>
+        </ion-col>
+      </ion-row>
+
+      <ion-row class="bg-white wrapper-sm m-t-sm" >
+          <ion-col col-8>
+            <div class="">
+              <div class="text-lg">2부 예배</div>
+              <div class="text-muted">주일 오전10시 ~ 11시</div>
+            </div>
+          </ion-col>
+          <ion-col col-4>
+              <ion-toggle mode="md" [(ngModel)]="toggle_2"></ion-toggle>
+          </ion-col>
+     </ion-row>
+
+     <ion-row class="bg-white wrapper-sm m-t-sm" >
+        <ion-col col-8>
+          <div class="">
+            <div class="text-lg">3부 예배</div>
+            <div class="text-muted">주일 오전12시 ~ 오후1시</div>
+          </div>
+        </ion-col >
+        <ion-col col-4>
+            <ion-toggle mode="md" [(ngModel)]="toggle_3"></ion-toggle>
+        </ion-col>
+   </ion-row>
+
+   <ion-row class="bg-white wrapper-sm m-t-sm" >
+      <ion-col col-8>
+        <div class="l-h">
+          <div class="text-lg">4부 젊은이 예배</div>
+          <div class="text-muted">주일 오후2시 ~ 3시</div>
+        </div>
+      </ion-col>
+      <ion-col col-4>
+          <ion-toggle mode="md" [(ngModel)]="toggle_4"></ion-toggle>
+      </ion-col>
+ </ion-row>
+
+ <ion-row class="bg-white wrapper-sm m-t-sm" >
+    <ion-col col-8>
+      <div class="l-h">
+        <div class="text-lg">오후예배</div>
+        <div class="text-muted">주일 오후3시반 ~ 4시반</div>
+      </div>
+    </ion-col >
+    <ion-col col-4>
+        <ion-toggle mode="md" [(ngModel)]="toggle_5"></ion-toggle>
+    </ion-col>
+</ion-row>
+
+<ion-row class="bg-white wrapper-sm m-t-sm" >
+    <ion-col col-8>
+      <div class="">
+        <div class="text-lg">수요예배</div>
+        <div class="text-muted">수요일 오후7시반 ~ 9시</div>
+      </div>
+    </ion-col>
+    <ion-col col-4>
+        <ion-toggle mode="md" [(ngModel)]="toggle_6"></ion-toggle>
+        
+    </ion-col>
+</ion-row>
+
+<ion-row class="bg-white wrapper-sm m-t-sm" >
+    <ion-col col-8>
+      <div class="">
+        <div class="text-lg">금요본당기도회</div>
+        <div class="text-muted">금요일 오후8시반 ~ 10시</div>
+      </div>
+    </ion-col>
+    <ion-col col-4>
+        <ion-toggle mode="md" [(ngModel)]="toggle_7"></ion-toggle>
+    </ion-col>
+</ion-row>
+
+</ion-content>

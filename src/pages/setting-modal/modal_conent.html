@@ -1,0 +1,29 @@
+<ion-header>
+    <ion-toolbar color="primary" no-border-bottom>
+      <ion-buttons start>
+        <button ion-button (click)="dismiss()">취소</button>
+      </ion-buttons>
+      <ion-title>
+        푸쉬 무음 시간 추가
+      </ion-title>
+  
+      <ion-buttons end>
+        <button ion-button (click)="addBlockTime()" strong>추가</button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+
+<ion-content class="bg-muted" padding>
+
+    <ion-card class="form-login">
+        <ion-item class="b-b b-light">
+        <ion-label color="primary" >시작시간</ion-label>
+        <ion-datetime [(ngModel)]="startTime" displayFormat="HH:mm" pickerFormat="HH mm" ></ion-datetime>
+      </ion-item>
+      <ion-item class="b-b b-light">
+        <ion-label color="primary" >종료시간</ion-label>
+        <ion-datetime [(ngModel)]="endTime" displayFormat="HH:mm" pickerFormat="HH mm" ></ion-datetime>
+      </ion-item>
+      </ion-card>
+     
+</ion-content>
