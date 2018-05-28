@@ -13,6 +13,8 @@
 
   <img style="width:100%" src="assets/imgs/park_map.png" />
   <br>
+  <div *ngIf="!parkingArray">인터넷에 연결 중 입니다.</div>
+  
   <ion-card class="padder text-2x" *ngFor="let parking of parkingArray">
     <div class="m-b-md m-t-sm b-b padder-v">  
     <ion-avatar item-start>
@@ -24,7 +26,6 @@
         {{parking.name}}
       </ion-card-title>
     </ion-card-content> -->
-    
     <div class="m-b-sm text-right ">
       <ion-avatar item-start>
         <img class="thumb-sm m-r-sm" src="assets/imgs/icon-parking.png"> {{parking.status}}

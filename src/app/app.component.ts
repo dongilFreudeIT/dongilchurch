@@ -46,6 +46,7 @@ export class MyApp {
     private storage: Storage, public fcm: FCM, public alertCtrl:AlertController, private iab: InAppBrowser, private backgroundMode: BackgroundMode,
     public modalCtrl: ModalController
   ) {
+
     platform.ready().then(() => {
 
       // Okay, so the platform is ready and our plugins are available.
@@ -54,14 +55,14 @@ export class MyApp {
       statusBar.styleDefault();
       statusBar.overlaysWebView(false);
       //1분마다 등록된 예배시간 체크하는 함수
-      storage.get('toggle_array').then((value) => {
-              //설정 안되어 있으면
-          if(value == null || value.length == 0){
-            MyApp.toggleArray = null;
-          }else{//설정 되어 있으면 local array에 넣는다.
-            MyApp.toggleArray = value;
-          }
-      });
+      // storage.get('toggle_array').then((value) => {
+      //         //설정 안되어 있으면
+      //     if(value == null || value.length == 0){
+      //       MyApp.toggleArray = null;
+      //     }else{//설정 되어 있으면 local array에 넣는다.
+      //       MyApp.toggleArray = value;
+      //     }
+      // });
       // this.setBackgroundTimer();
       //push 보내기 위한 설정
       this.setPushSetting(fcm);
@@ -75,6 +76,21 @@ export class MyApp {
             this.menuCtrl.enable(false, 'master');
             this.menuCtrl.enable(true, 'unauthenticated');
           }else{  //로그인 접속 시간 갱신을 위해 서버 연결
+            storage.get('grade').then((varGrade)=> {
+              console.log("user Grade : "+ varGrade);
+              //grade가 없으면 부회원모드
+              if(varGrade == null || varGrade == ''){
+                console.log('not loggin');
+                this.menuCtrl.enable(true, 'unauthenticated');
+              }else if(varGrade == "관리자"){
+                // console.log('admin');
+                this.menuCtrl.enable(true, 'master');
+              }else if(varGrade == "주차장매니저"){
+                this.menuCtrl.enable(true, 'parking_manager');
+              }else{
+                this.menuCtrl.enable(true, 'authenticated');
+              }
+            });
 
               var param = { user_serial : val2 };
                 this.http.post(this.url + '/user/login_refresh', param,{}).then(data =>{
@@ -84,20 +100,20 @@ export class MyApp {
                     var obj = JSON.parse(data.data);
                     //로그인 접속시간 갱신했으면 받아온 grade에 따라 왼쪽 메뉴 구성 변경
                     if(obj.code == "S01"){
-                      var grade = obj.grade;
-                      this.storage.set("grade", grade);
-                      //grade가 없으면 부회원모드
-                      if(grade == null || grade == ''){
-                        console.log('not loggin');
-                        this.menuCtrl.enable(true, 'unauthenticated');
-                      }else if(grade == "관리자"){
-                        // console.log('admin');
-                        this.menuCtrl.enable(true, 'master');
-                      }else if(grade == "주차장매니저"){
-                        this.menuCtrl.enable(true, 'parking_manager');
-                      }else{
-                        this.menuCtrl.enable(true, 'authenticated');
-                      }
+                      // var grade = obj.grade;
+                      // this.storage.set("grade", grade);
+                      // //grade가 없으면 부회원모드
+                      // if(grade == null || grade == ''){
+                      //   console.log('not loggin');
+                      //   this.menuCtrl.enable(true, 'unauthenticated');
+                      // }else if(grade == "관리자"){
+                      //   // console.log('admin');
+                      //   this.menuCtrl.enable(true, 'master');
+                      // }else if(grade == "주차장매니저"){
+                      //   this.menuCtrl.enable(true, 'parking_manager');
+                      // }else{
+                      //   this.menuCtrl.enable(true, 'authenticated');
+                      // }
 
                       //push_token도 refresh한다.
                       this.storage.get("push_token").then((value) => {
@@ -198,11 +214,12 @@ setPushSetting(fcm){
     });
 
     //push 메세지 도착하면
+    var tempThis = this;
     fcm.onNotification().subscribe(data=>{
       // this.badge.increase(1);
       if(data.wasTapped){ //백그라운드 모드이면
         console.log("Received in background:" + JSON.stringify(data));
-        // this.navCtrl.push(AlarmPage);
+        tempThis.navCtrl.push(AlarmPage);
       } else {
         console.log("Received in foreground:" + JSON.stringify(data));
         let alert = this.alertCtrl.create({
