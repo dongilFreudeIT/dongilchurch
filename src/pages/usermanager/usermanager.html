@@ -30,8 +30,12 @@
   </ion-header>
 
   <ion-content>
-      <div *ngIf="!userArray">인터넷에 연결 중 입니다.</div>
-
+      <div *ngIf="!userArray" text-center>
+          <ion-spinner item-start name="ios">
+          </ion-spinner>
+          서버에 접속 중입니다.
+      
+        </div>
       <ion-row class="wrapper-sm b-b b-light" *ngFor="let user of userArray" (click)="goToDetail(user)">
           <ion-col col-auto>
             <br>
