@@ -42,32 +42,34 @@ export class HomePage {
     });
   }
   goToMyinfo(){
-    this.storage.get('user_serial').then((value) => {
-      this.user_serial = value;
+    // this.storage.get('user_serial').then((value) => {
+    //   this.user_serial = value;
 
+    //   if(this.user_serial==null || this.user_serial == ''){
+    //     this.showAlert("안내","로그인을 해주세요.");
+    //     return;
+    //   }
 
-      if(this.user_serial==null || this.user_serial == ''){
-        this.showAlert("안내","로그인을 해주세요.");
-        return;
-      }
+    //   var param = { serial : this.user_serial };
+    //   this.http.post(this.url + '/user/get_user', param,{}).then(data =>{
+    //     if(data.status == 200){
+    //       console.log(data.data);
+    //       var obj = JSON.parse(data.data);
+    //       //로그인 성공이면
+    //       if(obj.code == "S01"){
+    //           var user = obj.value;
+    //           this.navCtrl.push(MyinfoPage, user);
+    //       }else{
 
-      var param = { serial : this.user_serial };
-      this.http.post(this.url + '/user/get_user', param,{}).then(data =>{
-        if(data.status == 200){
-          console.log(data.data);
-          var obj = JSON.parse(data.data);
-          //로그인 성공이면
-          if(obj.code == "S01"){
-              var user = obj.value;
-              this.navCtrl.push(MyinfoPage, user);
-          }else{
+    //       }
+    //     }
+    //   });//http end
 
-          }
-        }
-      });//http end
-
+    // });
+    this.storage.get('get_user').then((value)=>{
+      console.log("get_user : " + value);
+    this.navCtrl.push(MyinfoPage, value);
     });
-  
   }
 
   goToSetting(){

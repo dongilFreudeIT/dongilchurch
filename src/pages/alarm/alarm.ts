@@ -22,12 +22,15 @@ export class AlarmPage {
     this.getPushMessage();
     moment.lang("ko");
   }
-  showDetail(serial) {
-    this.navCtrl.push(PushShowPage, serial);
+  showDetail(data) {
+    this.navCtrl.push(PushShowPage, data);
   }
 
   getPushMessage() {
 
+    this.storage.get('pushDataArray').then((_pushDataArray)=>{
+      this.pushDataArray = _pushDataArray;
+    })
     //저장 된 user serial 가져와서 서버에 푸쉬 리스트 요청
     this.storage.get('user_serial').then((value) => {
 
@@ -41,6 +44,7 @@ export class AlarmPage {
           if (obj.code == "S01") {
             this.pushDataArray = obj.value;
             //this.new_pushData = obj.value;
+            this.storage.set("pushDataArray", this.pushDataArray);
           } else {
             console.log(obj.message);
           }

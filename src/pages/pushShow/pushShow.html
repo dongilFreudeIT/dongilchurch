@@ -19,14 +19,14 @@
       <ion-row class="wrapper-sm">
           <ion-col class="text-ellipsis-flex">
             <div class="l-h">
-              <div class="font-bold text-ellipsis" style="font-size:22px">{{ title }} </div>
-              <div class="text-sm text-muted text-ellipsis">{{ registered_date }}</div>
+              <div class="font-bold text-ellipsis" style="font-size:22px">{{ navParams.data.title }} </div>
+              <div class="text-sm text-muted text-ellipsis">{{ navParams.data.registered_date }}</div>
             </div>
           </ion-col>
         </ion-row>
       
         <div class="post-caption padder m-b-sm pos-rlt l-h">
-        {{ message }}
+        {{ navParams.data.body }}
         </div>
         <!-- <img src="{{image}}" style="width: 100%" [hidden]="image == null"> -->
 

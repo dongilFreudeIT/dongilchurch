@@ -26,8 +26,9 @@
         </ion-row>
       </div> -->
 
-  <ion-row class="wrapper-sm b-b b-light" (click)="showDetail(data.serial)" *ngFor="let data of pushDataArray">
-    <!-- <ion-col col-auto>
+  <!-- <ion-row class="wrapper-sm b-b b-light" (click)="showDetail(data.serial)" *ngFor="let data of pushDataArray"> -->
+  <ion-row class="wrapper-sm b-b b-light" (click)="showDetail(data)" *ngFor="let data of pushDataArray">
+      <!-- <ion-col col-auto>
       <ion-avatar item-start>
         <img class="thumb-sm" src="assets/imgs/logo_big.jpg">
       </ion-avatar>
