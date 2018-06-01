@@ -42,6 +42,8 @@ import { LoaderProvider } from '../providers/loader/loader';
 
 import { Network } from '@ionic-native/network'
 import { CheckNetworkProvider } from '../providers/check-network/check-network';
+import { IonicImageViewerModule } from 'ionic-img-viewer';
+
 @NgModule({
   //page 선언
   declarations: [
@@ -71,7 +73,8 @@ import { CheckNetworkProvider } from '../providers/check-network/check-network';
     BrowserModule, 
     // HttpClientModule, //http 통신을 위해
     IonicModule.forRoot(MyApp),
-    IonicStorageModule.forRoot() //앱 내에 데이터를 저장하기 위해
+    IonicStorageModule.forRoot(), //앱 내에 데이터를 저장하기 위해
+    IonicImageViewerModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
