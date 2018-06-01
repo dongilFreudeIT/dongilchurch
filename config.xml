@@ -86,8 +86,6 @@
     </platform>
     <allow-navigation href="http://192.168.100.43:8100" />
     <allow-navigation href="http://172.30.1.22:8100" />
-    <engine name="ios" spec="~4.5.4" />
-    <engine name="android" spec="6.3.0" />
     <plugin name="cordova-plugin-advanced-http" spec="^1.11.1" />
     <plugin name="cordova-plugin-inappbrowser" spec="^1.7.2" />
     <plugin name="cordova-sqlite-storage" spec="^2.3.2" />
@@ -112,4 +110,7 @@
     <plugin name="cordova-plugin-android-volume" spec="0.0.6" />
     <plugin name="cordova-plugin-background-mode" spec="^0.7.2" />
     <plugin name="cordova-background-timer" spec="0.0.4" />
+    <engine name="ios" spec="~4.5.4" />
+    <engine name="android" spec="6.3.0" />
+    <plugin name="cordova-plugin-network-information" spec="^2.0.1" />
 </widget>

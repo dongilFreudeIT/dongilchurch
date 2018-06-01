@@ -37,7 +37,7 @@ export class FindPasswordPage {
   next() {
     console.log("cer phone=" + FindPasswordPage.cerPhone);
     if (this.phone == null || this.phone == '') {
-      this.showAlert("안내", "폰번호를 제대로 입력해 주세요.");
+      this.showAlert("안내", "휴대폰 번호를 제대로 입력해 주세요.");
       return;
     }
     if (FindPasswordPage.cerPhone == '') {

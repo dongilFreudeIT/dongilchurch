@@ -11,12 +11,11 @@
 <ion-content class="bg-muted">
   <!-- <ion-list>   -->
   <!-- <ion-card *ngFor="let parking of parkingArray" > -->
-  <div *ngIf="!parkingArray" text-center>
-      <ion-spinner item-start name="ios">
-      </ion-spinner>
-      서버에 접속 중입니다.
-  
-    </div>
+  <div *ngIf="!isConnected || !parkingArray" class="b-b p-b-sm" text-center>
+    <ion-spinner item-start name="ios">
+    </ion-spinner>
+    서버에 접속 중입니다.
+  </div>
   <div class="bg-white wrapper m-b-sm text-xl" *ngFor="let parking of parkingArray">
 
     <div class="b-b p-b-sm">

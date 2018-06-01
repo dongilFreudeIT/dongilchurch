@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
-import { NavController, ModalController, AlertController } from 'ionic-angular';
+import { NavController, ModalController, AlertController, ToastController } from 'ionic-angular';
 import { HTTP } from '@ionic-native/http';
+import { Network } from '@ionic-native/network'
+
+import { CheckNetworkProvider } from '../../providers/check-network/check-network';
 
 import { UserdetailPage } from '../userdetail/userdetail';
 import { SendPushPage } from '../sendPush/sendPush';
@@ -16,12 +19,33 @@ export class UsermanagerPage {
   userOriginalArray : any; //필터적용 후 sort를 위한 orginal array
   isAllSelect : boolean;
   searchKeyword : string;
+  isConnected: number = 1;
 
   url: string = 'http://13.125.35.123/api';
+  
+  subscribeNet1 : any; 
+  subscribeNet2 : any;
 
-  constructor(public navCtrl: NavController, public http : HTTP, public modalCtrl: ModalController, public alertCtrl: AlertController) {
+  constructor(public navCtrl: NavController, public http : HTTP, public modalCtrl: ModalController, public alertCtrl: AlertController
+    , public toastController :ToastController, private network: Network, private chechNetwork : CheckNetworkProvider) {
 
     this.isAllSelect = false;
+    this.getUsers();
+    
+    this.subscribeNet1 = this.network.onDisconnect().subscribe((data)=>{
+      console.log("network disconnected");
+      this.chechNetwork.display(data.type);
+      this.isConnected = 0;
+    });
+    this.subscribeNet2 = this.network.onConnect().subscribe((data)=> {
+      console.log("network connected");
+      this.chechNetwork.display(data.type);
+      this.isConnected = 1;
+      this.getUsers();
+    });
+    
+  }
+  getUsers(){
     //모든 유저 불러온다.
     this.http.post(this.url + '/user/get_user_by_type', null,{}).then(data =>{
       if(data.status == 200){
@@ -180,7 +204,14 @@ export class UsermanagerPage {
           buttons: ['OK']
         });
       alert.present();
-    }else{
+    }else if(this.isConnected == 0){
+        let alert = this.alertCtrl.create({
+            title: "안내",
+            subTitle: "인터넷 연결을 확인해주세요.",
+            buttons: ['OK']
+          });
+        alert.present();
+    } else{
       this.navCtrl.push(SendPushPage, sendUserArray);
     }
 
@@ -210,5 +241,10 @@ export class UsermanagerPage {
   onCancel(event : any){
 
   }
+  ngOnDestroy(){
+    this.subscribeNet1.unsubscribe();
+    this.subscribeNet2.unsubscribe();
+  }
+
   
 }

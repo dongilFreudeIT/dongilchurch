@@ -13,14 +13,14 @@
 
   <img style="width:100%" src="assets/imgs/park_map.png" />
   <br>
-  <div *ngIf="!parkingArray" text-center>
+  <div *ngIf="!isConnected || !parkingArray" text-center>
     <ion-spinner item-start name="ios">
     </ion-spinner>
     서버에 접속 중입니다.
 
   </div>
 
-  <ion-card class="padder text-2x" *ngFor="let parking of parkingArray">
+  <ion-card  class="padder text-2x" *ngFor="let parking of parkingArray">
     <div class="m-b-md m-t-sm b-b padder-v">
       <ion-avatar item-start>
         <img class="thumb-sm line-lg" style="vertical-align:middle" src="assets/imgs/icon-p.png"> {{parking.name}}

@@ -40,6 +40,8 @@ import { BackgroundMode } from '@ionic-native/background-mode';
 import { Device } from '@ionic-native/device';
 import { LoaderProvider } from '../providers/loader/loader';
 
+import { Network } from '@ionic-native/network'
+import { CheckNetworkProvider } from '../providers/check-network/check-network';
 @NgModule({
   //page 선언
   declarations: [
@@ -109,7 +111,9 @@ import { LoaderProvider } from '../providers/loader/loader';
     SplashScreen,
     Device,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    LoaderProvider
+    LoaderProvider,
+    Network,
+    CheckNetworkProvider
   ]
 })
 export class AppModule {}
