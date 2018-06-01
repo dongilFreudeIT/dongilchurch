@@ -160,65 +160,65 @@ export class MyApp {
   }
 
   //앱이 꺼져도 1분마다 예배시간 체크하여 무음모드 설정하는 함수
-  setBackgroundTimer() {
-    // this.backgroundMode.enable();
-    var settings = {
-      timerInterval: 60000, // event함수 실행시킬 주기 milliseconds (Default: 60000)
-      startOnBoot: false, // enable this to start timer after the device was restarted (Default: false)
-      stopOnTerminate: false // set to true to force stop timer in case the app is terminated (User closed the app and etc.) (Default: true)
+  // setBackgroundTimer() {
+  //   // this.backgroundMode.enable();
+  //   var settings = {
+  //     timerInterval: 60000, // event함수 실행시킬 주기 milliseconds (Default: 60000)
+  //     startOnBoot: false, // enable this to start timer after the device was restarted (Default: false)
+  //     stopOnTerminate: false // set to true to force stop timer in case the app is terminated (User closed the app and etc.) (Default: true)
 
-      // hours: -1, // delay timer to start at certain time (Default: -1)
-      // minutes: , // delay timer to start at certain time (Default: -1)
-    }
+  //     // hours: -1, // delay timer to start at certain time (Default: -1)
+  //     // minutes: , // delay timer to start at certain time (Default: -1)
+  //   }
 
-    BackgroundTimer.onTimerEvent(function () {
-      // console.log("time check");
-      // if(MyApp == null){
-      //   console.log("null");
-      //   return;
-      // }
-      if (MyApp.toggleArray == null || MyApp.toggleArray.length == 0) {
-        return;
-      } else {
-        var day = new Date().getDay();
-        console.log(day);
-        var nowTime = new Date().toLocaleTimeString('en-GB').slice(0, 5);
-        var isTime = false;
-        if (MyApp.toggleArray[0] == true && nowTime == "08:00" && day == 0) {//일요일 8시이면
-          isTime = true;
-        }
-        if (MyApp.toggleArray[1] == true && nowTime == "10:00" && day == 0) {
-          isTime = true;
-        }
-        if (MyApp.toggleArray[2] == true && nowTime == "12:00" && day == 0) {
-          isTime = true;
-        }
-        if (MyApp.toggleArray[3] == true && nowTime == "14:00" && day == 0) {
-          isTime = true;
-        }
-        if (MyApp.toggleArray[4] == true && nowTime == "15:30" && day == 0) {
-          isTime = true;
-        }
-        if (MyApp.toggleArray[5] == true && nowTime == "19:30" && day == 3) {
-          isTime = true;
-        }
-        if (MyApp.toggleArray[6] == true && nowTime == "20:30" && day == 5) {
-          isTime = true;
-        }
-        if (isTime) {
-          //안드로이드
-          androidVolume.set(0, true, function (msg) {
-            // //console.log(msg); 
-          }, function (msg) {
-            //console.log(msg); 
-          });
-        }
-      }
-    }); // subscribe on timer event
-    BackgroundTimer.start(function () { }, function (e) {
-      console.log(e);
-    }, settings);
-  }
+  //   BackgroundTimer.onTimerEvent(function () {
+  //     // console.log("time check");
+  //     // if(MyApp == null){
+  //     //   console.log("null");
+  //     //   return;
+  //     // }
+  //     if (MyApp.toggleArray == null || MyApp.toggleArray.length == 0) {
+  //       return;
+  //     } else {
+  //       var day = new Date().getDay();
+  //       console.log(day);
+  //       var nowTime = new Date().toLocaleTimeString('en-GB').slice(0, 5);
+  //       var isTime = false;
+  //       if (MyApp.toggleArray[0] == true && nowTime == "08:00" && day == 0) {//일요일 8시이면
+  //         isTime = true;
+  //       }
+  //       if (MyApp.toggleArray[1] == true && nowTime == "10:00" && day == 0) {
+  //         isTime = true;
+  //       }
+  //       if (MyApp.toggleArray[2] == true && nowTime == "12:00" && day == 0) {
+  //         isTime = true;
+  //       }
+  //       if (MyApp.toggleArray[3] == true && nowTime == "14:00" && day == 0) {
+  //         isTime = true;
+  //       }
+  //       if (MyApp.toggleArray[4] == true && nowTime == "15:30" && day == 0) {
+  //         isTime = true;
+  //       }
+  //       if (MyApp.toggleArray[5] == true && nowTime == "19:30" && day == 3) {
+  //         isTime = true;
+  //       }
+  //       if (MyApp.toggleArray[6] == true && nowTime == "20:30" && day == 5) {
+  //         isTime = true;
+  //       }
+  //       if (isTime) {
+  //         //안드로이드
+  //         androidVolume.set(0, true, function (msg) {
+  //           // //console.log(msg); 
+  //         }, function (msg) {
+  //           //console.log(msg); 
+  //         });
+  //       }
+  //     }
+  //   }); // subscribe on timer event
+  //   BackgroundTimer.start(function () { }, function (e) {
+  //     console.log(e);
+  //   }, settings);
+  // }
 
   //fcm 푸쉬 보내기 위한 세팅
   setPushSetting(fcm) {
