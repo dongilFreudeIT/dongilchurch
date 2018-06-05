@@ -39,6 +39,8 @@ export class LoginPage {
         if(obj.code == "S01"){
           //user_serial, 등급을 내부 저장소에 저장하고 메뉴를 로그인 메뉴로 바꾸고 홈으로 이동
           this.storage.set('user_serial', obj.user_serial);
+          console.log("login page store user serial : "
+           + this.storage.get('user_serial'));
           this.storage.set('grade', obj.grade);
           if(obj.grade == "관리자"){
 
@@ -79,11 +81,31 @@ export class LoginPage {
           var errorMsg = obj.message;
           this.showAlert("로그인 실패", errorMsg);
         }
+
+
+        this.http.post(this.url + '/user/get_user', {user_serial: obj.user_serial}, {}).then(data => {
+          if (data.status == 200) {
+            // console.log(data.data);
+            var obj = JSON.parse(data.data);
+            //로그인 성공이면
+            if (obj.code == "S01") {
+              var user = obj.value;
+              this.storage.set("get_user", user);
+              // this.navCtrl.push(MyinfoPage, user);
+            } else {
+    
+            }
+          }
+        });//http end
+
+
       }
     })
     .catch(error =>{
       console.log(error.error);
     });
+
+    
   }
 
   goSignUp() {

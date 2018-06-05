@@ -20,7 +20,7 @@ export class MyinfoPage {
     this.user = this.navParams.data;
     this.birthdate = this.user.birthday.substring(0,4)+'-'+this.user.birthday.substring(4,6)+'-'+this.user.birthday.substring(6,8);
 
-    console.log("birth 1 : " +this.birthdate);
+    // console.log("birth 1 : " +this.birthdate);
   }
 
   update(){
@@ -58,7 +58,7 @@ export class MyinfoPage {
     }
     //생년월일 체크
     if(this.user.birthday != null){
-      console.log("birth 2 : " +this.birthdate);
+      // console.log("birth 2 : " +this.birthdate);
       var today = new Date();
       var birth = new Date(this.birthdate);
       if(birth  >=  today){
@@ -66,7 +66,7 @@ export class MyinfoPage {
         return;
       }
       this.user.birthday = this.birthdate.replace(/-/gi, "");
-      console.log("birth 3 : " +this.user.birthday);
+      // console.log("birth 3 : " +this.user.birthday);
 
     }
     var param = {
