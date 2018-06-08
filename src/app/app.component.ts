@@ -137,19 +137,19 @@ export class MyApp {
           // console.log("val2 : " + val2);
 
 
-          // this.http.post(this.url + '/user/get_user', param, {}).then(data => {
-          //   if (data.status == 200) {
-          //     // console.log(data.data);
-          //     var obj = JSON.parse(data.data);
-          //     //로그인 성공이면
-          //     if (obj.code == "S01") {
-          //       var user = obj.value;
-          //       this.storage.set("get_user", user);
-          //       // this.navCtrl.push(MyinfoPage, user);
-          //     } else {
-          //     }
-          //   }
-          // });//http end
+          this.http.post(this.url + '/user/get_user', param, {}).then(data => {
+            if (data.status == 200) {
+              // console.log(data.data);
+              var obj = JSON.parse(data.data);
+              //로그인 성공이면
+              if (obj.code == "S01") {
+                var user = obj.value;
+                this.storage.set("get_user", user);
+                // this.navCtrl.push(MyinfoPage, user);
+              } else {
+              }
+            }
+          });//http end
         
         
         }
@@ -270,25 +270,26 @@ export class MyApp {
   //내 정보 수정으로 이동(메뉴에서 선택 가능)
   goToMyinfo(params) {
     //저장된 user_serial이 있으면(로그인 된적 있으면)
-    // this.storage.get('user_serial').then((value) => {
+    this.storage.get('user_serial').then((value) => {
 
-    //   var param = { user_serial: value };
-    //   console.log("goto myinfo : " + param.user_serial);
-    //   this.http.post(this.url + '/user/get_user', param, {}).then(data => {
-    //     if (data.status == 200) {
-    //       console.log(data.data);
-    //       var obj = JSON.parse(data.data);
-    //       //로그인 성공이면
-    //       if (obj.code == "S01") {
-    //         var user = obj.value;
-    //         this.storage.set("push_token", user);
-    //         this.navCtrl.push(MyinfoPage, user);
-    //       } else {
+      var param = { user_serial: value };
+      console.log("goto myinfo : " + param.user_serial);
+      this.http.post(this.url + '/user/get_user', param, {}).then(data => {
+        if (data.status == 200) {
+          // console.log(data.data);
+          var obj = JSON.parse(data.data);
+          //로그인 성공이면
+          if (obj.code == "S01") {
+            var user = obj.value;
+            this.storage.set("push_token", user);
+            this.storage.set("get_user", user);
+            // this.navCtrl.push(MyinfoPage, user);
+          } else {
 
-    //       }
-    //     }
-    //   });//http end
-    // });//storage end
+          }
+        }
+      });//http end
+    });//storage end
 
     this.storage.get('get_user').then((value)=>{
       console.log("get_user : " + value);
