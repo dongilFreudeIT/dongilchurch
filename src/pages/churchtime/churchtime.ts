@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { AlertController } from 'ionic-angular/components/alert/alert-controller';
 /**
@@ -23,7 +23,7 @@ export class ChurchtimePage {
   toggle_6 : boolean;
   toggle_7 : boolean;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private storage: Storage, private alertCtrl: AlertController) {
+  constructor( private storage: Storage, private alertCtrl: AlertController) {
     this.getSavedData();
   }
 
@@ -61,7 +61,7 @@ export class ChurchtimePage {
     this.storage.set("toggle_array", toggleArray);
 
     let alert = this.alertCtrl.create({
-      title: "안내",
+      title: "알림",
       subTitle: "예배 시간이 저장 되었습니다.",
       buttons: ['OK']
     });

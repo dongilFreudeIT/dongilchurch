@@ -9,7 +9,7 @@
   </ion-navbar>
 </ion-header>
 <ion-content>
-  <!--     
+
     <div>
         <ion-row class="wrapper-sm b-b b-light" (click)="showDetail(data.serial)" *ngFor="let data of pushDataArray">
           <ion-col class="text-ellipsis-flex">
@@ -24,32 +24,7 @@
             <div class="text-muted text-xs m-t-xs">{{data.registered_date}}</div>
           </ion-col>
         </ion-row>
-      </div> -->
-
-  <!-- <ion-row class="wrapper-sm b-b b-light" (click)="showDetail(data.serial)" *ngFor="let data of pushDataArray"> -->
-  <ion-row class="wrapper-sm b-b b-light" (click)="showDetail(data)" *ngFor="let data of pushDataArray">
-      <!-- <ion-col col-auto>
-      <ion-avatar item-start>
-        <img class="thumb-sm" src="assets/imgs/logo_big.jpg">
-      </ion-avatar>
-    </ion-col> -->
-    <ion-col class="text-ellipsis-flex">
-      <div class="l-h">
-        <div class="">제목
-          <strong> {{data.title}}</strong>
-        </div>
-        <div class="text-sm text-muted text-ellipsis">{{data.body}}</div>
-        <!-- <div class="text-xxs text-muted">
-              <ion-icon name="ios-pin-outline"></ion-icon>
-              daegu
-            </div> -->
       </div>
-    </ion-col>
-    <ion-col text-right col-auto>
-      <div class="span text-xs text-muted m-t-xs">{{data.registered_date}}</div>
-    </ion-col>
-  </ion-row>
-
 
   <!-- <ion-list>
       <button ion-item *ngFor="let data of pushDataArray" (click)="showDetail(data.serial)">

@@ -24,7 +24,6 @@ import { ChurchtimePage } from '../pages/churchtime/churchtime';
 import { MyinfoShowPage } from '../pages/myinfo-show/myinfo-show';
 import { PasswordsetPage } from '../pages/passwordset/passwordset';
 import { FindPasswordPage } from '../pages/findpassword/findpassword';
-import { FamilysitePage } from '../pages/familysite/familysite';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -36,12 +35,8 @@ import { ImagePicker } from '@ionic-native/image-picker';
 import { File } from '@ionic-native/file';
 import { FilePath } from '@ionic-native/file-path';
 import { AndroidPermissions } from '@ionic-native/android-permissions';
-import { BackgroundMode } from '@ionic-native/background-mode';
 import { Device } from '@ionic-native/device';
-import { LoaderProvider } from '../providers/loader/loader';
 
-import { Network } from '@ionic-native/network'
-import { CheckNetworkProvider } from '../providers/check-network/check-network';
 @NgModule({
   //page 선언
   declarations: [
@@ -63,8 +58,7 @@ import { CheckNetworkProvider } from '../providers/check-network/check-network';
     ChurchtimePage,
     MyinfoShowPage,
     PasswordsetPage,
-    FindPasswordPage,
-    FamilysitePage
+    FindPasswordPage
     
   ],
   imports: [
@@ -93,8 +87,7 @@ import { CheckNetworkProvider } from '../providers/check-network/check-network';
     ChurchtimePage,
     MyinfoShowPage,
     PasswordsetPage,
-    FindPasswordPage,
-    FamilysitePage
+    FindPasswordPage
   ],
   //사용되는 프로바이더(라이브러리 또는 플러그인)
   providers: [
@@ -106,14 +99,10 @@ import { CheckNetworkProvider } from '../providers/check-network/check-network';
     // Storage,
     InAppBrowser,
     AndroidPermissions,
-    BackgroundMode,
     StatusBar,
     SplashScreen,
     Device,
-    {provide: ErrorHandler, useClass: IonicErrorHandler},
-    LoaderProvider,
-    Network,
-    CheckNetworkProvider
+    {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })
 export class AppModule {}

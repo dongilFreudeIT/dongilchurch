@@ -443,9 +443,7 @@ html {
 .text-2x {
   font-size: 2em;
 }
-.text-1x {
-  font-size: 1.4em;
-}
+
 .text-lg {
   font-size: 18px;
 }
@@ -566,8 +564,8 @@ html {
 }
 
 .padder-v {
-  padding-top: $sizeSM;
-  padding-bottom: $sizeSM;
+  padding-top: $sizeNorm;
+  padding-bottom: $sizeNorm;
 }
 
 .no-padder {
@@ -1034,9 +1032,7 @@ html {
 .m-b-n-xxl {
   margin-bottom: -$sizeXXL;
 }
-.p-b-sm{
-  padding-bottom:$sizeSM;
-}
+
 .w-xxs {
   width: 60px;
 }

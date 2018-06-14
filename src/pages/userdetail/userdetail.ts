@@ -22,9 +22,6 @@ export class UserdetailPage {
 
   //유저 정보 수정
   changeUser(){
-    if (this.user.address == null || this.user.address == '') {
-      this.user.address = ' ';
-    }
     var param = { 
       serial : this.user.serial, 
       name : this.user.name,

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, ModalController } from 'ionic-angular';
+import { NavController } from 'ionic-angular';
 import { HTTP } from '@ionic-native/http';
 import { NotiSetting} from '../setting-modal/setting_modal';
 import { Storage } from '@ionic/storage';
@@ -18,7 +18,7 @@ export class SettingPage {
   user_serial : any;
   url: string = 'http://13.125.35.123/api';
 
-  constructor(public navCtrl: NavController, public modalCtrl: ModalController, public http : HTTP, private storage: Storage, private alertCtrl : AlertController) {
+  constructor(public navCtrl: NavController,  public http : HTTP, private storage: Storage, private alertCtrl : AlertController) {
 
   }
 
@@ -29,7 +29,7 @@ export class SettingPage {
 
 
       if(this.user_serial==null || this.user_serial == ''){
-        this.showAlert("안내","로그인을 해주세요.");
+        this.showAlert("알림","로그인을 해주세요.");
         return;
       }
 

@@ -1,64 +1,30 @@
 <ion-header>
-  <ion-navbar color="primary" no-border-bottom>
-    <button ion-button menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </button>
-    <ion-title>
-      주차장 관리
-    </ion-title>
-  </ion-navbar>
-</ion-header>
-<ion-content class="bg-muted">
-  <!-- <ion-list>   -->
-  <!-- <ion-card *ngFor="let parking of parkingArray" > -->
-  <div *ngIf="!isConnected || !parkingArray" class="b-b p-b-sm" text-center>
-    <ion-spinner item-start name="ios">
-    </ion-spinner>
-    서버에 접속 중입니다.
-  </div>
-  <div class="bg-white wrapper m-b-sm text-xl" *ngFor="let parking of parkingArray">
-
-    <div class="b-b p-b-sm">
-      <ion-avatar item-start>
-        <img class="thumb-sm line-lg" style="vertical-align:middle" src="assets/imgs/icon-p.png"> {{parking.name}}
-      </ion-avatar>
-
-
-      <ion-avatar item-start class="text-right">
-        <img class="thumb-sm m-r-sm" src="assets/imgs/icon-parking.png"> {{parking.status}}
-      </ion-avatar>
-    </div>
-    <div>
-      <p class="text-lg"></p>
-      <button ion-button round outline style="width:30%; margin-left:4px" (click)="setParking(parking.serial,'자리없음')">자리 없음</button>
-      <button ion-button round outline style="width:30%; margin-left:4px" (click)="setParking(parking.serial,'1자리')">1자리</button>
-      <button ion-button round outline style="width:30%; margin-left:4px" (click)="setParking(parking.serial,'2자리')">2자리</button>
-
-      <button ion-button round outline style="width:30%; margin-left:4px" (click)="setParking(parking.serial,'3자리')">3자리</button>
-      <button ion-button round outline style="width:30%; margin-left:4px" (click)="setParking(parking.serial,'4자리')">4자리</button>
-      <button ion-button round outline style="width:30%; margin-left:4px" (click)="setParking(parking.serial,'5자리')">5자리</button>
-
-      <button ion-button outline round style="width:30%; margin-left:4px" (click)="setParking(parking.serial,'5~10자리')">5~10자리</button>
-      <button ion-button outline round style="width:30%; margin-left:4px" (click)="setParking(parking.serial,'10~20자리')">10~20자리</button>
-      <button ion-button outline round style="width:30%; margin-left:4px" (click)="setParking(parking.serial,'20자리 이상')">20자리 이상</button>
-    </div>
-  </div>
-
-
-  <!-- <ion-card-content>
+    <ion-navbar color="primary" no-border-bottom>
+      <button ion-button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+      <ion-title>
+            주차장 관리
+      </ion-title>
+    </ion-navbar>
+  </ion-header>
+  <ion-content >
+    <ion-list>  
+            <ion-card *ngFor="let parking of parkingArray" >
+                    <ion-card-content>
                             <p style="font-size:20px">{{parking.name}} : {{parking.status}}</p>
-                            <button ion-button round outline style="width:30%; margin-left:4px"  (click)="setParking(parking.serial,'자리없음')">자리 없음</button>
-                            <button ion-button round outline style="width:30%; margin-left:4px"  (click)="setParking(parking.serial,'1자리')">1자리</button>
-                            <button ion-button round outline style="width:30%; margin-left:4px"  (click)="setParking(parking.serial,'2자리')">2자리</button>
+                            <button ion-button full (click)="setParking(parking.serial,'자리없음')">자리 없음</button>
+                            <button ion-button style="width:17%; margin-left:4px"  (click)="setParking(parking.serial,'1자리')">1자리</button>
+                            <button ion-button style="width:17%; margin-left:4px"  (click)="setParking(parking.serial,'2자리')">2자리</button>
+                            <button ion-button style="width:17%; margin-left:4px"  (click)="setParking(parking.serial,'3자리')">3자리</button>
+                            <button ion-button style="width:17%; margin-left:4px"  (click)="setParking(parking.serial,'4자리')">4자리</button>
+                            <button ion-button style="width:17%; margin-left:4px"  (click)="setParking(parking.serial,'5자리')">5자리</button>
 
-                            <button ion-button round outline style="width:30%; margin-left:4px"  (click)="setParking(parking.serial,'3자리')">3자리</button>
-                            <button ion-button round outline style="width:30%; margin-left:4px"  (click)="setParking(parking.serial,'4자리')">4자리</button>
-                            <button ion-button round outline style="width:30%; margin-left:4px"  (click)="setParking(parking.serial,'5자리')">5자리</button>
+                            <button ion-button style="width:48%"  (click)="setParking(parking.serial,'5~10자리')">5~10자리</button>
+                            <button ion-button style="width:48%"  (click)="setParking(parking.serial,'10~20자리')">10~20자리</button>
 
-                            <button ion-button outline round style="width:30%; margin-left:4px"  (click)="setParking(parking.serial,'5~10자리')">5~10자리</button>
-                            <button ion-button outline round style="width:30%; margin-left:4px"  (click)="setParking(parking.serial,'10~20자리')">10~20자리</button>
-                            <button ion-button outline round style="width:30%; margin-left:4px"  (click)="setParking(parking.serial,'20자리 이상')">20자리 이상</button>
+                            <button ion-button full (click)="setParking(parking.serial,'20자리 이상')">20자리 이상</button>
                     </ion-card-content>
-                  </ion-card> -->
-  <!-- </ion-list> -->
-</ion-content>
+                  </ion-card>
+    </ion-list>
+  </ion-content>

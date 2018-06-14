@@ -7,7 +7,7 @@ page-home {
 }
 .home-image{
     margin: auto;
-    width: 40%;
+    width: 80%;
     padding: 40px;
     display: block;
 }
@@ -17,24 +17,8 @@ page-home {
     text-align: center;
     font-weight: normal;
 }
-.main-header{
-    background-image: url('../assets/imgs/home_back.jpg') ;
-    background-repeat: no-repeat;
-    background-size: 100% 100%;
-    background-color: #45372E;
-}
-.main-body{
-    background-color: rgb(170, 170, 170);
-    background-image: url('../assets/imgs/button-2.png') ;
-    background-size: 100%;
-    border-radius: 10px;
-    margin:2%; 
-
-// background: linear-gradient(to right, 
-// 	                              transparent 0%, 
-// 	                              transparent calc(50% - 0.81px), 
-// 	                              black calc(50% - 0.8px), 
-// 	                              black calc(50% + 0.8px), 
-// 	                              transparent calc(50% + 0.81px), 
-// 	                              transparent 100%); 
+.home-grid{
+    background: color($colors, primary);
+    padding: 20px;
+    height: 100%;
 }

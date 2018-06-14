@@ -6,49 +6,26 @@
     <ion-title>
       로그인
     </ion-title>
-    <ion-buttons end>
-        <button ion-button color="light" (click)="dismiss()">
-          <ion-icon name="md-close"></ion-icon>
-        </button>
-      </ion-buttons>
   </ion-navbar>
 </ion-header>
 <ion-content padding center>
 
     <ion-card class="form-login">
         <ion-item class="b-b b-light">
-            <!-- <ion-label color="primary">아이디</ion-label> -->
-            <ion-input type="text" placeholder="아이디" [(ngModel)]="user_id" name="user_id"></ion-input>
+            <ion-label color="primary">아이디</ion-label>
+            <ion-input type="text" placeholder="" [(ngModel)]="user_id" name="user_id"></ion-input>
         </ion-item>
     
         <ion-item>
-            <!-- <ion-label color="primary">비밀번호</ion-label> -->
-            <ion-input type="password" placeholder="비밀번호" [(ngModel)]="password" name="password" ></ion-input>
+            <ion-label color="primary">비밀번호</ion-label>
+            <ion-input type="password" placeholder="" [(ngModel)]="password" name="password" ></ion-input>
         </ion-item>
       </ion-card>
 
-      <!-- <div class="spacer" style="height:40px;" id="login-spacer1"></div> -->
-
-      <div class="padder">
-          <button ion-button block outline color="light" (click)="login()">
-            <b>로그인</b>
-          </button>
-        </div>
-      
-        <ion-row class="color-white m-t">
-          <ion-col>
-            <button ion-button clear color="light" small (click)="goPasswordSet()">
-              비밀번호 찾기
-            </button>
-          </ion-col>
-          <ion-col text-right>
-            <button ion-button clear color="light" small (click)="goSignUp()">
-                회원가입
-            </button>
-          </ion-col>
-        </ion-row>
+      <div class="spacer" style="height:40px;" id="login-spacer1"></div>
     
-    <!-- <button id="login-button1" ion-button color="stable" block (click)="login()">
+    
+    <button id="login-button1" ion-button color="stable" block (click)="login()">
       로그인
     </button>
     <button id="login-button2" ion-button clear color="positive" block (click)="goSignUp()" href-inappbrowser="/signup">
@@ -56,5 +33,5 @@
     </button>
     <button id="login-button3" ion-button clear color="danger" block (click)="goPasswordSet()">
       비밀번호 찾기
-    </button> -->
+    </button>
 </ion-content>

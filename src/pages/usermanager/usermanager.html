@@ -8,7 +8,7 @@
       </ion-title>
     
         <ion-buttons end>
-            <button ion-button (click)="sendPush()">푸시 보내기</button>    
+            <button ion-button (click)="sendPush()">푸쉬보내기</button>    
         </ion-buttons>
         <ion-buttons end>
             <button ion-button (click)="showSortModal()">정렬</button>    
@@ -28,14 +28,8 @@
       </ion-toolbar>
 
   </ion-header>
-
   <ion-content>
-      <div *ngIf="!userArray" text-center>
-          <ion-spinner item-start name="ios">
-          </ion-spinner>
-          서버에 접속 중입니다.
-      
-        </div>
+
       <ion-row class="wrapper-sm b-b b-light" *ngFor="let user of userArray" (click)="goToDetail(user)">
           <ion-col col-auto>
             <br>

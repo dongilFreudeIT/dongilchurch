@@ -4,7 +4,7 @@
       <ion-icon name="menu"></ion-icon>
     </button>
     <ion-title>
-      내 정보 수정
+      내정보 수정
     </ion-title>
   </ion-navbar>
 </ion-header>
@@ -30,21 +30,21 @@
             <ion-label color="primary">
               이름
             </ion-label>
-            <ion-input type="text" text-right [(ngModel)]="user.name" name="user.name" placeholder=""disabled></ion-input>
+            <ion-input type="text" text-right [(ngModel)]="user.name" name="user.name" placeholder=""></ion-input>
           </ion-item>
 
           <ion-item class="b-b b-light">
             <ion-label color="primary">
-                휴대폰 번호
+              폰번호
             </ion-label>
-            <ion-input type="tel" text-right [(ngModel)]="user.phone" name="user.phone" maxlength="11" placeholder="" disabled></ion-input>
+            <ion-input type="tel" text-right [(ngModel)]="user.phone" name="user.phone" maxlength="11" placeholder=""></ion-input>
           </ion-item>
 
          <ion-item class="b-b b-light">
             <ion-label color="primary">
                 생년월일
               </ion-label>
-              <ion-datetime displayFormat="YYYY년 MM월 DD일" [(ngModel)]="birthdate" name="birthdate"></ion-datetime>
+              <ion-datetime displayFormat="YYYY년 MM월 DD일" [(ngModel)]="user.birthday" name="user.birthday"></ion-datetime>
               <!-- <ion-input type="number" [(ngModel)]="user.birthday" name="user.birthday" placeholder="" maxlength="8"></ion-input> -->
             </ion-item>
 
@@ -98,16 +98,16 @@
                       <ion-option value="4남전도회">4남전도회</ion-option>
                       <ion-option value="5남전도회">5남전도회</ion-option>
                       <ion-option value="6남전도회">6남전도회</ion-option>
-                      <ion-option value="1여전도회">1여전도회</ion-option>
-                      <ion-option value="2여전도회">2여전도회</ion-option>
-                      <ion-option value="3여전도회">3여전도회</ion-option>
-                      <ion-option value="4여전도회">4여전도회</ion-option>
-                      <ion-option value="5여전도회">5여전도회</ion-option>
-                      <ion-option value="6여전도회">6여전도회</ion-option>
-                      <ion-option value="7여전도회">7여전도회</ion-option>
-                      <ion-option value="8여전도회">8여전도회</ion-option>
-                      <ion-option value="9여전도회">9여전도회</ion-option>
-                      <ion-option value="10여전도회">10여전도회</ion-option>
+                      <ion-option value="1남전도회">1남전도회</ion-option>
+                      <ion-option value="2남전도회">2남전도회</ion-option>
+                      <ion-option value="3남전도회">3남전도회</ion-option>
+                      <ion-option value="4남전도회">4남전도회</ion-option>
+                      <ion-option value="5남전도회">5남전도회</ion-option>
+                      <ion-option value="6남전도회">6남전도회</ion-option>
+                      <ion-option value="7남전도회">7남전도회</ion-option>
+                      <ion-option value="8남전도회">8남전도회</ion-option>
+                      <ion-option value="9남전도회">9남전도회</ion-option>
+                      <ion-option value="10남전도회">10남전도회</ion-option>
               </ion-select>
           </ion-item>
   
@@ -144,7 +144,7 @@
           <p text-center>비밀번호 변경을 원하지 않을 경우 비워두시면 됩니다.</p>
 
 
-        <button class="form-login"ion-button color="stable" block (click)="update()">
+        <button ion-button color="stable" block (click)="update()">
           저장하기
         </button>
 

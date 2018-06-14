@@ -21,17 +21,14 @@ export class PasswordsetPage {
   }
 
   changepw() {
-    if (this.password == null || this.password == '') {
-      this.showAlert("안내", "비밀번호를 입력해 주세요.");
+
+    if(this.password != null && this.password != '' && this.chkPwd(this.password)== false){
+      this.showAlert("알림", "비밀번호는 영문+숫자 6자 이상입니다.");
       return;
     }
-    // if(this.password != null && this.password != '' && this.chkPwd(this.password)== false){
-    //   this.showAlert("안내", "비밀번호는 영문+숫자 6자 이상입니다.");
-    //   return;
-    // }
 
     if(this.password != this.password_again){
-      this.showAlert("안내", "새 비밀번호와 비밀번호 확인이 일치하지 않습니다.");
+      this.showAlert("알림", "비밀번호와 재입력한 비밀번호가 일치하지 않습니다.");
       return;
     }
 
@@ -44,7 +41,7 @@ export class PasswordsetPage {
         var obj = JSON.parse(data.data);
         //로그인 성공이면
         if(obj.code == "S01"){
-          this.showAlert("안내","비밀번호 변경 성공");
+          this.showAlert("알림","비밀번호 변경 성공");
           this.navCtrl.pop();
         }else{
           var errorMsg = obj.message;

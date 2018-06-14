@@ -66,3 +66,6 @@ demos/src/**/*.metadata.json
 demos/src/**/*.css.shim.ts
 GoogleService-Info.plist
 google-services.json
+src/assets/imgs/button-2.png
+src/assets/imgs/button-2.png
+src/assets/imgs/button-alram.png

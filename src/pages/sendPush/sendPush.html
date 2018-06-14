@@ -4,7 +4,7 @@
             <ion-icon name="menu"></ion-icon>
           </button>
           <ion-title>
-            푸시 메시지 작성
+            푸쉬 메세지 작성
           </ion-title>
         </ion-navbar>
       </ion-header>
@@ -12,7 +12,7 @@
       <ion-content padding>
 
           <div class="bg-white wrapper text-center l-h m-b">
-              <div class="">총 {{userCount}} 명에게 푸시를 보냅니다.</div>
+              <div class="">총 {{userCount}} 명에게 푸쉬를 보냅니다.</div>
             </div>
 
         <ion-card class="form-login">
@@ -22,8 +22,8 @@
             </ion-item>
 
             <ion-item class="b-b b-light">
-                <ion-label color="primary" >메시지</ion-label>
-                    <ion-textarea type="text" rows="15" placeholder="" [(ngModel)]="message" name="message" ></ion-textarea>
+                <ion-label color="primary" style="height:200px">메세지</ion-label>
+                <ion-textarea rows="10" placeholder="" [(ngModel)]="message" name="message" ></ion-textarea>
             </ion-item>
 
             <!-- <ion-item class="b-b b-light">
