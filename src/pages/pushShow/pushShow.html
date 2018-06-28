@@ -1,22 +1,22 @@
 <ion-header>
-    <ion-navbar color="primary" no-border-bottom>
-      <button ion-button menuToggle>
-        <ion-icon name="menu"></ion-icon>
-      </button>
+  <ion-navbar color="primary" no-border-bottom>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
 
-      
-      <ion-title>
-        푸시 메시지 확인
-      </ion-title>
-    </ion-navbar>
-  </ion-header>
 
-  <ion-content class="bg-muted">
+    <ion-title>
+      푸시 메시지 확인
+    </ion-title>
+  </ion-navbar>
+</ion-header>
 
-      <ion-card class="form-login">
-      <div class="bg-white m-b-sm">
-          <div class="wrapper-sm">
-      <ion-row class="wrapper-sm">
+<ion-content class="bg-muted">
+
+  <ion-card class="form-login">
+    <div class="bg-white m-b-sm">
+      <div class="wrapper-sm">
+        <ion-row class="wrapper-sm">
           <ion-col class="text-ellipsis-flex">
             <div class="l-h">
               <div class="font-bold text-ellipsis" style="font-size:22px">{{ navParams.data.title }} </div>
@@ -24,14 +24,15 @@
             </div>
           </ion-col>
         </ion-row>
-      
+
         <div class="post-caption padder m-b-sm pos-rlt l-h" style=" white-space: pre-line;">
-        {{ navParams.data.body }}
+          {{ navParams.data.body }}
         </div>
         <!-- <img src="{{image}}" style="width: 100%" [hidden]="image == null"> -->
-
+        <div class="post-caption padder m-b-sm pos-rlt l-h" style=" white-space: pre-line;" [innerHtml]="navParams.data.bodyHtml">
+        </div>
       </div>
     </div>
 
   </ion-card>
-  </ion-content>
+</ion-content>
