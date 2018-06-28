@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 
 import { HTTP } from '@ionic-native/http';
+import { InAppBrowser } from '@ionic-native/in-app-browser';
 
 @Component({
   templateUrl: 'pushShow.html'
@@ -15,11 +16,15 @@ export class PushShowPage {
   // // image : string;
   // registered_date : string;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public http : HTTP) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public http : HTTP, private iab: InAppBrowser) {
     // this.serial = navParams.data;
     // this.getPushData();
+    console.log("pushShowPage navParams : " + navParams.data.linkaddress);
   }
-
+  btnLink(){
+    const browser = this.iab.create(this.navParams.data.linkaddress);
+    browser.show();  
+  }
   //서버로부터 push 데이터 가져옴
   // getPushData(){
 

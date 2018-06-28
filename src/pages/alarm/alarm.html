@@ -27,36 +27,40 @@
       </div> -->
 
   <!-- <ion-row class="wrapper-sm b-b b-light" (click)="showDetail(data.serial)" *ngFor="let data of pushDataArray"> -->
-  <ion-row class="wrapper-sm b-b b-light" (click)="showDetail(data)" *ngFor="let data of pushDataArray">
-      <!-- <ion-col col-auto>
-      <ion-avatar item-start>
-        <img class="thumb-sm" src="assets/imgs/logo_big.jpg">
-      </ion-avatar>
-    </ion-col> -->
+  <!-- <ion-row class="wrapper-sm b-b b-light" (click)="showDetail(data)" *ngFor="let data of pushDataArray">
     <ion-col class="text-ellipsis-flex">
       <div class="l-h">
         <div class="">제목
           <strong> {{data.title}}</strong>
         </div>
         <div class="text-sm text-muted text-ellipsis">{{data.body}}</div>
-        <!-- <div class="text-xxs text-muted">
+       -->
+  <!-- 위치 아이콘 + 대구 -->
+  <!-- <div class="text-xxs text-muted">
               <ion-icon name="ios-pin-outline"></ion-icon>
               daegu
-            </div> -->
+            </div> 
       </div>
     </ion-col>
     <ion-col text-right col-auto>
       <div class="span text-xs text-muted m-t-xs">{{data.registered_date}}</div>
     </ion-col>
-  </ion-row>
+  </ion-row> -->
 
+  <ion-list line (click)="showDetail(data)" *ngFor="let data of pushDataArray">
+    <ion-item text-wrap>
+      <ion-thumbnail item-start>
+        <img src="{{data.image}}">
+      </ion-thumbnail>
+      <h2>
+        <div>
+          제목<strong> {{data.title}}</strong>
+        </div>
+      </h2>
+      <p>{{data.body}}</p>
+      <div class="span text-xs text-muted m-t-xs">{{data.registered_date}}</div>
+      <!-- <button ion-button clear item-end>View</button> -->
+    </ion-item>
+  </ion-list>
 
-  <!-- <ion-list>
-      <button ion-item *ngFor="let data of pushDataArray" (click)="showDetail(data.serial)">
-        <span style="font-size:16px;">{{data.title}}</span>
-        <span style="font-size:12px; color:rgb(88, 88, 88)" float-right>{{data.registered_date}}</span>
-        <br>   
-        <span style="font-size:12px;">{{data.body}}</span>
-    </button>
-  </ion-list> -->
 </ion-content>

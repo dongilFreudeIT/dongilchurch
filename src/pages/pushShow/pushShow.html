@@ -19,20 +19,24 @@
         <ion-row class="wrapper-sm">
           <ion-col class="text-ellipsis-flex">
             <div class="l-h">
-              <div class="font-bold text-ellipsis" style="font-size:22px">{{ navParams.data.title }} </div>
+              <img src="{{navParams.data.image}}" style="width: 100%" >
+              <div class="font-bold text-ellipsis m-t-sm" style="font-size:22px; white-space: pre-line;">{{ navParams.data.title }} </div>
               <div class="text-sm text-muted text-ellipsis">{{ navParams.data.registered_date }}</div>
             </div>
           </ion-col>
         </ion-row>
 
-        <div class="post-caption padder m-b-sm pos-rlt l-h" style=" white-space: pre-line;">
+        <!-- <div class="post-caption padder m-b-sm pos-rlt l-h" style=" white-space: pre-line;">
           {{ navParams.data.body }}
-        </div>
-        <!-- <img src="{{image}}" style="width: 100%" [hidden]="image == null"> -->
+        </div> -->
         <div class="post-caption padder m-b-sm pos-rlt l-h" style=" white-space: pre-line;" [innerHtml]="navParams.data.bodyHtml">
         </div>
       </div>
     </div>
-
+    <button class="form-login"ion-button color="stable" block (click)="btnLink()"
+    *ngIf="navParams.data.linkbtn">
+        {{ navParams.data.linkbtn }}
+      </button>
   </ion-card>
+  
 </ion-content>
