@@ -32,14 +32,15 @@ export class HomePage {
 
   
   goToAlarm(){
-    this.storage.get('user_serial').then((value) => {
+    this.storage.ready().then(() => {
+      this.storage.get('user_serial').then((value) => {
       this.user_serial = value;
       if(this.user_serial==null || this.user_serial == ''){
         this.showAlert("안내","로그인을 해주세요.");
         return;
       }
       this.navCtrl.push(AlarmPage);
-    });
+    })});
   }
   // goToMyinfo(){
   //   this.storage.get("user_serial").then((value) => {

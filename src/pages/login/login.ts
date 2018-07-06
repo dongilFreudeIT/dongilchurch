@@ -75,8 +75,8 @@ export class LoginPage {
             });
           });
 
-
-          this.navCtrl.pop();
+          this.viewCtrl.dismiss(obj.name);
+          // this.navCtrl.pop();
         }else{
           var errorMsg = obj.message;
           this.showAlert("로그인 실패", errorMsg);
@@ -85,7 +85,7 @@ export class LoginPage {
 
         this.http.post(this.url + '/user/get_user', {user_serial: obj.user_serial}, {}).then(data => {
           if (data.status == 200) {
-            // console.log(data.data);
+            console.log(data.data);
             var obj = JSON.parse(data.data);
             //로그인 성공이면
             if (obj.code == "S01") {

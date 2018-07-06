@@ -10,10 +10,11 @@ import { SettingPage } from '../pages/setting/setting';
 import { LoginPage } from '../pages/login/login';
 import { SignupPage } from '../pages/signup/signup';
 import { UsermanagerPage } from '../pages/usermanager/usermanager';
-import { UserdetailPage } from '../pages/userdetail/userdetail';
 import { ParkingPage } from '../pages/parking/parking';
 import { ParkingManagerPage } from '../pages/parkingmanager/parkingmanager';
 import { MyinfoPage } from '../pages/myinfo/myinfo';
+import { FamilysitePage } from '../pages/familysite/familysite';
+import { RegisteruserPage } from '../pages/registeruser/registeruser';
 
 import { Storage } from '@ionic/storage';
 import { HTTP } from '@ionic-native/http';
@@ -21,13 +22,6 @@ import { FCM } from '@ionic-native/fcm'
 
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { BackgroundMode } from '@ionic-native/background-mode';
-import { ChurchtimePage } from '../pages/churchtime/churchtime';
-import { MyinfoShowPage } from '../pages/myinfo-show/myinfo-show';
-import { FindPasswordPage } from '../pages/findpassword/findpassword';
-import { FamilysitePage } from '../pages/familysite/familysite';
-
-declare var BackgroundTimer: any;
-declare var androidVolume: any;
 
 
 @Component({
@@ -101,20 +95,20 @@ export class MyApp {
               var obj = JSON.parse(data.data);
               //로그인 접속시간 갱신했으면 받아온 grade에 따라 왼쪽 메뉴 구성 변경
               if (obj.code == "S01") {
-                // var grade = obj.grade;
-                // this.storage.set("grade", grade);
-                // //grade가 없으면 부회원모드
-                // if(grade == null || grade == ''){
-                //   console.log('not loggin');
-                //   this.menuCtrl.enable(true, 'unauthenticated');
-                // }else if(grade == "관리자"){
-                //   // console.log('admin');
-                //   this.menuCtrl.enable(true, 'master');
-                // }else if(grade == "주차장매니저"){
-                //   this.menuCtrl.enable(true, 'parking_manager');
-                // }else{
-                //   this.menuCtrl.enable(true, 'authenticated');
-                // }
+                var grade = obj.grade;
+                this.storage.set("grade", grade);
+                //grade가 없으면 부회원모드
+                if(grade == null || grade == ''){
+                  console.log('not loggin');
+                  this.menuCtrl.enable(true, 'unauthenticated');
+                }else if(grade == "관리자"){
+                  // console.log('admin');
+                  this.menuCtrl.enable(true, 'master');
+                }else if(grade == "주차장매니저"){
+                  this.menuCtrl.enable(true, 'parking_manager');
+                }else{
+                  this.menuCtrl.enable(true, 'authenticated');
+                }
 
                 //push_token도 refresh한다.
                 this.storage.get("push_token").then((value) => {
@@ -133,7 +127,7 @@ export class MyApp {
               }
             }
           });
-        
+
           // console.log("val2 : " + val2);
 
 
@@ -144,18 +138,24 @@ export class MyApp {
               //로그인 성공이면
               if (obj.code == "S01") {
                 var user = obj.value;
+                // for (const key in user) {
+                //   if (user.hasOwnProperty(key)) {
+                //     const element = user[key];
+                //     console.log(key + " : " + element);
+
+                //   }
+                // }
                 this.storage.set("get_user", user);
                 // this.navCtrl.push(MyinfoPage, user);
               } else {
               }
             }
           });//http end
-        
-        
+
+
         }
 
       });
-
     });
   }
 
@@ -291,17 +291,21 @@ export class MyApp {
       });//http end
     });//storage end
 
-    this.storage.get('get_user').then((value)=>{
+    this.storage.get('get_user').then((value) => {
       console.log("get_user : " + value);
-    this.navCtrl.push(MyinfoPage, value);
+      this.navCtrl.push(MyinfoPage, value);
     });
   }
   //로그인 화면으로 이동(메뉴에서)
   // goToLogin(params) {
-    goToLogin() {
+  goToLogin() {
     // if (!params) params = {};
     // this.navCtrl.push(LoginPage);
+    
     let modal = this.modalCtrl.create(LoginPage, {}, { cssClass: 'modal-gradient' });
+    modal.onDidDismiss(data => {
+      this.showAlert('<strong>'+data+'</strong>님 로그인 되었습니다.<br>사랑하며 축복합니다!','');
+ });
     modal.present();
   }
   //회원가입 화면으로 이동(메뉴에서)
@@ -338,5 +342,20 @@ export class MyApp {
   goToFamilysite() {
     this.navCtrl.push(FamilysitePage);
   }
+  goToRegisteruser() {
+    // this.navCtrl.push(RegisteruserPage);
+    let modal = this.modalCtrl.create(RegisteruserPage, {}, {cssClass: 'modal-gradient'});
+    modal.present();
+  }
 
+  showAlert(title, msg){
+    // console.log(title+","+msg);
+      let alert = this.alertCtrl.create({
+        title: title,
+        subTitle: msg,
+        buttons: ['OK']
+      });
+    alert.present();
+  
+  }
 }

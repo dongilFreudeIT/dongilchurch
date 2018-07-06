@@ -14,6 +14,7 @@ export class UserdetailPage {
 
   url: string = 'http://13.125.35.123/api';
   user: any;
+  password: string; 
 
   constructor(public navCtrl: NavController, public alertCtrl: AlertController,  public navParams: NavParams, public http : HTTP) {
     this.user = this.navParams.data;
@@ -27,6 +28,7 @@ export class UserdetailPage {
     }
     var param = { 
       serial : this.user.serial, 
+      password : this.password,
       name : this.user.name,
       birthday : this.user.birthday,
       phone : this.user.phone,

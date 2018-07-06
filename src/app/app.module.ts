@@ -25,6 +25,7 @@ import { MyinfoShowPage } from '../pages/myinfo-show/myinfo-show';
 import { PasswordsetPage } from '../pages/passwordset/passwordset';
 import { FindPasswordPage } from '../pages/findpassword/findpassword';
 import { FamilysitePage } from '../pages/familysite/familysite';
+import { RegisteruserPage } from '../pages/registeruser/registeruser';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -64,7 +65,8 @@ import { CheckNetworkProvider } from '../providers/check-network/check-network';
     MyinfoShowPage,
     PasswordsetPage,
     FindPasswordPage,
-    FamilysitePage
+    FamilysitePage,
+    RegisteruserPage
     
   ],
   imports: [
@@ -94,7 +96,8 @@ import { CheckNetworkProvider } from '../providers/check-network/check-network';
     MyinfoShowPage,
     PasswordsetPage,
     FindPasswordPage,
-    FamilysitePage
+    FamilysitePage,
+    RegisteruserPage
   ],
   //사용되는 프로바이더(라이브러리 또는 플러그인)
   providers: [
