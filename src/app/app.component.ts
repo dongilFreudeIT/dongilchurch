@@ -21,7 +21,6 @@ import { HTTP } from '@ionic-native/http';
 import { FCM } from '@ionic-native/fcm'
 
 import { InAppBrowser } from '@ionic-native/in-app-browser';
-import { BackgroundMode } from '@ionic-native/background-mode';
 
 
 @Component({
@@ -37,7 +36,7 @@ export class MyApp {
   static toggleArray: any;
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, public http: HTTP, public menuCtrl: MenuController,
-    private storage: Storage, public fcm: FCM, public alertCtrl: AlertController, private iab: InAppBrowser, private backgroundMode: BackgroundMode,
+    private storage: Storage, public fcm: FCM, public alertCtrl: AlertController, private iab: InAppBrowser,
     public modalCtrl: ModalController
   ) {
 
@@ -98,15 +97,15 @@ export class MyApp {
                 var grade = obj.grade;
                 this.storage.set("grade", grade);
                 //grade가 없으면 부회원모드
-                if(grade == null || grade == ''){
+                if (grade == null || grade == '') {
                   console.log('not loggin');
                   this.menuCtrl.enable(true, 'unauthenticated');
-                }else if(grade == "관리자"){
+                } else if (grade == "관리자") {
                   // console.log('admin');
                   this.menuCtrl.enable(true, 'master');
-                }else if(grade == "주차장매니저"){
+                } else if (grade == "주차장매니저") {
                   this.menuCtrl.enable(true, 'parking_manager');
-                }else{
+                } else {
                   this.menuCtrl.enable(true, 'authenticated');
                 }
 
@@ -157,6 +156,7 @@ export class MyApp {
 
       });
     });
+
   }
 
   //앱이 꺼져도 1분마다 예배시간 체크하여 무음모드 설정하는 함수
@@ -301,11 +301,11 @@ export class MyApp {
   goToLogin() {
     // if (!params) params = {};
     // this.navCtrl.push(LoginPage);
-    
+
     let modal = this.modalCtrl.create(LoginPage, {}, { cssClass: 'modal-gradient' });
     modal.onDidDismiss(data => {
-      this.showAlert('<strong>'+data+'</strong>님 로그인 되었습니다.<br>사랑하며 축복합니다!','');
- });
+      this.showAlert('<strong>' + data + '</strong>님 로그인 되었습니다.<br>사랑하며 축복합니다!', '');
+    });
     modal.present();
   }
   //회원가입 화면으로 이동(메뉴에서)
@@ -344,18 +344,18 @@ export class MyApp {
   }
   goToRegisteruser() {
     // this.navCtrl.push(RegisteruserPage);
-    let modal = this.modalCtrl.create(RegisteruserPage, {}, {cssClass: 'modal-gradient'});
+    let modal = this.modalCtrl.create(RegisteruserPage, {}, { cssClass: 'modal-gradient' });
     modal.present();
   }
 
-  showAlert(title, msg){
+  showAlert(title, msg) {
     // console.log(title+","+msg);
-      let alert = this.alertCtrl.create({
-        title: title,
-        subTitle: msg,
-        buttons: ['OK']
-      });
+    let alert = this.alertCtrl.create({
+      title: title,
+      subTitle: msg,
+      buttons: ['OK']
+    });
     alert.present();
-  
+
   }
 }

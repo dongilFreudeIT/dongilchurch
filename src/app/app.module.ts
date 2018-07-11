@@ -43,6 +43,8 @@ import { LoaderProvider } from '../providers/loader/loader';
 
 import { Network } from '@ionic-native/network'
 import { CheckNetworkProvider } from '../providers/check-network/check-network';
+import { NativeStorage } from '@ionic-native/native-storage';
+
 @NgModule({
   //page 선언
   declarations: [
@@ -74,6 +76,7 @@ import { CheckNetworkProvider } from '../providers/check-network/check-network';
     // HttpClientModule, //http 통신을 위해
     IonicModule.forRoot(MyApp),
     IonicStorageModule.forRoot() //앱 내에 데이터를 저장하기 위해
+    
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -116,7 +119,10 @@ import { CheckNetworkProvider } from '../providers/check-network/check-network';
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     LoaderProvider,
     Network,
-    CheckNetworkProvider
+    CheckNetworkProvider,
+    NativeStorage
+
+
   ]
 })
 export class AppModule {}

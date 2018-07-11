@@ -6,6 +6,8 @@ import { HTTP } from '@ionic-native/http';
 
 import { PushShowPage } from '../pushShow/pushShow';
 import * as moment from 'moment';
+import { NativeStorage } from '@ionic-native/native-storage';
+
 
 @Component({
   selector: 'page-alarm',
@@ -15,7 +17,8 @@ export class AlarmPage {
   url: string = 'http://13.125.35.123/api';
   pushDataArray: any; //서버에서 받아온 푸쉬 메세지 리스트 저장 array
 
-  constructor(public navCtrl: NavController, private storage: Storage, public http: HTTP) {
+  constructor(public navCtrl: NavController, private storage: Storage, public http: HTTP
+    , private nativeStorage: NativeStorage) {
 
     // 뱃지(숫자 보여주는거) 클리어
     // this.badge.clear();
@@ -28,9 +31,7 @@ export class AlarmPage {
 
   getPushMessage() {
 
-    this.storage.get('pushDataArray').then((_pushDataArray)=>{
-      this.pushDataArray = _pushDataArray;
-    })
+
     //저장 된 user serial 가져와서 서버에 푸쉬 리스트 요청
     this.storage.get('user_serial').then((value) => {
 
@@ -44,7 +45,12 @@ export class AlarmPage {
           if (obj.code == "S01") {
             this.pushDataArray = obj.value;
             //this.new_pushData = obj.value;
-            this.storage.set("pushDataArray", this.pushDataArray);
+            // this.storage.set("pushDataArray", this.pushDataArray);
+            this.nativeStorage.setItem('pushDataArray2', this.pushDataArray)
+              .then(
+                () => console.log('Stored item!'),
+                error => console.error('Error storing item', error)
+              );
           } else {
             console.log(obj.message);
           }
@@ -56,14 +62,18 @@ export class AlarmPage {
 
       });//http 부분
 
-    });//storage 부분
-
-    // this.pushDataArray.forEach(temp_json => {
-    //   console.log("th : " +temp_json.serial);
+    });
+    // this.storage.get('pushDataArray').then((_pushDataArray) => {
+    //   this.pushDataArray = _pushDataArray;
     // });
-    // this.pushDataArray;
+    this.nativeStorage.getItem('pushDataArray2').then(data => {
+        this.pushDataArray = data;
+      }
+    )
+
+
   }
-  
+
   /**
    * 건호 추가
    * 날짜 변환 코드
@@ -81,5 +91,18 @@ export class AlarmPage {
       }
       this.pushDataArray[i] = temp_json;
     }
+  }
+
+  storeLocalStorage() {
+    this.nativeStorage.setItem('myitem', { property: 'value', anotherProperty: 'anotherValue' })
+      .then(
+        () => console.log('Stored item!'),
+        error => console.error('Error storing item', error)
+      );
+
+    this.nativeStorage.getItem('myitem')
+      .then(
+        data => { console.log(data.anotherProperty) }
+      )
   }
 }
