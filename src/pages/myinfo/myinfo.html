@@ -8,145 +8,145 @@
     </ion-title>
   </ion-navbar>
 </ion-header>
-<ion-content class="bg-muted" padding >
-    <ion-card class="form-login">
-        <ion-item class="b-b b-light">
-            <ion-label color="primary">
-              아이디
-            </ion-label>
-            <ion-label text-right >
-                {{user.id}}
-            </ion-label>
-          </ion-item>
+<ion-content class="bg-muted" padding>
+  <ion-card class="form-login">
+    <ion-item class="b-b b-light">
+      <ion-label color="primary">
+        아이디
+      </ion-label>
+      <ion-label text-right>
+        {{user.id}}
+      </ion-label>
+    </ion-item>
 
-         <ion-item class="b-b b-light">
-            <ion-label color="primary">
-              비밀번호
-            </ion-label>
-            <ion-input type="password" text-right [(ngModel)]="password" name="password" placeholder=""></ion-input>
-          </ion-item> 
+    <ion-item class="b-b b-light">
+      <ion-label color="primary">
+        비밀번호
+      </ion-label>
+      <ion-input type="password" text-right [(ngModel)]="password" name="password" placeholder=""></ion-input>
+    </ion-item>
 
-         <ion-item class="b-b b-light">
-            <ion-label color="primary">
-              이름
-            </ion-label>
-            <ion-input type="text" text-right [(ngModel)]="user.name" name="user.name" placeholder=""disabled></ion-input>
-          </ion-item>
+    <ion-item class="b-b b-light">
+      <ion-label color="primary">
+        이름
+      </ion-label>
+      <ion-input type="text" text-right [(ngModel)]="user.name" name="user.name" placeholder="" disabled></ion-input>
+    </ion-item>
 
-          <ion-item class="b-b b-light">
-            <ion-label color="primary">
-                휴대폰 번호
-            </ion-label>
-            <ion-input type="tel" text-right [(ngModel)]="user.phone" name="user.phone" maxlength="11" placeholder="" disabled></ion-input>
-          </ion-item>
+    <ion-item class="b-b b-light">
+      <ion-label color="primary">
+        휴대폰 번호
+      </ion-label>
+      <ion-input type="tel" text-right [(ngModel)]="user.phone" name="user.phone" maxlength="11" placeholder="" disabled></ion-input>
+    </ion-item>
 
-         <ion-item class="b-b b-light">
-            <ion-label color="primary">
-                생년월일
-              </ion-label>
-              <ion-datetime displayFormat="YYYY년 MM월 DD일" [(ngModel)]="birthdate" name="birthdate"></ion-datetime>
-              <!-- <ion-input type="number" [(ngModel)]="user.birthday" name="user.birthday" placeholder="" maxlength="8"></ion-input> -->
-            </ion-item>
+    <ion-item class="b-b b-light">
+      <ion-label color="primary">
+        생년월일
+      </ion-label>
+      <ion-datetime displayFormat="YYYY년 MM월 DD일" [(ngModel)]="birthdate" name="birthdate"></ion-datetime>
+      <!-- <ion-input type="number" [(ngModel)]="user.birthday" name="user.birthday" placeholder="" maxlength="8"></ion-input> -->
+    </ion-item>
 
-          <ion-item class="b-b b-light">
-            <ion-label color="primary">
-                주소
-              </ion-label>
-              <ion-input type="text" text-right [(ngModel)]="user.address" name="user.address" placeholder=""></ion-input>
-            </ion-item>
-
-
-            <ion-item class="b-b b-light">
-              <ion-label color="primary">
-                  지역
-              </ion-label>
-              <ion-select [(ngModel)]="user.place" name="user.place">
-                      <ion-option value="">지역없음</ion-option>
-                      <ion-option value="1지역">1지역</ion-option>
-                      <ion-option value="2지역">2지역</ion-option>
-                      <ion-option value="3지역">3지역</ion-option>
-                      <ion-option value="4지역">4지역</ion-option>
-                      <ion-option value="5지역">5지역</ion-option>
-                      <ion-option value="6지역">6지역</ion-option>
-                      <ion-option value="7지역">7지역</ion-option>
-              </ion-select>
-          </ion-item>
-  
-          <ion-item class="b-b b-light">
-              <ion-label color="primary">
-                  기관
-              </ion-label>
-              <ion-select  [(ngModel)]="user.subgroup" name="user.subgroup">
-                      <ion-option value="">기관없음</ion-option>
-                      <ion-option value="영아부">영아부</ion-option>
-                      <ion-option value="유치부">유치부</ion-option>
-                      <ion-option value="유년부">유년부</ion-option>
-                      <ion-option value="초등부">초등부</ion-option>
-                      <ion-option value="중등부">중등부</ion-option>
-                      <ion-option value="고등부">고등부</ion-option>
-                      <ion-option value="1청년부">1청년부</ion-option>
-                      <ion-option value="2청년부">2청년부</ion-option>
-                      <ion-option value="3청년부">3청년부</ion-option>
-                      <ion-option value="신혼청년부">신혼청년부</ion-option>
-                      <ion-option value="에녹소망회">에녹소망회</ion-option>
-                      <ion-option value="갈렙회">갈렙회</ion-option>
-                      <ion-option value="사라회">사라회</ion-option>
-                      <ion-option value="나오미회">나오미회</ion-option>
-                      <ion-option value="1남전도회">1남전도회</ion-option>
-                      <ion-option value="2남전도회">2남전도회</ion-option>
-                      <ion-option value="3남전도회">3남전도회</ion-option>
-                      <ion-option value="4남전도회">4남전도회</ion-option>
-                      <ion-option value="5남전도회">5남전도회</ion-option>
-                      <ion-option value="6남전도회">6남전도회</ion-option>
-                      <ion-option value="1여전도회">1여전도회</ion-option>
-                      <ion-option value="2여전도회">2여전도회</ion-option>
-                      <ion-option value="3여전도회">3여전도회</ion-option>
-                      <ion-option value="4여전도회">4여전도회</ion-option>
-                      <ion-option value="5여전도회">5여전도회</ion-option>
-                      <ion-option value="6여전도회">6여전도회</ion-option>
-                      <ion-option value="7여전도회">7여전도회</ion-option>
-                      <ion-option value="8여전도회">8여전도회</ion-option>
-                      <ion-option value="9여전도회">9여전도회</ion-option>
-                      <ion-option value="10여전도회">10여전도회</ion-option>
-              </ion-select>
-          </ion-item>
-  
-          <ion-item class="b-b b-light">
-              <ion-label color="primary">
-                  직분
-              </ion-label>
-              <ion-select [(ngModel)]="user.title" name="user.title">
-                      <ion-option value="">직분없음</ion-option>
-                      <ion-option value="교역자">교역자</ion-option>
-                      <ion-option value="장로">장로</ion-option>
-                      <ion-option value="권사">권사</ion-option>
-                      <ion-option value="장립집사">장립집사</ion-option>
-                      <ion-option value="서리집사">서리집사</ion-option>
-              </ion-select>
-          </ion-item>
-  
-          <ion-item class="b-b b-light">
-              <ion-label color="primary">
-                  순직책
-              </ion-label>
-              <ion-select [(ngModel)]="user.subtitle" name="user.subtitle">
-                      <ion-option value="">순직책없음</ion-option>
-                      <ion-option value="교구장">교구장</ion-option>
-                      <ion-option value="지역권사">지역권사</ion-option>
-                      <ion-option value="순장">순장</ion-option>
-                      <ion-option value="순원">순원</ion-option>
-                   
-              </ion-select>
-          </ion-item>
-
-          </ion-card>
-
-          <p text-center>비밀번호 변경을 원하지 않을 경우 비워두시면 됩니다.</p>
+    <ion-item class="b-b b-light">
+      <ion-label color="primary">
+        주소
+      </ion-label>
+      <ion-input type="text" text-right [(ngModel)]="user.address" name="user.address" placeholder=""></ion-input>
+    </ion-item>
 
 
-        <button class="form-login"ion-button color="stable" block (click)="update()">
-          저장하기
-        </button>
+    <ion-item class="b-b b-light">
+      <ion-label color="primary">
+        지역
+      </ion-label>
+      <ion-select [(ngModel)]="user.place" name="user.place">
+        <ion-option value="">지역없음</ion-option>
+        <ion-option value="1지역">1지역</ion-option>
+        <ion-option value="2지역">2지역</ion-option>
+        <ion-option value="3지역">3지역</ion-option>
+        <ion-option value="4지역">4지역</ion-option>
+        <ion-option value="5지역">5지역</ion-option>
+        <ion-option value="6지역">6지역</ion-option>
+        <ion-option value="7지역">7지역</ion-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item class="b-b b-light">
+      <ion-label color="primary">
+        기관
+      </ion-label>
+      <ion-select [(ngModel)]="user.subgroup" name="user.subgroup">
+        <ion-option value="">기관없음</ion-option>
+        <ion-option value="영아부">영아부</ion-option>
+        <ion-option value="유치부">유치부</ion-option>
+        <ion-option value="유년부">유년부</ion-option>
+        <ion-option value="초등부">초등부</ion-option>
+        <ion-option value="중등부">중등부</ion-option>
+        <ion-option value="고등부">고등부</ion-option>
+        <ion-option value="1청년부">1청년부</ion-option>
+        <ion-option value="2청년부">2청년부</ion-option>
+        <ion-option value="3청년부">3청년부</ion-option>
+        <ion-option value="신혼청년부">신혼청년부</ion-option>
+        <ion-option value="에녹소망회">에녹소망회</ion-option>
+        <ion-option value="갈렙회">갈렙회</ion-option>
+        <ion-option value="사라회">사라회</ion-option>
+        <ion-option value="나오미회">나오미회</ion-option>
+        <ion-option value="1남전도회">1남전도회</ion-option>
+        <ion-option value="2남전도회">2남전도회</ion-option>
+        <ion-option value="3남전도회">3남전도회</ion-option>
+        <ion-option value="4남전도회">4남전도회</ion-option>
+        <ion-option value="5남전도회">5남전도회</ion-option>
+        <ion-option value="6남전도회">6남전도회</ion-option>
+        <ion-option value="1여전도회">1여전도회</ion-option>
+        <ion-option value="2여전도회">2여전도회</ion-option>
+        <ion-option value="3여전도회">3여전도회</ion-option>
+        <ion-option value="4여전도회">4여전도회</ion-option>
+        <ion-option value="5여전도회">5여전도회</ion-option>
+        <ion-option value="6여전도회">6여전도회</ion-option>
+        <ion-option value="7여전도회">7여전도회</ion-option>
+        <ion-option value="8여전도회">8여전도회</ion-option>
+        <ion-option value="9여전도회">9여전도회</ion-option>
+        <ion-option value="10여전도회">10여전도회</ion-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item class="b-b b-light">
+      <ion-label color="primary">
+        직분
+      </ion-label>
+      <ion-select [(ngModel)]="user.title" name="user.title">
+        <ion-option value="">직분없음</ion-option>
+        <ion-option value="교역자">교역자</ion-option>
+        <ion-option value="장로">장로</ion-option>
+        <ion-option value="권사">권사</ion-option>
+        <ion-option value="장립집사">장립집사</ion-option>
+        <ion-option value="서리집사">서리집사</ion-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item class="b-b b-light">
+      <ion-label color="primary">
+        순직책
+      </ion-label>
+      <ion-select [(ngModel)]="user.subtitle" name="user.subtitle">
+        <ion-option value="">순직책없음</ion-option>
+        <ion-option value="교구장">교구장</ion-option>
+        <ion-option value="지역권사">지역권사</ion-option>
+        <ion-option value="순장">순장</ion-option>
+        <ion-option value="순원">순원</ion-option>
+
+      </ion-select>
+    </ion-item>
+
+  </ion-card>
+
+  <p text-center>비밀번호 변경을 원하지 않을 경우 비워두시면 됩니다.</p>
+  <p text-center>이름 또는 휴대폰 번호을 변경하려면 관리자에게 <br>문의 바랍니다. <a href="tel:053-755-6017" class="button button-positive">053-755-6017</a></p>
+
+  <button class="form-login" ion-button color="stable" block (click)="update()">
+    저장하기
+  </button>
 
 
 </ion-content>

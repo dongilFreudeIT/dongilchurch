@@ -40,7 +40,9 @@
             <ion-label color="primary">
                 생년월일
             </ion-label>
-            <ion-input type="number" text-right [(ngModel)]="user.birthday" name="user.birthday" placeholder=""></ion-input>
+            <ion-datetime displayFormat="YYYY년 MM월 DD일" [(ngModel)]="birthdate" name="birthdate"></ion-datetime>
+
+            <!-- <ion-input type="number" text-right [(ngModel)]="user.birthday" name="user.birthday" placeholder=""></ion-input> -->
         </ion-item>
 
         <ion-item class="b-b b-light">

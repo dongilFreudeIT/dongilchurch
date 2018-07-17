@@ -15,9 +15,12 @@ export class UserdetailPage {
   url: string = 'http://13.125.35.123/api';
   user: any;
   password: string; 
+  birthdate:any;
 
   constructor(public navCtrl: NavController, public alertCtrl: AlertController,  public navParams: NavParams, public http : HTTP) {
     this.user = this.navParams.data;
+    this.birthdate = this.user.birthday.substring(0,4)+'-'+this.user.birthday.substring(4,6)+'-'+this.user.birthday.substring(6,8);
+
     console.log("received = " + this.user.name);
   }
 
@@ -25,6 +28,19 @@ export class UserdetailPage {
   changeUser(){
     if (this.user.address == null || this.user.address == '') {
       this.user.address = ' ';
+    }
+    //생년월일 체크
+    if(this.user.birthday != null){
+      // console.log("birth 2 : " +this.birthdate);
+      var today = new Date();
+      var birth = new Date(this.birthdate);
+      if(birth  >=  today){
+        this.showAlert("안내", "생년월일 입력이 잘못 되었습니다.");
+        return;
+      }
+      this.user.birthday = this.birthdate.replace(/-/gi, "");
+      // console.log("birth 3 : " +this.user.birthday);
+
     }
     var param = { 
       serial : this.user.serial, 

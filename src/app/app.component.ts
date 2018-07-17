@@ -284,17 +284,24 @@ export class MyApp {
             this.storage.set("push_token", user);
             this.storage.set("get_user", user);
             // this.navCtrl.push(MyinfoPage, user);
-          } else {
-
-          }
+          } 
+          this.storage.get('get_user').then((value) => {
+            console.log("get_user : " + value);
+            this.navCtrl.push(MyinfoPage, value);
+          });
         }
+      },()=>{
+        this.storage.get('get_user').then((value) => {
+          console.log("get_user : " + value);
+          this.navCtrl.push(MyinfoPage, value);
+        });
       });//http end
     });//storage end
 
-    this.storage.get('get_user').then((value) => {
-      console.log("get_user : " + value);
-      this.navCtrl.push(MyinfoPage, value);
-    });
+    // this.storage.get('get_user').then((value) => {
+    //   console.log("get_user : " + value);
+    //   this.navCtrl.push(MyinfoPage, value);
+    // });
   }
   //로그인 화면으로 이동(메뉴에서)
   // goToLogin(params) {
@@ -304,7 +311,9 @@ export class MyApp {
 
     let modal = this.modalCtrl.create(LoginPage, {}, { cssClass: 'modal-gradient' });
     modal.onDidDismiss(data => {
-      this.showAlert('<strong>' + data + '</strong>님 로그인 되었습니다.<br>사랑하며 축복합니다!', '');
+      if(data){
+        this.showAlert('<strong>' + data + '</strong>님 로그인 되었습니다.<br>사랑하며 축복합니다!', '');
+      }
     });
     modal.present();
   }
