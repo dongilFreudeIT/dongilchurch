@@ -8,6 +8,7 @@ import { CheckNetworkProvider } from '../../providers/check-network/check-networ
 import { UserdetailPage } from '../userdetail/userdetail';
 import { SendPushPage } from '../sendPush/sendPush';
 import { PushfilterModal } from '../pushfilter-modal/pushfilter';
+import { InAppBrowser } from '@ionic-native/in-app-browser';
 
 @Component({
   selector: 'page-usermanager',
@@ -27,7 +28,8 @@ export class UsermanagerPage {
   subscribeNet2 : any;
 
   constructor(public navCtrl: NavController, public http : HTTP, public modalCtrl: ModalController, public alertCtrl: AlertController
-    , public toastController :ToastController, private network: Network, private chechNetwork : CheckNetworkProvider) {
+    , public toastController :ToastController, private network: Network, private iab: InAppBrowser,
+    private chechNetwork : CheckNetworkProvider) {
 
     this.isAllSelect = false;
     this.getUsers();
@@ -193,29 +195,32 @@ export class UsermanagerPage {
   //푸쉬 보내는 화면으로 이동
   sendPush(){
     //선택된 사람들만 보낸다.
-    var sendUserArray = Array();
-    for(var i=0; i<this.userArray.length; i++){
-      if(this.userArray[i].selected == true){
-        sendUserArray.push(this.userArray[i]);
-      }
-    }
-    if(sendUserArray.length == 0){
-      let alert = this.alertCtrl.create({
-          title: "안내",
-          subTitle: "푸시 메지지 보낼 유저를 선택해 주세요.",
-          buttons: ['OK']
-        });
-      alert.present();
-    }else if(this.isConnected == 0){
-        let alert = this.alertCtrl.create({
-            title: "안내",
-            subTitle: "인터넷 연결을 확인해주세요.",
-            buttons: ['OK']
-          });
-        alert.present();
-    } else{
-      this.navCtrl.push(SendPushPage, sendUserArray);
-    }
+    // var sendUserArray = Array();
+    // for(var i=0; i<this.userArray.length; i++){
+    //   if(this.userArray[i].selected == true){
+    //     sendUserArray.push(this.userArray[i]);
+    //   }
+    // }
+    // if(sendUserArray.length == 0){
+    //   let alert = this.alertCtrl.create({
+    //       title: "안내",
+    //       subTitle: "푸시 메지지 보낼 유저를 선택해 주세요.",
+    //       buttons: ['OK']
+    //     });
+    //   alert.present();
+    // }else if(this.isConnected == 0){
+    //     let alert = this.alertCtrl.create({
+    //         title: "안내",
+    //         subTitle: "인터넷 연결을 확인해주세요.",
+    //         buttons: ['OK']
+    //       });
+    //     alert.present();
+    // } else{
+    //   this.navCtrl.push(SendPushPage, sendUserArray);
+    // }
+    console.log("푸시보내기");
+    const browser = this.iab.create('http://13.125.35.123/api/SendPush');
+    browser.show();
 
   }
   //유저 검색
