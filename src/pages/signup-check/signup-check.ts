@@ -72,6 +72,7 @@ export class SignupCheckPage {
           text: 'OK',
           handler: () => {
             console.log('alert clicked');
+            this.viewCtrl.dismiss();
             this.modal.present();
           }
         }]
