@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, ViewController, ModalController, AlertController } from 'ionic-angular';
+import { NavController, NavParams, ViewController, ModalController, AlertController } from 'ionic-angular';
 import { HTTP } from '@ionic-native/http';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 
@@ -24,8 +24,11 @@ export class RegisteruserPage {
   user_subgroup: string;
 
   browserRef: any;
-  constructor(public navCtrl: NavController, public alertCtrl: AlertController, public http: HTTP, public viewCtrl: ViewController, public modalCtrl: ModalController,
+  constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController, public http: HTTP, 
+    public viewCtrl: ViewController, public modalCtrl: ModalController,
     public iab: InAppBrowser) {
+      this.user_name = navParams.get('name');
+      this.user_phone = navParams.get('phone');
   }
 
 

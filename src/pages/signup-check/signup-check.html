@@ -1,0 +1,54 @@
+<ion-header>
+  <ion-navbar color="primary" no-border-bottom>
+    <ion-title>
+      회원 확인
+    </ion-title>
+    <ion-buttons end>
+      <button ion-button color="light" (click)="dismiss()">
+        <ion-icon name="md-close"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding center>
+  <ion-card class="form-login">
+    <ion-item class="b-b b-light">
+      <ion-input type="text" placeholder="이름" [(ngModel)]="name" name="name"></ion-input>
+    </ion-item>
+</ion-card>
+<ion-card class="form-login">
+
+    <ion-item>
+      <ion-input type="tel" placeholder="휴대폰 번호" maxlength="11" [(ngModel)]="phone" name="phone"></ion-input>
+    </ion-item>
+  </ion-card>
+
+  <ion-row class="form-login">
+    <ion-col col-4>
+      <ion-item>
+        <ion-input type="tel" placeholder="1900" maxlength="4" [(ngModel)]="year"> </ion-input>
+      </ion-item>
+    </ion-col>
+
+    <ion-col col-3>
+      <ion-item >
+        <ion-input type="tel" placeholder="00" maxlength="2" [(ngModel)]="month"> </ion-input>
+      </ion-item>
+    </ion-col>
+
+    <ion-col col-3>
+      <ion-item >
+        <ion-input type="tel" placeholder="00" maxlength="2" [(ngModel)]="day"> </ion-input>
+      </ion-item>
+
+    </ion-col>
+  </ion-row>
+
+  <div class="padder">
+    <button ion-button block outline color="light" (click)="checkUser()">
+      <b>확인</b>
+    </button>
+  </div>
+
+</ion-content>

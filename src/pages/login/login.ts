@@ -8,6 +8,7 @@ import { HTTP } from '@ionic-native/http';
 import { Storage } from '@ionic/storage';
 import { MenuController } from 'ionic-angular';
 import { FindPasswordPage } from '../findpassword/findpassword';
+import { SignupCheckPage } from '../signup-check/signup-check';
 
 @Component({
   selector: 'page-login',
@@ -109,8 +110,9 @@ export class LoginPage {
   }
 
   goSignUp() {
-    this.viewCtrl.dismiss();
-    let modal = this.modalCtrl.create(SignupPage, {}, {cssClass: 'modal-gradient'});
+    // this.viewCtrl.dismiss();
+    // let modal = this.modalCtrl.create(SignupPage, {}, {cssClass: 'modal-gradient'});
+    let modal = this.modalCtrl.create(SignupCheckPage, {}, {cssClass: 'modal-gradient'});
     modal.present();
   }
 
