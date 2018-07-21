@@ -5,6 +5,7 @@ import { AlarmPage } from '../alarm/alarm';
 import { SettingPage } from '../setting/setting';
 import { ParkingPage } from '../parking/parking';
 import { FamilysitePage } from '../familysite/familysite';
+import { WeeklyPage } from '../weekly/weekly';
 
 import { Storage } from '@ionic/storage';
 import { HTTP } from '@ionic-native/http';
@@ -109,5 +110,7 @@ export class HomePage {
   goToFamilysite(){
     this.navCtrl.push(FamilysitePage);
   }
-  
+  goToWeekly() {
+    this.navCtrl.push(WeeklyPage);
+  }
 }

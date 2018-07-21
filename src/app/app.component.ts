@@ -21,6 +21,7 @@ import { HTTP } from '@ionic-native/http';
 import { FCM } from '@ionic-native/fcm'
 
 import { InAppBrowser } from '@ionic-native/in-app-browser';
+import { WeeklyPage } from '../pages/weekly/weekly';
 
 
 @Component({
@@ -356,7 +357,9 @@ export class MyApp {
     let modal = this.modalCtrl.create(RegisteruserPage, {serial:false}, { cssClass: 'modal-gradient' });
     modal.present();
   }
-
+  goToWeekly() {
+    this.navCtrl.push(WeeklyPage);
+  }
   showAlert(title, msg) {
     // console.log(title+","+msg);
     let alert = this.alertCtrl.create({
@@ -367,4 +370,5 @@ export class MyApp {
     alert.present();
 
   }
+
 }

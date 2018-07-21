@@ -27,6 +27,7 @@ import { FindPasswordPage } from '../pages/findpassword/findpassword';
 import { FamilysitePage } from '../pages/familysite/familysite';
 import { RegisteruserPage } from '../pages/registeruser/registeruser';
 import { SignupCheckPage } from '../pages/signup-check/signup-check';
+import { WeeklyPage } from '../pages/weekly/weekly';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -70,7 +71,8 @@ import { NativeStorage } from '@ionic-native/native-storage';
     FindPasswordPage,
     FamilysitePage,
     RegisteruserPage,
-    SignupCheckPage
+    SignupCheckPage,
+    WeeklyPage
   ],
   imports: [
     BrowserModule, 
@@ -102,7 +104,8 @@ import { NativeStorage } from '@ionic-native/native-storage';
     FindPasswordPage,
     FamilysitePage,
     RegisteruserPage,
-    SignupCheckPage
+    SignupCheckPage,
+    WeeklyPage
   ],
   //사용되는 프로바이더(라이브러리 또는 플러그인)
   providers: [
