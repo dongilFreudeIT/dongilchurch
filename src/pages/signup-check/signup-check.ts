@@ -40,7 +40,9 @@ export class SignupCheckPage {
     if(this.month && this.month.length == 1){
       this.month = '0'+this.month;
     }
-
+    if(this.day && this.day.length == 1){
+      this.day = '0'+this.day;
+    }
     this.birthday = this.year+this.month+this.day;
     let info = {name:this.name, phone:_phone, birthday:this.birthday}
     this.http.post(this.url + '/user/checkUser', info,{}).then(data =>{
@@ -50,7 +52,7 @@ export class SignupCheckPage {
         
         if(obj.code == "S01"){
           this.showAlert("안내","정보가 확인되었습니다. 나머지 정보를 입력하시면 가입이 완료됩니다.");
-          this.modal = this.modalCtrl.create(RegisteruserPage,{name: obj.value['name'],phone:this.phone}, {cssClass: 'modal-gradient'});
+          this.modal = this.modalCtrl.create(RegisteruserPage,obj.value, {cssClass: 'modal-gradient'});
         }else{
           this.showAlert("안내","일치하는 정보가 없습니다. 회원가입 화면으로 이동합니다.")
           this.modal = this.modalCtrl.create(SignupPage, {}, {cssClass: 'modal-gradient'});

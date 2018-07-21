@@ -353,7 +353,7 @@ export class MyApp {
   }
   goToRegisteruser() {
     // this.navCtrl.push(RegisteruserPage);
-    let modal = this.modalCtrl.create(RegisteruserPage, {}, { cssClass: 'modal-gradient' });
+    let modal = this.modalCtrl.create(RegisteruserPage, {serial:false}, { cssClass: 'modal-gradient' });
     modal.present();
   }
 

@@ -27,8 +27,20 @@ export class RegisteruserPage {
   constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController, public http: HTTP, 
     public viewCtrl: ViewController, public modalCtrl: ModalController,
     public iab: InAppBrowser) {
-      this.user_name = navParams.get('name');
-      this.user_phone = navParams.get('phone');
+      console.log(navParams);
+      if(navParams.get('serial')){
+        this.user_name = navParams.get('name');
+        this.user_phone = navParams.get('phone').replace(/\D/g,'');
+        this.user_address = navParams.get('address');
+        this.user_subgroup = navParams.get('subgroup');
+        this.user_subtitle = navParams.get('subtitle');
+        this.user_title = navParams.get('title');
+        
+        if(navParams.get('place').length == 1)
+        {
+          this.user_place = navParams.get('place')+'지역'
+        }
+      }
   }
 
 
