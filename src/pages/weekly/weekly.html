@@ -4,6 +4,15 @@
   <!-- <img src="http://www.dongil.org/files/attach/images/789/804/015/725e15fe5e635831e8596b3bf47bac92.jpg" /> -->
   <!-- <img [src]="'img/' + img '"> --> 
   <!-- <img src="{{img}}"> -->
-  <img [src]="img"/>
+  
+  <button ion-button color="b-primary" (click)="showWeekly()">주보 목록 보기</button>
+
+  <img *ngIf="img" [src]="img"/>
   <!-- <img ng-src="{{img}}"> -->
+
+  <div *ngIf="!flagGetImage" text-center>
+    <ion-spinner item-start name="ios">
+    </ion-spinner>
+    서버에 접속 중입니다.
+  </div>
 </ion-content>

@@ -1,6 +1,6 @@
 import { NgModule, ErrorHandler } from '@angular/core';
 import { HTTP } from '@ionic-native/http';
-// import { HttpClientModule } from '@angular/common/http';
+
 import { BrowserModule } from '@angular/platform-browser';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 
@@ -35,17 +35,14 @@ import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { FCM } from '@ionic-native/fcm';
 
 import { IonicStorageModule } from '@ionic/storage';
-import { ImagePicker } from '@ionic-native/image-picker';
-import { File } from '@ionic-native/file';
-import { FilePath } from '@ionic-native/file-path';
 import { AndroidPermissions } from '@ionic-native/android-permissions';
-import { BackgroundMode } from '@ionic-native/background-mode';
 import { Device } from '@ionic-native/device';
 import { LoaderProvider } from '../providers/loader/loader';
 
 import { Network } from '@ionic-native/network'
 import { CheckNetworkProvider } from '../providers/check-network/check-network';
 import { NativeStorage } from '@ionic-native/native-storage';
+import { IonicImageViewerModule } from 'ionic-img-viewer';
 
 @NgModule({
   //page 선언
@@ -76,6 +73,7 @@ import { NativeStorage } from '@ionic-native/native-storage';
   ],
   imports: [
     BrowserModule, 
+    IonicImageViewerModule,
     // HttpClientModule, //http 통신을 위해
     IonicModule.forRoot(MyApp),
     IonicStorageModule.forRoot() //앱 내에 데이터를 저장하기 위해
@@ -110,14 +108,10 @@ import { NativeStorage } from '@ionic-native/native-storage';
   //사용되는 프로바이더(라이브러리 또는 플러그인)
   providers: [
     HTTP,
-    File,
-    FilePath,
-    ImagePicker,
     FCM,
     // Storage,
     InAppBrowser,
     AndroidPermissions,
-    BackgroundMode,
     StatusBar,
     SplashScreen,
     Device,
