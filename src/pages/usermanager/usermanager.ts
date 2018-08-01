@@ -6,7 +6,6 @@ import { Network } from '@ionic-native/network'
 import { CheckNetworkProvider } from '../../providers/check-network/check-network';
 
 import { UserdetailPage } from '../userdetail/userdetail';
-import { SendPushPage } from '../sendPush/sendPush';
 import { PushfilterModal } from '../pushfilter-modal/pushfilter';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 

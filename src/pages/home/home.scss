@@ -1,10 +1,10 @@
 page-home {
-    background: color($colors, primary);
+     background: color($colors, dark);
 }
 
-.back{
-    background: color($colors, primary);
-}
+// .back{
+//     background: color($colors, primary);
+// }
 .home-image{
     margin: auto;
     width: 40%;
@@ -21,7 +21,7 @@ page-home {
     background-image: url('../assets/imgs/home_back.jpg') ;
     background-repeat: no-repeat;
     background-size: 100% 100%;
-    background-color: #45372E;
+    background-color: color($colors, dark);
 }
 .main-body{
     background-color: rgb(170, 170, 170);
@@ -37,4 +37,17 @@ page-home {
 // 	                              black calc(50% + 0.8px), 
 // 	                              transparent calc(50% + 0.81px), 
 // 	                              transparent 100%); 
+}
+.video-container {
+    position: relative;
+    padding-bottom: 56.25%;
+    padding-top: 30px; height: 0; overflow: hidden;
+}
+
+.video-container iframe, .video-container object, .video-container embed {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
 }

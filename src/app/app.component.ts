@@ -15,15 +15,23 @@ import { ParkingManagerPage } from '../pages/parkingmanager/parkingmanager';
 import { MyinfoPage } from '../pages/myinfo/myinfo';
 import { FamilysitePage } from '../pages/familysite/familysite';
 import { RegisteruserPage } from '../pages/registeruser/registeruser';
+import { WeeklyPage } from '../pages/weekly/weekly';
 
 import { Storage } from '@ionic/storage';
 import { HTTP } from '@ionic-native/http';
 import { FCM } from '@ionic-native/fcm'
 
 import { InAppBrowser } from '@ionic-native/in-app-browser';
-import { WeeklyPage } from '../pages/weekly/weekly';
 
-
+// import * as firebase from "firebase";
+// var config = {
+//   apiKey: "AIzaSyCihLx56ZVvhnUlP_-1dkSNTDNLlAAy1XQ",
+//   authDomain: "dongilchurch-b89c0.firebaseapp.com",
+//   databaseURL: "https://dongilchurch-b89c0.firebaseio.com",
+//   projectId: "dongilchurch-b89c0",
+//   storageBucket: "dongilchurch-b89c0.appspot.com",
+//   messagingSenderId: "521875318610"
+// };
 @Component({
   templateUrl: 'app.html'
 })
@@ -157,7 +165,17 @@ export class MyApp {
 
       });
     });
+    // firebase.initializeApp(config);
+    // firebase.auth().onAuthStateChanged((user) => {
+    //   if (user) {
+    //     this.rootPage = FamilysitePage;
+    //     console.log("auth test");
 
+    //   } else {
+    //     this.rootPage = SignupPage;
+    //     console.log("auth test");
+    //   }
+    // });
   }
 
   //앱이 꺼져도 1분마다 예배시간 체크하여 무음모드 설정하는 함수

@@ -83,7 +83,7 @@ export class AlarmPage {
       var temp_json = this.pushDataArray[i];
       for (var key in temp_json) {
         var attrSerial = key;
-        var attrTitle = temp_json[key];
+        // var attrTitle = temp_json[key];
         if (attrSerial == "registered_date") {
           temp_json["registered_date"] = moment(temp_json["registered_date"]).fromNow();
           // console.log(attrSerial + " === " + temp_json["registered_date"]);

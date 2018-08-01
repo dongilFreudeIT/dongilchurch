@@ -3,7 +3,6 @@ import { Component } from '@angular/core';
 import { NavController, ViewController, AlertController } from 'ionic-angular';
 
 import { HTTP } from '@ionic-native/http';
-import { MenuController } from 'ionic-angular';
 import { Device } from '@ionic-native/device';
 
 import { InAppBrowser } from '@ionic-native/in-app-browser';

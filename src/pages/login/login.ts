@@ -1,8 +1,6 @@
 import { Component } from '@angular/core';
 
 import { NavController,ViewController, ModalController,AlertController  } from 'ionic-angular';
-import { SignupPage } from '../signup/signup';
-import { PasswordsetPage } from '../passwordset/passwordset';
 
 import { HTTP } from '@ionic-native/http';
 import { Storage } from '@ionic/storage';

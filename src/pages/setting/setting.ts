@@ -4,7 +4,6 @@ import { HTTP } from '@ionic-native/http';
 import { NotiSetting} from '../setting-modal/setting_modal';
 import { Storage } from '@ionic/storage';
 import { MyinfoPage } from '../myinfo/myinfo';
-import { ChurchtimePage } from '../churchtime/churchtime';
 import { AlertController } from 'ionic-angular/components/alert/alert-controller';
 
 @Component({
@@ -64,9 +63,7 @@ export class SettingPage {
   
   }
 
-  goToChurchTime(){
-    this.navCtrl.push(ChurchtimePage);
-  }
+
 
 //   //예배 시간 추가할 모달(다이얼로그)
 // showBlockTimeModal() {

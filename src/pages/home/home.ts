@@ -10,12 +10,12 @@ import { WeeklyPage } from '../weekly/weekly';
 import { Storage } from '@ionic/storage';
 import { HTTP } from '@ionic-native/http';
 import { AndroidPermissions } from '@ionic-native/android-permissions';
-import { MyinfoPage } from '../myinfo/myinfo';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 
-// declare var audio_mode: any; 
-declare var AudioManagement: any;
-declare var androidVolume : any;
+import { ScreenOrientation } from '@ionic-native/screen-orientation';
+import { Platform } from 'ionic-angular';
+
+import {DomSanitizer} from '@angular/platform-browser';
 
 @Component({
   selector: 'page-home',
@@ -24,90 +24,93 @@ declare var androidVolume : any;
 export class HomePage {
 
   url: string = 'http://13.125.35.123/api';
-  user_serial : string; //유저 serial(user db primary key)
+  user_serial: string; //유저 serial(user db primary key)
 
-  constructor(public navCtrl: NavController, private storage: Storage,  private androidPermissions: AndroidPermissions, public http : HTTP, 
-    public alertCtrl : AlertController,private iab: InAppBrowser) {
-  
+  urlVideo: any;
+  urlDongil:string = 'http://dongil.org/data/preach.php';
+  cWidth: any;
+  cHeight: any;
+  _width: any;
+  _height: any;
+
+  constructor(public navCtrl: NavController, private storage: Storage, private androidPermissions: AndroidPermissions, public http: HTTP,
+    public alertCtrl: AlertController, private iab: InAppBrowser, private screenOrientation: ScreenOrientation,
+    private platform: Platform, public sanitizer: DomSanitizer
+  ) {
+    
+    platform.ready().then(() => {
+      this.http.post(this.urlDongil, {}, {}).then(data => {
+        this.urlVideo = data.data;
+        console.log("this.urlVideo : " +this.urlVideo);
+      });
+    });
+
+    this.screenOrientation.unlock();
+    this.cWidth = platform.width();
+    this.cHeight = platform.height();
+
+    this.setSize(this.cWidth);
+    this.screenOrientation.onChange().subscribe(() => {
+      if (platform.isPortrait()) {
+        this.setSize(this.cHeight);
+      } else {
+        this.setSize(this.cWidth);
+      }
+    }
+    );
+  }
+  setSize(width) {
+    this._width = width;
+    this._height = Math.floor(this._width * 0.56);
   }
 
-  
-  goToAlarm(){
+  goToAlarm() {
     this.storage.ready().then(() => {
       this.storage.get('user_serial').then((value) => {
-      this.user_serial = value;
-      if(this.user_serial==null || this.user_serial == ''){
-        this.showAlert("안내","로그인을 해주세요.");
-        return;
-      }
-      this.navCtrl.push(AlarmPage);
-    })});
+        this.user_serial = value;
+        if (this.user_serial == null || this.user_serial == '') {
+          this.showAlert("안내", "로그인을 해주세요.");
+          return;
+        }
+        this.navCtrl.push(AlarmPage);
+      })
+    });
   }
-  // goToMyinfo(){
-  //   this.storage.get("user_serial").then((value) => {
-  //     this.user_serial = value;
 
-  //     if(this.user_serial==null || this.user_serial == ''){
-  //       this.showAlert("안내","로그인을 해주세요.");
-  //       return;
-  //     }
-  //     console.log("goto myinfo : " + this.user_serial);
-  //     var param = { serial : this.user_serial };
-  //     this.http.post(this.url + '/user/get_user', param,{}).then(data =>{
-  //       if(data.status == 200){
-  //         console.log("user data : " + data.data);
-  //         var obj = JSON.parse(data.data);
-  //         //로그인 성공이면
-  //         if(obj.code == "S01"){
-  //             var user = obj.value;
-  //             this.navCtrl.push(MyinfoPage, user);
-  //         }else{
-
-  //         }
-  //       }
-  //     });//http end
-
-  //   });
-  //   // this.storage.get('get_user').then((value)=>{
-  //   //   console.log("get_user : " + value);
-  //   // this.navCtrl.push(MyinfoPage, value);
-  //   // });
-  // }
-
-  goToSetting(){
+  goToSetting() {
 
     this.storage.get('user_serial').then((value) => {
       this.user_serial = value;
 
-    if(this.user_serial==null || this.user_serial == ''){
-      this.showAlert("안내","로그인을 해주세요.");
-      return;
-    }
-    this.navCtrl.push(SettingPage);
+      if (this.user_serial == null || this.user_serial == '') {
+        this.showAlert("안내", "로그인을 해주세요.");
+        return;
+      }
+      this.navCtrl.push(SettingPage);
 
-  });
+    });
   }
 
-  goToParking(){
+  goToParking() {
     this.navCtrl.push(ParkingPage);
   }
-  goToHome(params){
+  goToHome(params) {
     const browser = this.iab.create('http://www.dongil.org/');
     browser.show();
     // if (!params) params = {};
     // this.navCtrl.setRoot(HomePage);
   }
-  showAlert(title, msg){
-    console.log(title+","+msg);
-      let alert = this.alertCtrl.create({
-        title: title,
-        subTitle: msg,
-        buttons: ['OK']
-      });
+  showAlert(title, msg) {
+    console.log(title + "," + msg);
+    let alert = this.alertCtrl.create({
+      title: title,
+      subTitle: msg,
+      buttons: ['OK']
+    });
     alert.present();
-  
+
   }
-  goToFamilysite(){
+  goToFamilysite() {
     this.navCtrl.push(FamilysitePage);
   }
   goToWeekly() {

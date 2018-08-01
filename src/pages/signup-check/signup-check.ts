@@ -5,7 +5,6 @@ import { HTTP } from '@ionic-native/http';
 import { RegisteruserPage } from '../registeruser/registeruser';
 import { SignupPage } from '../signup/signup';
 
-
 @Component({
   selector: 'page-signup-check',
   templateUrl: 'signup-check.html',

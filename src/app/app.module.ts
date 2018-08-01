@@ -16,12 +16,9 @@ import { SignupPage } from '../pages/signup/signup';
 import { UsermanagerPage } from '../pages/usermanager/usermanager';
 import { PushfilterModal } from '../pages/pushfilter-modal/pushfilter';
 import { UserdetailPage } from '../pages/userdetail/userdetail';
-import { SendPushPage } from '../pages/sendPush/sendPush';
 import { ParkingPage } from '../pages/parking/parking';
 import { ParkingManagerPage } from '../pages/parkingmanager/parkingmanager';
 import { PushShowPage } from '../pages/pushShow/pushShow';
-import { ChurchtimePage } from '../pages/churchtime/churchtime';
-import { MyinfoShowPage } from '../pages/myinfo-show/myinfo-show';
 import { PasswordsetPage } from '../pages/passwordset/passwordset';
 import { FindPasswordPage } from '../pages/findpassword/findpassword';
 import { FamilysitePage } from '../pages/familysite/familysite';
@@ -43,10 +40,13 @@ import { Network } from '@ionic-native/network'
 import { CheckNetworkProvider } from '../providers/check-network/check-network';
 import { NativeStorage } from '@ionic-native/native-storage';
 import { IonicImageViewerModule } from 'ionic-img-viewer';
+import { ScreenOrientation } from '@ionic-native/screen-orientation';
+import { SafePipe } from '../pipes/safe/safe';
 
 @NgModule({
   //page 선언
   declarations: [
+    SafePipe,
     MyApp,
     HomePage,
     AlarmPage,
@@ -57,13 +57,10 @@ import { IonicImageViewerModule } from 'ionic-img-viewer';
     UsermanagerPage,
     PushfilterModal,
     UserdetailPage,
-    SendPushPage,
     NotiSetting,
     ParkingPage,
     ParkingManagerPage,
     PushShowPage,
-    ChurchtimePage,
-    MyinfoShowPage,
     PasswordsetPage,
     FindPasswordPage,
     FamilysitePage,
@@ -91,13 +88,10 @@ import { IonicImageViewerModule } from 'ionic-img-viewer';
     UsermanagerPage,
     PushfilterModal,
     UserdetailPage,
-    SendPushPage,
     NotiSetting,
     ParkingPage,
     ParkingManagerPage,
     PushShowPage,
-    ChurchtimePage,
-    MyinfoShowPage,
     PasswordsetPage,
     FindPasswordPage,
     FamilysitePage,
@@ -119,8 +113,8 @@ import { IonicImageViewerModule } from 'ionic-img-viewer';
     LoaderProvider,
     Network,
     CheckNetworkProvider,
-    NativeStorage
-
+    NativeStorage,
+    ScreenOrientation
 
   ]
 })
