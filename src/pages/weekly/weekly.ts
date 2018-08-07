@@ -29,7 +29,7 @@ export class WeeklyPage {
     console.log('ionViewDidLoad WeeklyPage');
   }
   showWeekly(){
-    const browser = this.iab.create('http://www.dongil.org/board_GIoY27');
+    const browser = this.iab.create(this.img,"target='_blank'"  );
     browser.show();
     
   }

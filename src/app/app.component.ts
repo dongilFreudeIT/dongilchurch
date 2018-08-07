@@ -22,6 +22,7 @@ import { HTTP } from '@ionic-native/http';
 import { FCM } from '@ionic-native/fcm'
 
 import { InAppBrowser } from '@ionic-native/in-app-browser';
+import { SignupCheckPage } from '../pages/signup-check/signup-check';
 
 // import * as firebase from "firebase";
 // var config = {
@@ -274,7 +275,7 @@ export class MyApp {
   }
   //홈페이지 이동(메뉴에서 선택 가능)
   goToHome(params) {
-    const browser = this.iab.create('http://www.dongil.org/');
+    const browser = this.iab.create('http://www.dongil.org/',"target='_black'");
     browser.show();
     // if (!params) params = {};
     // this.navCtrl.setRoot(HomePage);
@@ -377,6 +378,10 @@ export class MyApp {
   }
   goToWeekly() {
     this.navCtrl.push(WeeklyPage);
+  }
+  goToSignupCheck(){
+    let modal = this.modalCtrl.create(SignupCheckPage, {}, {cssClass: 'modal-gradient'});
+    modal.present();
   }
   showAlert(title, msg) {
     // console.log(title+","+msg);

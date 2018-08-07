@@ -6,6 +6,7 @@ import { SettingPage } from '../setting/setting';
 import { ParkingPage } from '../parking/parking';
 import { FamilysitePage } from '../familysite/familysite';
 import { WeeklyPage } from '../weekly/weekly';
+import { SignupCheckPage } from '../signup-check/signup-check';
 
 import { Storage } from '@ionic/storage';
 import { HTTP } from '@ionic-native/http';
@@ -95,7 +96,7 @@ export class HomePage {
     this.navCtrl.push(ParkingPage);
   }
   goToHome(params) {
-    const browser = this.iab.create('http://www.dongil.org/');
+    const browser = this.iab.create('http://www.dongil.org/',"target='_black'");
     browser.show();
     // if (!params) params = {};
     // this.navCtrl.setRoot(HomePage);
@@ -115,5 +116,8 @@ export class HomePage {
   }
   goToWeekly() {
     this.navCtrl.push(WeeklyPage);
+  }
+  goToSignupCheck(){
+    this.navCtrl.push(SignupCheckPage);
   }
 }

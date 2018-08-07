@@ -22,7 +22,7 @@ export class PushShowPage {
     console.log("pushShowPage navParams : " + navParams.data.linkaddress);
   }
   btnLink(){
-    const browser = this.iab.create(this.navParams.data.linkaddress);
+    const browser = this.iab.create(this.navParams.data.linkaddress,"target='_black'");
     browser.show();  
   }
   //서버로부터 push 데이터 가져옴

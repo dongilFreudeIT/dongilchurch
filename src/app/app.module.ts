@@ -43,6 +43,10 @@ import { IonicImageViewerModule } from 'ionic-img-viewer';
 import { ScreenOrientation } from '@ionic-native/screen-orientation';
 import { SafePipe } from '../pipes/safe/safe';
 
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ZoomAreaModule } from 'ionic2-zoom-area';
+import {PhotoViewer} from '@ionic-native/photo-viewer';
+
 @NgModule({
   //page 선언
   declarations: [
@@ -71,6 +75,8 @@ import { SafePipe } from '../pipes/safe/safe';
   imports: [
     BrowserModule, 
     IonicImageViewerModule,
+    BrowserAnimationsModule,
+    ZoomAreaModule.forRoot(),
     // HttpClientModule, //http 통신을 위해
     IonicModule.forRoot(MyApp),
     IonicStorageModule.forRoot() //앱 내에 데이터를 저장하기 위해
@@ -114,7 +120,8 @@ import { SafePipe } from '../pipes/safe/safe';
     Network,
     CheckNetworkProvider,
     NativeStorage,
-    ScreenOrientation
+    ScreenOrientation,
+    PhotoViewer
 
   ]
 })

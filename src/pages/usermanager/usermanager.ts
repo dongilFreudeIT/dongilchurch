@@ -21,6 +21,8 @@ export class UsermanagerPage {
   searchKeyword : string;
   isConnected: number = 1;
 
+  nUserArray:any;
+
   url: string = 'http://13.125.35.123/api';
   
   subscribeNet1 : any; 
@@ -54,27 +56,28 @@ export class UsermanagerPage {
         var obj = JSON.parse(data.data);
         //값 얻어왔으면
         if(obj.code == "S01"){
-          // var tempArray = obj.value;
-          // for(var i=0; i<tempArray.length; i++){
-          //   //null이면 값 다시 대입
-          //   if(tempArray[i].subgroup == '' || tempArray[i].subgroup == null){
-          //     tempArray[i].subgroup = "그룹없음";
-          //   }
-          //   if(tempArray[i].place == '' || tempArray[i].place == null){
-          //     tempArray[i].place = "지역없음";
-          //   }
-          //   if(tempArray[i].title == '' || tempArray[i].title == null){
-          //     tempArray[i].title = "직책없음";
-          //   }
-          //   if(tempArray[i].phone == '' || tempArray[i].phone == null){
-          //     tempArray[i].phone = "폰번호 정보 없음";
-          //   }
-          //   tempArray[i].selected = false;
-          // }
+          var tempArray = obj.value;
+          for(var i=0; i<tempArray.length; i++){
+            //null이면 값 다시 대입
+            if(tempArray[i].subgroup == '' || tempArray[i].subgroup == null){
+              tempArray[i].subgroup = "그룹없음";
+            }
+            if(tempArray[i].place == '' || tempArray[i].place == null){
+              tempArray[i].place = "지역없음";
+            }
+            if(tempArray[i].title == '' || tempArray[i].title == null){
+              tempArray[i].title = "직책없음";
+            }
+            // if(tempArray[i].phone == '' || tempArray[i].phone == null){
+            //   tempArray[i].phone = "번호 정보 없음";
+            // }
+            tempArray[i].selected = false;
+          }
 
-          // this.userArray = tempArray;
+          this.userArray = tempArray;
           this.userArray = obj.value;
           this.userOriginalArray = Object.assign([], this.userArray);
+          this.nUserArray = this.userArray.length + "명 ";
         }
       }else{
 
@@ -218,7 +221,7 @@ export class UsermanagerPage {
     //   this.navCtrl.push(SendPushPage, sendUserArray);
     // }
     console.log("푸시보내기");
-    const browser = this.iab.create('http://13.125.35.123/api/SendPush');
+    const browser = this.iab.create('http://13.125.35.123/api/SendPush',"target='_blank'");
     browser.show();
 
   }
