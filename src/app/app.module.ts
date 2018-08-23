@@ -25,6 +25,8 @@ import { FamilysitePage } from '../pages/familysite/familysite';
 import { RegisteruserPage } from '../pages/registeruser/registeruser';
 import { SignupCheckPage } from '../pages/signup-check/signup-check';
 import { WeeklyPage } from '../pages/weekly/weekly';
+import { GetUserInfoPage } from '../pages/get-user-info/get-user-info';
+import { MyinfoShowPage } from '../pages/myinfo-show/myinfo-show';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -46,6 +48,8 @@ import { SafePipe } from '../pipes/safe/safe';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ZoomAreaModule } from 'ionic2-zoom-area';
 import {PhotoViewer} from '@ionic-native/photo-viewer';
+import { AppVersion } from '@ionic-native/app-version';
+import { Clipboard } from '@ionic-native/clipboard';
 
 @NgModule({
   //page 선언
@@ -70,7 +74,9 @@ import {PhotoViewer} from '@ionic-native/photo-viewer';
     FamilysitePage,
     RegisteruserPage,
     SignupCheckPage,
-    WeeklyPage
+    WeeklyPage,
+    GetUserInfoPage,
+    MyinfoShowPage
   ],
   imports: [
     BrowserModule, 
@@ -103,7 +109,9 @@ import {PhotoViewer} from '@ionic-native/photo-viewer';
     FamilysitePage,
     RegisteruserPage,
     SignupCheckPage,
-    WeeklyPage
+    WeeklyPage,
+    GetUserInfoPage,
+    MyinfoShowPage
   ],
   //사용되는 프로바이더(라이브러리 또는 플러그인)
   providers: [
@@ -121,8 +129,9 @@ import {PhotoViewer} from '@ionic-native/photo-viewer';
     CheckNetworkProvider,
     NativeStorage,
     ScreenOrientation,
-    PhotoViewer
-
+    PhotoViewer,
+    AppVersion,
+    Clipboard
   ]
 })
 export class AppModule {}

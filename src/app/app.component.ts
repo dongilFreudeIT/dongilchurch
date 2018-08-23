@@ -16,13 +16,15 @@ import { MyinfoPage } from '../pages/myinfo/myinfo';
 import { FamilysitePage } from '../pages/familysite/familysite';
 import { RegisteruserPage } from '../pages/registeruser/registeruser';
 import { WeeklyPage } from '../pages/weekly/weekly';
-
+import { GetUserInfoPage } from '../pages/get-user-info/get-user-info';
 import { Storage } from '@ionic/storage';
 import { HTTP } from '@ionic-native/http';
 import { FCM } from '@ionic-native/fcm'
 
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { SignupCheckPage } from '../pages/signup-check/signup-check';
+
+import { AppVersion } from '@ionic-native/app-version';
 
 // import * as firebase from "firebase";
 // var config = {
@@ -43,38 +45,26 @@ export class MyApp {
   userSerial: any;
   @ViewChild(Nav) navCtrl: Nav;
   rootPage: any = HomePage;
-  static toggleArray: any;
-
+  myName:string;
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, public http: HTTP, public menuCtrl: MenuController,
-    private storage: Storage, public fcm: FCM, public alertCtrl: AlertController, private iab: InAppBrowser,
-    public modalCtrl: ModalController
+    public storage: Storage, public fcm: FCM, public alertCtrl: AlertController, private iab: InAppBrowser,
+    public modalCtrl: ModalController, private appVersion: AppVersion
   ) {
 
     platform.ready().then(() => {
 
-      // Okay, so the platform is ready and our plugins are available.
-      // Here you can do any higher level native things you might need.
       splashScreen.hide();
       statusBar.styleDefault();
       statusBar.overlaysWebView(false);
-      //1분마다 등록된 예배시간 체크하는 함수
-      // storage.get('toggle_array').then((value) => {
-      //         //설정 안되어 있으면
-      //     if(value == null || value.length == 0){
-      //       MyApp.toggleArray = null;
-      //     }else{//설정 되어 있으면 local array에 넣는다.
-      //       MyApp.toggleArray = value;
-      //     }
-      // });
-      // this.setBackgroundTimer();
+
       //push 보내기 위한 설정
       this.setPushSetting(fcm);
 
       //로그인 된적 있는지 체크(storage에 user_serial 저장해놓았으면 로그인 된 상태)
       //처음 로그인부분, 확인 필요
-      storage.get('user_serial').then((val2) => {
+      storage.get('user_serial').then((localSerial) => {
         //user serial 없으면 미 로그인
-        if (val2 == null || val2 == "") {
+        if (localSerial == null || localSerial == "") {
           this.menuCtrl.enable(false, 'authenticated');
           this.menuCtrl.enable(false, 'master');
           this.menuCtrl.enable(true, 'unauthenticated');
@@ -96,11 +86,9 @@ export class MyApp {
             }
           });
 
-          var param = { user_serial: val2 };
+          let param = { user_serial: localSerial };
           this.http.post(this.url + '/user/login_refresh', param, {}).then(data => {
             if (data.status == 200) {
-              // console.log(data.data);
-
               var obj = JSON.parse(data.data);
               //로그인 접속시간 갱신했으면 받아온 grade에 따라 왼쪽 메뉴 구성 변경
               if (obj.code == "S01") {
@@ -111,7 +99,6 @@ export class MyApp {
                   console.log('not loggin');
                   this.menuCtrl.enable(true, 'unauthenticated');
                 } else if (grade == "관리자") {
-                  // console.log('admin');
                   this.menuCtrl.enable(true, 'master');
                 } else if (grade == "주차장매니저") {
                   this.menuCtrl.enable(true, 'parking_manager');
@@ -121,14 +108,15 @@ export class MyApp {
 
                 //push_token도 refresh한다.
                 this.storage.get("push_token").then((value) => {
-                  // console.log("start save token :" + value);
-                  var param = { push_token: value, serial: val2 };
-                  this.http.post(this.url + '/user/update_token', param, {}).then(data => {
-                    if (data.status == 200) {
-                      console.log(data.data);
-                      // var obj = JSON.parse(data.data);
-                    }
-
+                  //app Version 받기
+                  this.appVersion.getVersionNumber().then((appversion) => {
+                    var param = { push_token: value, serial: localSerial, version: appversion };
+                    this.http.post(this.url + '/user/update_token', param, {}).then(data => {
+                      if (data.status == 200) {
+                        // console.log(data.data);
+                        // var obj = JSON.parse(data.data);
+                      }
+                    });
                   });
                 });
               } else {
@@ -137,34 +125,24 @@ export class MyApp {
             }
           });
 
-          // console.log("val2 : " + val2);
-
-
+          //유저 정보 서버에 받아서 내부에 저장
           this.http.post(this.url + '/user/get_user', param, {}).then(data => {
             if (data.status == 200) {
-              // console.log(data.data);
               var obj = JSON.parse(data.data);
-              //로그인 성공이면
               if (obj.code == "S01") {
                 var user = obj.value;
-                // for (const key in user) {
-                //   if (user.hasOwnProperty(key)) {
-                //     const element = user[key];
-                //     console.log(key + " : " + element);
-
-                //   }
-                // }
                 this.storage.set("get_user", user);
-                // this.navCtrl.push(MyinfoPage, user);
               } else {
               }
             }
-          });//http end
-
+          });
 
         }
-
+        this.checkRequest()
       });
+
+      storage.get('get_user').then((obj) => {
+        this.myName = obj.name;});
     });
     // firebase.initializeApp(config);
     // firebase.auth().onAuthStateChanged((user) => {
@@ -178,68 +156,48 @@ export class MyApp {
     //   }
     // });
   }
+  checkRequest() {
+    this.storage.get('user_serial').then((localSerial) => {
 
-  //앱이 꺼져도 1분마다 예배시간 체크하여 무음모드 설정하는 함수
-  // setBackgroundTimer() {
-  //   // this.backgroundMode.enable();
-  //   var settings = {
-  //     timerInterval: 60000, // event함수 실행시킬 주기 milliseconds (Default: 60000)
-  //     startOnBoot: false, // enable this to start timer after the device was restarted (Default: false)
-  //     stopOnTerminate: false // set to true to force stop timer in case the app is terminated (User closed the app and etc.) (Default: true)
+      this.http.post(this.url + '/push/checkRequest', { user_serial: localSerial }, {}).then(data => {
+        if (data.status == 200) {
+          var obj = JSON.parse(data.data);
+          console.log(obj);
+          for (const key in obj) {
+            // console.log("for key : " + key);
+            if (obj.hasOwnProperty(key)) {
+              const element = obj[key];
+              console.log(element);
+              if (element.allow == null) {
+                let alert = this.alertCtrl.create({
+                  title: '알림',
+                  subTitle: element.sname + '님에게 정보요청이 왔습니다.',
+                  buttons: [
+                    {
+                      text: '거절',
+                      handler: () => {
+                        this.http.post(this.url + '/push/setRequest', { serial: element.serial, name:this.myName, sid: element.sid, allow: 0 }, {});
+                      }
+                    },
+                    {
+                      text: '승인',
+                      handler: () => {
+                        this.http.post(this.url + '/push/setRequest', { serial: element.serial, name:this.myName, sid: element.sid, allow: 1 }, {});
+                      }
+                    }
+                  ]
 
-  //     // hours: -1, // delay timer to start at certain time (Default: -1)
-  //     // minutes: , // delay timer to start at certain time (Default: -1)
-  //   }
+                });
+                alert.present();
+              }
+            }
+          }
 
-  //   BackgroundTimer.onTimerEvent(function () {
-  //     // console.log("time check");
-  //     // if(MyApp == null){
-  //     //   console.log("null");
-  //     //   return;
-  //     // }
-  //     if (MyApp.toggleArray == null || MyApp.toggleArray.length == 0) {
-  //       return;
-  //     } else {
-  //       var day = new Date().getDay();
-  //       console.log(day);
-  //       var nowTime = new Date().toLocaleTimeString('en-GB').slice(0, 5);
-  //       var isTime = false;
-  //       if (MyApp.toggleArray[0] == true && nowTime == "08:00" && day == 0) {//일요일 8시이면
-  //         isTime = true;
-  //       }
-  //       if (MyApp.toggleArray[1] == true && nowTime == "10:00" && day == 0) {
-  //         isTime = true;
-  //       }
-  //       if (MyApp.toggleArray[2] == true && nowTime == "12:00" && day == 0) {
-  //         isTime = true;
-  //       }
-  //       if (MyApp.toggleArray[3] == true && nowTime == "14:00" && day == 0) {
-  //         isTime = true;
-  //       }
-  //       if (MyApp.toggleArray[4] == true && nowTime == "15:30" && day == 0) {
-  //         isTime = true;
-  //       }
-  //       if (MyApp.toggleArray[5] == true && nowTime == "19:30" && day == 3) {
-  //         isTime = true;
-  //       }
-  //       if (MyApp.toggleArray[6] == true && nowTime == "20:30" && day == 5) {
-  //         isTime = true;
-  //       }
-  //       if (isTime) {
-  //         //안드로이드
-  //         androidVolume.set(0, true, function (msg) {
-  //           // //console.log(msg); 
-  //         }, function (msg) {
-  //           //console.log(msg); 
-  //         });
-  //       }
-  //     }
-  //   }); // subscribe on timer event
-  //   BackgroundTimer.start(function () { }, function (e) {
-  //     console.log(e);
-  //   }, settings);
-  // }
-
+        } else {
+        }
+      });
+    });
+  }
   //fcm 푸쉬 보내기 위한 세팅
   setPushSetting(fcm) {
     // 푸쉬 받을 수 있는 토큰 얻으면 저장소에 저장하고 로그인 하거나 회원가입 시 추가한다.
@@ -257,17 +215,41 @@ export class MyApp {
     //push 메세지 도착하면
     var tempThis = this;
     fcm.onNotification().subscribe(data => {
+      let alert;
       // this.badge.increase(1);
       if (data.wasTapped) { //백그라운드 모드이면
-        console.log("Received in background:" + JSON.stringify(data));
-        tempThis.navCtrl.push(AlarmPage);
+        console.log("Received in background:" + data);
+        if (data.req == "1" || data.req == "2") {
+          // this.checkRequest();
+        } else {
+          tempThis.navCtrl.push(AlarmPage);
+        }
       } else {
-        console.log("Received in foreground:" + JSON.stringify(data));
-        let alert = this.alertCtrl.create({
-          title: "안내",
-          subTitle: "푸시 메시지가 도착했어요. 알림 리스트에서 확인하세요.",
-          buttons: ['OK']
-        });
+        console.log("Received in foreground:" + data);
+        if (data.req == "1") {
+          alert = this.alertCtrl.create({
+            title: "안내",
+            subTitle: "정보 요청이 왔습니다.",
+            buttons: [{
+              text: '확인',
+              handler: () => {
+                this.checkRequest();
+              }
+            }]
+          });
+        } else if (data.req == "2"){
+          alert = this.alertCtrl.create({
+            title: "안내",
+            subTitle: data.sname+"님으로부터 정보 요청이 승인되었습니다.",
+            buttons: ['OK']
+          });
+        }else {
+          alert = this.alertCtrl.create({
+            title: "안내",
+            subTitle: "알림 메시지가 도착했습니다.",
+            buttons: ['OK']
+          });
+        }
         alert.present();
       };
     })
@@ -275,7 +257,7 @@ export class MyApp {
   }
   //홈페이지 이동(메뉴에서 선택 가능)
   goToHome(params) {
-    const browser = this.iab.create('http://www.dongil.org/',"target='_black'");
+    const browser = this.iab.create('http://www.dongil.org/', "target='_black'");
     browser.show();
     // if (!params) params = {};
     // this.navCtrl.setRoot(HomePage);
@@ -304,13 +286,13 @@ export class MyApp {
             this.storage.set("push_token", user);
             this.storage.set("get_user", user);
             // this.navCtrl.push(MyinfoPage, user);
-          } 
+          }
           this.storage.get('get_user').then((value) => {
             console.log("get_user : " + value);
             this.navCtrl.push(MyinfoPage, value);
           });
         }
-      },()=>{
+      }, () => {
         this.storage.get('get_user').then((value) => {
           console.log("get_user : " + value);
           this.navCtrl.push(MyinfoPage, value);
@@ -331,7 +313,7 @@ export class MyApp {
 
     let modal = this.modalCtrl.create(LoginPage, {}, { cssClass: 'modal-gradient' });
     modal.onDidDismiss(data => {
-      if(data){
+      if (data) {
         this.showAlert('<strong>' + data + '</strong>님 로그인 되었습니다.<br>사랑하며 축복합니다!', '');
       }
     });
@@ -373,15 +355,19 @@ export class MyApp {
   }
   goToRegisteruser() {
     // this.navCtrl.push(RegisteruserPage);
-    let modal = this.modalCtrl.create(RegisteruserPage, {serial:false}, { cssClass: 'modal-gradient' });
+    let modal = this.modalCtrl.create(RegisteruserPage, { serial: false }, { cssClass: 'modal-gradient' });
     modal.present();
   }
   goToWeekly() {
     this.navCtrl.push(WeeklyPage);
   }
-  goToSignupCheck(){
-    let modal = this.modalCtrl.create(SignupCheckPage, {}, {cssClass: 'modal-gradient'});
+  goToSignupCheck() {
+    let modal = this.modalCtrl.create(SignupCheckPage, {}, { cssClass: 'modal-gradient' });
     modal.present();
+  }
+  goToGetUserInfo() {
+    this.navCtrl.push(GetUserInfoPage);
+
   }
   showAlert(title, msg) {
     // console.log(title+","+msg);

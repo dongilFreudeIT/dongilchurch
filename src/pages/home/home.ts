@@ -7,6 +7,7 @@ import { ParkingPage } from '../parking/parking';
 import { FamilysitePage } from '../familysite/familysite';
 import { WeeklyPage } from '../weekly/weekly';
 import { SignupCheckPage } from '../signup-check/signup-check';
+import { GetUserInfoPage } from '../get-user-info/get-user-info';
 
 import { Storage } from '@ionic/storage';
 import { HTTP } from '@ionic-native/http';
@@ -119,5 +120,8 @@ export class HomePage {
   }
   goToSignupCheck(){
     this.navCtrl.push(SignupCheckPage);
+  }
+  goToGetUserInfo(){
+    this.navCtrl.push(GetUserInfoPage);
   }
 }

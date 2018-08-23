@@ -1,0 +1,41 @@
+<ion-header>
+  <ion-navbar color="primary" no-border-bottom>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>
+      요람
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+    <!-- <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar> -->
+    <ion-item class="b-b b-light" >
+
+      <ion-input type="text" (keypress)="eventHandler($event.keyCode)" [(ngModel)]= "name" placeholder="검색할 이름을 입력하세요"> </ion-input>
+      <button ion-button item-end (click)="searchName()">검색</button>
+    </ion-item>
+  
+  <ion-row class="wrapper-sm b-b b-light" *ngFor="let user of searchArray" (click)="sendRequest(user)">
+    <ion-col class="text-ellipsis-flex">
+      <b>{{user.name}}</b>
+
+    </ion-col>
+  </ion-row>
+
+  <ion-row class="wrapper-sm b-b b-light" *ngFor="let user of usersInfo" (click)="goToInfoShow(user)">
+    <ion-col class="text-ellipsis-flex">
+      <div class="l-h">
+        <div class=""><b>{{user.name}}</b></div>
+        <div class="text-sm text-muted text-ellipsis">{{user.place}}/{{user.subgroup}}/{{user.title}}</div>
+        <div class="text-sm text-muted text-ellipsis">{{user.birthday}}/{{user.phone}}</div>
+      </div>
+    </ion-col>
+    <ion-col col-auto>
+      <div class="" style="color:rgb(224, 33, 33)" ><b>{{user.grade}}</b></div>
+    </ion-col>
+  </ion-row>
+
+</ion-content>

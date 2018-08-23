@@ -10,7 +10,7 @@ import { InAppBrowser } from '@ionic-native/in-app-browser';
   templateUrl: 'weekly.html',
 })
 export class WeeklyPage {
-  url: string = 'http://dongil.org/data/app.php';
+  url: string = 'http://dongil.org/data/weekly.php';
   img: string;
   flagGetImage:boolean = false;
 
