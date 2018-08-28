@@ -115,6 +115,7 @@ export class GetUserInfoPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad GetUserInfoPage');
+    // this.showAlert("test",location.href);
   }
   getUsersInfo(){
     

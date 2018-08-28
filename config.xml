@@ -3,7 +3,7 @@
     <name>동일교회</name>
     <description>동일 교회교인을 위한 앱</description>
     <author email="cmbosszz@gmail.com" href="http://dongil.org">동일교회</author>
-    <content original-src="index.html" src="http://192.168.100.43:8100" />
+    <content src="index.html" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
@@ -90,6 +90,8 @@
     <allow-navigation href="*" />
     <allow-navigation href="http://192.168.100.43:8100" />
     <allow-navigation href="http://172.30.1.22:8100" />
+    <allow-navigation href="http://169.254.77.191:8100" />
+    <allow-navigation href="http://10.211.55.2:8100" />
     <engine name="ios" spec="^4.5.5" />
     <engine name="android" spec="6.3.0" />
     <plugin name="cordova-plugin-advanced-http" spec="^1.11.1" />

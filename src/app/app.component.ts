@@ -142,7 +142,7 @@ export class MyApp {
       });
 
       storage.get('get_user').then((obj) => {
-        this.myName = obj.name;});
+        if(obj) this.myName = obj.name;});
     });
     // firebase.initializeApp(config);
     // firebase.auth().onAuthStateChanged((user) => {
