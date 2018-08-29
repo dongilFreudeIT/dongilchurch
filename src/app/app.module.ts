@@ -50,7 +50,6 @@ import { ZoomAreaModule } from 'ionic2-zoom-area';
 import {PhotoViewer} from '@ionic-native/photo-viewer';
 import { AppVersion } from '@ionic-native/app-version';
 import { Clipboard } from '@ionic-native/clipboard';
-import { AnmCoreModule } from 'ngx-naver-map';
 
 @NgModule({
   //page 선언
@@ -86,11 +85,8 @@ import { AnmCoreModule } from 'ngx-naver-map';
     ZoomAreaModule.forRoot(),
     // HttpClientModule, //http 통신을 위해
     IonicModule.forRoot(MyApp),
-    IonicStorageModule.forRoot(), //앱 내에 데이터를 저장하기 위해
-    AnmCoreModule.forRoot({
-      apiKey: '1nX3i8bwjzbdJ_RLgLYk'
-    })
-
+    IonicStorageModule.forRoot() //앱 내에 데이터를 저장하기 위해
+    
   ],
   bootstrap: [IonicApp],
   entryComponents: [
