@@ -3,6 +3,10 @@ import { NavController, NavParams } from 'ionic-angular';
 
 import { HTTP } from '@ionic-native/http';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
+import {DomSanitizer} from '@angular/platform-browser';
+
+import { ScreenOrientation } from '@ionic-native/screen-orientation';
+import { Platform } from 'ionic-angular';
 
 @Component({
   templateUrl: 'pushShow.html'
@@ -15,16 +19,48 @@ export class PushShowPage {
   // message : string;
   // // image : string;
   // registered_date : string;
-
-  constructor(public navCtrl: NavController, public navParams: NavParams, public http : HTTP, private iab: InAppBrowser) {
+  htmlbody :any;
+  cWidth: any;
+  cHeight: any;
+  _width: any;
+  _height: any;
+  constructor(public navCtrl: NavController, public navParams: NavParams, public http : HTTP, 
+    private iab: InAppBrowser, public sanitizer: DomSanitizer,
+    private screenOrientation: ScreenOrientation, private platform: Platform) {
     // this.serial = navParams.data;
     // this.getPushData();
     console.log("pushShowPage navParams : " + navParams.data.linkaddress);
+
+    this.htmlbody = this.getInnerHTMLValue();
+    console.log("bodyHTML : " + this.htmlbody);
+    
+    this.screenOrientation.unlock();
+    this.cWidth = platform.width();
+    this.cHeight = platform.height();
+
+
+    this.setSize(this.cWidth);
+    this.screenOrientation.onChange().subscribe(() => {
+      if (platform.isPortrait()) {
+        this.setSize(this.cHeight);
+      } else {
+        this.setSize(this.cWidth);
+      }
+    }
+    );
+  }
+  getInnerHTMLValue(){
+    return this.sanitizer.bypassSecurityTrustHtml(this.navParams.data.bodyHtml);
+  }
+  setSize(width) {
+    this._width = width;
+    this._height = Math.floor(this._width * 0.56);
   }
   btnLink(){
     const browser = this.iab.create(this.navParams.data.linkaddress,"target='_black'");
     browser.show();  
   }
+
   //서버로부터 push 데이터 가져옴
   // getPushData(){
 
