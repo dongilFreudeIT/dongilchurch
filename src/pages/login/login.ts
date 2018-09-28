@@ -70,7 +70,6 @@ export class LoginPage {
                 console.log(data.data);
                 // var obj = JSON.parse(data.data);
               }
-
             });
           });
 

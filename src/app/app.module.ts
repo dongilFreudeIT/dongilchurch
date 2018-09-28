@@ -50,6 +50,7 @@ import { ZoomAreaModule } from 'ionic2-zoom-area';
 import {PhotoViewer} from '@ionic-native/photo-viewer';
 import { AppVersion } from '@ionic-native/app-version';
 import { Clipboard } from '@ionic-native/clipboard';
+import { Market } from '@ionic-native/market';
 
 @NgModule({
   //page 선언
@@ -131,7 +132,8 @@ import { Clipboard } from '@ionic-native/clipboard';
     ScreenOrientation,
     PhotoViewer,
     AppVersion,
-    Clipboard
+    Clipboard,
+    Market
   ]
 })
 export class AppModule {}

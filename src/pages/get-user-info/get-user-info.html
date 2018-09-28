@@ -6,36 +6,89 @@
     <ion-title>
       요람
     </ion-title>
+    <ion-buttons *ngIf="flagSlide" end>
+      <button ion-button (click)="showSlide()">도움말</button>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
+<!-- <div style="position:absolute; top:0px; left:0px; width: 500px; height: 500px; background-color:aqua">  -->
 
+<ion-content style="z-index: 1;">
+    <div *ngIf="!flagSlide" id="divCanvas" style="position:absolute; z-index: 2; width: 500PX; "[ngStyle]="{'height': _height}" >
+        <canvas #canvas></canvas>
+      </div>
 
-<ion-content padding>
-    <!-- <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar> -->
-    <ion-item class="b-b b-light" >
+  <ion-slides *ngIf="!flagSlide" pager>
+    <ion-slide *ngFor="let slide of slides" [ngStyle]="{'background-color': color1}">
 
-      <ion-input type="text" (keypress)="eventHandler($event.keyCode)" [(ngModel)]= "name" placeholder="검색할 이름을 입력하세요"> </ion-input>
+      <!-- <img [src]="slide.image" class="slide-image" />
+      <h2 class="slide-title" [innerHTML]="slide.title"></h2>
+      <p [innerHTML]="slide.description"></p>
+      <ion-toolbar>
+        <ion-buttons left>
+          <button (click)="btnSlideRemove();" ion-button color="primary">다시 보지 않기</button>
+        </ion-buttons>
+        <ion-buttons end>
+          <button (click)="btnSlideNext();" ion-button color="primary">다음</button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-slide>
+    <ion-slide>
+      <img src="assets/imgs/home_back.jpg" class="slide-image" />
+      <h2 class="slide-title"></h2>
+      <button (click)='btnStart();' ion-button large clear icon-end color="primary">
+        시작하기
+        <ion-icon name="arrow-forward"></ion-icon>
+      </button>
+      <ion-toolbar>
+      </ion-toolbar> -->
+
+      <ion-footer [ngStyle]="{'background-color': color1}"  >
+        <h2 class="slide-title" [innerHTML]="slide.title"></h2>
+        <p [innerHTML]="slide.description"></p>
+        <ion-toolbar position="bottom" transparent>
+          <ion-buttons left>
+            <button (click)="btnSlideRemove();" ion-button color="primary">다시 보지 않기</button>
+          </ion-buttons>
+          <ion-buttons end>
+            <button (click)="btnSlideNext();" ion-button color="primary">다음</button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-footer>
+    </ion-slide>
+  </ion-slides>
+
+  <!-- <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar> -->
+  <div *ngIf="flagSlide" padding>
+    <ion-item id="search" class="b-b b-light">
+      <ion-input type="text" (keypress)="eventHandler($event.keyCode)" [(ngModel)]="name" placeholder="검색할 이름을 입력하세요"> </ion-input>
       <button ion-button item-end (click)="searchName()">검색</button>
     </ion-item>
-  
-  <ion-row class="wrapper-sm b-b b-light" *ngFor="let user of searchArray" (click)="sendRequest(user)">
-    <ion-col class="text-ellipsis-flex">
-      <b>{{user.name}}</b>
 
-    </ion-col>
-  </ion-row>
+    <ion-row class="wrapper-sm b-b b-light" *ngFor="let user of searchArray" (click)="sendRequest(user)">
+      <ion-col class="text-ellipsis-flex">
+        <b>{{user.name}}</b>
+      </ion-col>
+      <ion-col col-auto>
+        <button ion-button color="noti">연락처 요청</button>
+      </ion-col>
+    </ion-row>
 
-  <ion-row class="wrapper-sm b-b b-light" *ngFor="let user of usersInfo" (click)="goToInfoShow(user)">
-    <ion-col class="text-ellipsis-flex">
-      <div class="l-h">
-        <div class=""><b>{{user.name}}</b></div>
-        <div class="text-sm text-muted text-ellipsis">{{user.place}}/{{user.subgroup}}/{{user.title}}</div>
-        <div class="text-sm text-muted text-ellipsis">{{user.birthday}}/{{user.phone}}</div>
-      </div>
-    </ion-col>
-    <ion-col col-auto>
-      <div class="" style="color:rgb(224, 33, 33)" ><b>{{user.grade}}</b></div>
-    </ion-col>
-  </ion-row>
+    <ion-row class="wrapper-sm b-b b-light" *ngFor="let user of usersInfo">
+      <ion-col class="text-ellipsis-flex" (click)="goToInfoShow(user)">
+        <div class="l-h">
+          <div class=""><b>{{user.name}}</b></div>
+          <div class="text-sm text-muted text-ellipsis">{{user.place}}/{{user.subgroup}}/{{user.title}}</div>
+          <div class="text-sm text-muted text-ellipsis">{{user.birthday}}/{{user.phone}}</div>
+        </div>
 
+      </ion-col>
+      <ion-col col-auto>
+        <button ion-button (click)="phoneCall(user)">통화</button>
+        <button ion-button color="sms" (click)="phoneSms(user)">문자</button>
+
+        <!-- <div class="" style="color:rgb(224, 33, 33)" ><b>{{user.grade}}</b></div> -->
+      </ion-col>
+    </ion-row>
+  </div>
 </ion-content>

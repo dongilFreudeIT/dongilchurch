@@ -29,6 +29,7 @@
     "@ionic-native/fcm": "^4.3.2",
     "@ionic-native/http": "^4.3.2",
     "@ionic-native/in-app-browser": "^4.3.2",
+    "@ionic-native/market": "^4.12.2",
     "@ionic-native/native-storage": "^4.10.1",
     "@ionic-native/network": "^4.7.0",
     "@ionic-native/photo-viewer": "^4.11.0",
@@ -52,6 +53,7 @@
     "cordova-plugin-file": "^6.0.1",
     "cordova-plugin-inappbrowser": "^1.7.2",
     "cordova-plugin-ionic-webview": "^1.2.1",
+    "cordova-plugin-market": "^1.2.0",
     "cordova-plugin-network-information": "^2.0.1",
     "cordova-plugin-screen-orientation": "^3.0.1",
     "cordova-plugin-splashscreen": "^4.1.0",
@@ -94,7 +96,8 @@
       "cordova-plugin-screen-orientation": {},
       "com-sarriaroman-photoviewer": {},
       "cordova-plugin-app-version": {},
-      "cordova-clipboard": {}
+      "cordova-clipboard": {},
+      "cordova-plugin-market": {}
     },
     "platforms": [
       "ios",

@@ -26,6 +26,11 @@ export class MyinfoShowPage {
     // window.open("this.sanitize('sms://' + user.phone)");
     // window.open("sms:"+this.user.phone, "_system");
   }
+
+  GotoPreviousPage(){
+    this.navCtrl.pop();
+  }
+  
   sanitize(url: string) {
     return this.sanitizer.bypassSecurityTrustUrl(url);
   }

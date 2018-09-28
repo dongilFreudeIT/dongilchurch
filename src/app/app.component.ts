@@ -25,6 +25,7 @@ import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { SignupCheckPage } from '../pages/signup-check/signup-check';
 
 import { AppVersion } from '@ionic-native/app-version';
+import { Market } from '@ionic-native/market';
 
 // import * as firebase from "firebase";
 // var config = {
@@ -45,10 +46,20 @@ export class MyApp {
   userSerial: any;
   @ViewChild(Nav) navCtrl: Nav;
   rootPage: any = HomePage;
-  myName:string;
-  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, public http: HTTP, public menuCtrl: MenuController,
-    public storage: Storage, public fcm: FCM, public alertCtrl: AlertController, private iab: InAppBrowser,
-    public modalCtrl: ModalController, private appVersion: AppVersion
+  myName: string;
+  constructor(
+    platform: Platform,
+    statusBar: StatusBar,
+    splashScreen: SplashScreen,
+    public http: HTTP,
+    public menuCtrl: MenuController,
+    public storage: Storage,
+    public fcm: FCM,
+    public alertCtrl: AlertController,
+    private iab: InAppBrowser,
+    public modalCtrl: ModalController,
+    private appVersion: AppVersion,
+    private market: Market
   ) {
 
     platform.ready().then(() => {
@@ -142,7 +153,8 @@ export class MyApp {
       });
 
       storage.get('get_user').then((obj) => {
-        this.myName = obj.name;});
+        this.myName = obj.name;
+      });
     });
     // firebase.initializeApp(config);
     // firebase.auth().onAuthStateChanged((user) => {
@@ -170,19 +182,19 @@ export class MyApp {
               console.log(element);
               if (element.allow == null) {
                 let alert = this.alertCtrl.create({
-                  title: '알림',
-                  subTitle: element.sname + '님에게 정보요청이 왔습니다.',
+                  title: '개인정보 열람요청',
+                  subTitle: '[' + element.sname + ']님께서 개인정보 열람을 요청하셨습니다. <br>아래 [승인]을 누르시면 연락처를 보냅니다.',
                   buttons: [
                     {
                       text: '거절',
                       handler: () => {
-                        this.http.post(this.url + '/push/setRequest', { serial: element.serial, name:this.myName, sid: element.sid, allow: 0 }, {});
+                        this.http.post(this.url + '/push/setRequest', { serial: element.serial, name: this.myName, sid: element.sid, allow: 0 }, {});
                       }
                     },
                     {
                       text: '승인',
                       handler: () => {
-                        this.http.post(this.url + '/push/setRequest', { serial: element.serial, name:this.myName, sid: element.sid, allow: 1 }, {});
+                        this.http.post(this.url + '/push/setRequest', { serial: element.serial, name: this.myName, sid: element.sid, allow: 1 }, {});
                       }
                     }
                   ]
@@ -216,34 +228,66 @@ export class MyApp {
     var tempThis = this;
     fcm.onNotification().subscribe(data => {
       let alert;
+      if (data.req == 'update') {
+        alert = this.alertCtrl.create({
+          title: "안내",
+          subTitle: "최신 버전으로 업데이트 하시겠습니까?",
+          buttons: [{
+            text: '확인',
+            handler: () => {
+              this.market.open('com.dongil.church');
+            }
+          }]
+        });
+      }
       // this.badge.increase(1);
       if (data.wasTapped) { //백그라운드 모드이면
         console.log("Received in background:" + data);
         if (data.req == "1" || data.req == "2") {
-          // this.checkRequest();
+          this.checkRequest();
+          this.navCtrl.push(GetUserInfoPage);
         } else {
           tempThis.navCtrl.push(AlarmPage);
         }
       } else {
-        console.log("Received in foreground:" + data);
+        console.log("Received in foreground:");
+        console.log(data);
+
         if (data.req == "1") {
+          // alert = this.alertCtrl.create({
+          // title: "안내",
+          // subTitle: "정보 요청이 왔습니다.",
+          // buttons: [{
+          //   text: '확인',
+          //   handler: () => {
+          this.checkRequest();
+          //     }
+          //   }]
+          // });
+        } else if (data.req == "2") {
           alert = this.alertCtrl.create({
             title: "안내",
-            subTitle: "정보 요청이 왔습니다.",
+            subTitle: data.sname + "님으로부터 정보 요청이 승인되었습니다.",
+            // buttons: ['OK']
+
             buttons: [{
               text: '확인',
               handler: () => {
-                this.checkRequest();
+                // console.log(this.navCtrl.getActive().name);
+                console.log(this.navCtrl.getActive());
+                if (this.navCtrl.getActive().name == 'GetUserInfoPage') {
+                  this.navCtrl.pop();
+                  // this.navCtrl.pop().then(()=>{
+                  //   this.navCtrl.push(GetUserInfoPage);
+                  // this.navCtrl.setRoot(this.navCtrl.getActive().component);
+                  // });
+                  // this.navCtrl.getActive().component
+                }
+                // let view = this.nav.getActive();
               }
             }]
           });
-        } else if (data.req == "2"){
-          alert = this.alertCtrl.create({
-            title: "안내",
-            subTitle: data.sname+"님으로부터 정보 요청이 승인되었습니다.",
-            buttons: ['OK']
-          });
-        }else {
+        } else {
           alert = this.alertCtrl.create({
             title: "안내",
             subTitle: "알림 메시지가 도착했습니다.",
@@ -283,7 +327,7 @@ export class MyApp {
           //로그인 성공이면
           if (obj.code == "S01") {
             var user = obj.value;
-            this.storage.set("push_token", user);
+            // this.storage.set("push_token", user);
             this.storage.set("get_user", user);
             // this.navCtrl.push(MyinfoPage, user);
           }
@@ -366,7 +410,9 @@ export class MyApp {
     modal.present();
   }
   goToGetUserInfo() {
-    this.navCtrl.push(GetUserInfoPage);
+    this.storage.get('flagSlide').then((flag) => {
+      this.navCtrl.push(GetUserInfoPage, { slide: flag });
+    });
 
   }
   showAlert(title, msg) {

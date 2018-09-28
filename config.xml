@@ -3,7 +3,7 @@
     <name>동일교회</name>
     <description>동일 교회교인을 위한 앱</description>
     <author email="cmbosszz@gmail.com" href="http://dongil.org">동일교회</author>
-    <content original-src="index.html" src="http://192.168.100.43:8100" />
+    <content src="index.html" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
@@ -109,4 +109,5 @@
     <plugin name="com-sarriaroman-photoviewer" spec="^1.1.18" />
     <plugin name="cordova-plugin-app-version" spec="^0.1.9" />
     <plugin name="cordova-clipboard" spec="^1.2.1" />
+    <plugin name="cordova-plugin-market" spec="^1.2.0" />
 </widget>
