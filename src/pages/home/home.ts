@@ -6,8 +6,11 @@ import { SettingPage } from '../setting/setting';
 import { ParkingPage } from '../parking/parking';
 import { FamilysitePage } from '../familysite/familysite';
 import { WeeklyPage } from '../weekly/weekly';
+<<<<<<< HEAD
 import { SignupCheckPage } from '../signup-check/signup-check';
 import { GetUserInfoPage } from '../get-user-info/get-user-info';
+=======
+>>>>>>> parent of 1c912fd... 웹뷰, 홈 디자인
 
 import { Storage } from '@ionic/storage';
 import { HTTP } from '@ionic-native/http';
@@ -97,7 +100,7 @@ export class HomePage {
     this.navCtrl.push(ParkingPage);
   }
   goToHome(params) {
-    const browser = this.iab.create('http://www.dongil.org/',"target='_black'");
+    const browser = this.iab.create('http://www.dongil.org/');
     browser.show();
     // if (!params) params = {};
     // this.navCtrl.setRoot(HomePage);
@@ -118,10 +121,13 @@ export class HomePage {
   goToWeekly() {
     this.navCtrl.push(WeeklyPage);
   }
+<<<<<<< HEAD
   goToSignupCheck(){
     this.navCtrl.push(SignupCheckPage);
   }
   goToGetUserInfo(){
     this.navCtrl.push(GetUserInfoPage);
   }
+=======
+>>>>>>> parent of 1c912fd... 웹뷰, 홈 디자인
 }

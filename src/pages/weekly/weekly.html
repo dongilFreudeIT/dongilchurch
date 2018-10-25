@@ -1,21 +1,14 @@
-<ion-header>
-  <ion-navbar color="primary" no-border-bottom>
-    <button ion-button menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </button>
-    <ion-title>
-      주보
-    </ion-title>
-  </ion-navbar>
-</ion-header>
+
 
 <ion-content>
+  <!-- <img src="http://www.dongil.org/files/attach/images/789/804/015/725e15fe5e635831e8596b3bf47bac92.jpg" /> -->
   <!-- <img [src]="'img/' + img '"> --> 
   <!-- <img src="{{img}}"> -->
   
-  <!-- <button ion-button color="b-primary" (click)="showWeekly()">주보 목록 보기</button> -->
-  <img *ngIf="img" [src]="img" (click)="showWeekly()"/>
-  
+  <button ion-button color="b-primary" (click)="showWeekly()">주보 목록 보기</button>
+
+  <img *ngIf="img" [src]="img"/>
+  <!-- <img ng-src="{{img}}"> -->
 
   <div *ngIf="!flagGetImage" text-center>
     <ion-spinner item-start name="ios">
