@@ -8,6 +8,7 @@ import { CheckNetworkProvider } from '../../providers/check-network/check-networ
 import { UserdetailPage } from '../userdetail/userdetail';
 import { PushfilterModal } from '../pushfilter-modal/pushfilter';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
+import { Storage } from '@ionic/storage';
 
 @Component({
   selector: 'page-usermanager',
@@ -29,7 +30,7 @@ export class UsermanagerPage {
   subscribeNet2 : any;
 
   constructor(public navCtrl: NavController, public http : HTTP, public modalCtrl: ModalController, public alertCtrl: AlertController
-    , public toastController :ToastController, private network: Network, private iab: InAppBrowser,
+    , public toastController :ToastController, private network: Network, private iab: InAppBrowser, public storage: Storage,
     private chechNetwork : CheckNetworkProvider) {
 
     this.isAllSelect = false;
@@ -221,8 +222,10 @@ export class UsermanagerPage {
     //   this.navCtrl.push(SendPushPage, sendUserArray);
     // }
     console.log("푸시보내기");
-    const browser = this.iab.create('http://13.125.35.123/api/SendPush',"target='_blank'");
-    browser.show();
+    this.storage.get('user_serial').then((localSerial) => {
+      const browser = this.iab.create('http://13.125.35.123/api/SendPush?serial='+localSerial,"target='_blank'");
+      browser.show();
+    });
 
   }
   //유저 검색
