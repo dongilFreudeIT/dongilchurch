@@ -45,7 +45,6 @@ import { IonicImageViewerModule } from 'ionic-img-viewer';
 import { ScreenOrientation } from '@ionic-native/screen-orientation';
 import { SafePipe } from '../pipes/safe/safe';
 
-<<<<<<< HEAD
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ZoomAreaModule } from 'ionic2-zoom-area';
 import {PhotoViewer} from '@ionic-native/photo-viewer';
@@ -53,8 +52,6 @@ import { AppVersion } from '@ionic-native/app-version';
 import { Clipboard } from '@ionic-native/clipboard';
 import { Market } from '@ionic-native/market';
 
-=======
->>>>>>> parent of 1c912fd... 웹뷰, 홈 디자인
 @NgModule({
   //page 선언
   declarations: [
@@ -85,6 +82,8 @@ import { Market } from '@ionic-native/market';
   imports: [
     BrowserModule, 
     IonicImageViewerModule,
+    BrowserAnimationsModule,
+    ZoomAreaModule.forRoot(),
     // HttpClientModule, //http 통신을 위해
     IonicModule.forRoot(MyApp),
     IonicStorageModule.forRoot() //앱 내에 데이터를 저장하기 위해
@@ -130,16 +129,11 @@ import { Market } from '@ionic-native/market';
     Network,
     CheckNetworkProvider,
     NativeStorage,
-<<<<<<< HEAD
     ScreenOrientation,
     PhotoViewer,
     AppVersion,
     Clipboard,
     Market
-=======
-    ScreenOrientation
-
->>>>>>> parent of 1c912fd... 웹뷰, 홈 디자인
   ]
 })
 export class AppModule {}

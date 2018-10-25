@@ -569,7 +569,10 @@ html {
   padding-top: $sizeSM;
   padding-bottom: $sizeSM;
 }
-
+.padder-v-l {
+  padding-top: $sizeMD;
+  padding-bottom: $sizeMD;
+}
 .no-padder {
   padding: 0 !important;
 }

@@ -57,7 +57,7 @@ export class PushShowPage {
     this._height = Math.floor(this._width * 0.56);
   }
   btnLink(){
-    const browser = this.iab.create(this.navParams.data.linkaddress);
+    const browser = this.iab.create(this.navParams.data.linkaddress,"target='_black'");
     browser.show();  
   }
 

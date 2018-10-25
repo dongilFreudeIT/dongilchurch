@@ -4,24 +4,18 @@
       <ion-icon name="menu"></ion-icon>
     </button>
     <ion-title title-md>
-      동일교회
+      홈
     </ion-title>
-<<<<<<< HEAD
     <!-- <ion-buttons end>
       <button ion-button (click)="goToGetUserInfo()">요람</button>    
   </ion-buttons> -->
-=======
-    <ion-buttons end>
-      <button ion-button (click)="goToWeekly()">주보</button>
-    </ion-buttons>
->>>>>>> parent of 1c912fd... 웹뷰, 홈 디자인
   </ion-navbar>
 </ion-header>
 
 <ion-content class="main-header">
 
   <!-- <img src="assets/imgs/home.jpg" /> -->
-  <img *ngIf="!urlVideo"class="home-image" src="assets/imgs/main-logo.png" />
+  <img class="home-image padder-v-l" src="assets/imgs/logo-dongil.png" />
   <div *ngIf="urlVideo">
     <iframe [src]="urlVideo | safe" width={{_width}} height={{_height}} style=" margin: 0 auto; " frameborder="0" webkitallowfullscreen
       mozallowfullscreen allowfullscreen allow="autoplay; encrypted-media"></iframe>
@@ -31,7 +25,7 @@
 
   <div class="main-body">
 
-    <ion-row>
+    <!-- <ion-row>
       <ion-col style="padding:10px;">
         <img src="assets/imgs/button-alram.png" (click)="goToAlarm()">
       </ion-col>
@@ -42,7 +36,29 @@
 
     <ion-row class="ionrow" style="padding:10px;">
       <ion-col>
-        <img src="assets/imgs/button-home_2.png" (click)="goToHome()">
+        <img src="assets/imgs/button-home_2.png" (click)="goToHome()" >
+
+      </ion-col>
+      <ion-col>
+        <img src="assets/imgs/button-familysite.png" (click)="goToFamilysite()">
+      </ion-col>
+    </ion-row> -->
+
+    <ion-row>
+      <ion-col style="padding:10px;">
+        <img src="assets/imgs/home-menu-noti.png" (click)="goToAlarm()">
+      </ion-col>
+      <ion-col>
+        <img src="assets/imgs/home-menu-parking.png" (click)="goToParking()">
+      </ion-col>
+    </ion-row>
+
+    <ion-row class="ionrow" style="padding:10px;">
+      <ion-col>
+        <img src="assets/imgs/home-menu-weekly.png" (click)="goToWeekly()" >
+      </ion-col>
+      <ion-col>
+        <img src="assets/imgs/button-home_2.png" (click)="goToHome()" >
       </ion-col>
       <ion-col>
         <img src="assets/imgs/button-familysite.png" (click)="goToFamilysite()">

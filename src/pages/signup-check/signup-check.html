@@ -1,7 +1,7 @@
 <ion-header>
   <ion-navbar color="primary" no-border-bottom>
     <ion-title>
-      회원 확인
+      교인 확인
     </ion-title>
     <ion-buttons end>
       <button ion-button color="light" (click)="dismiss()">
@@ -16,8 +16,8 @@
     <ion-item class="b-b b-light">
       <ion-input type="text" placeholder="이름" [(ngModel)]="name" name="name"></ion-input>
     </ion-item>
-</ion-card>
-<ion-card class="form-login">
+  </ion-card>
+  <ion-card class="form-login">
 
     <ion-item>
       <ion-input type="tel" placeholder="휴대폰 번호" maxlength="11" [(ngModel)]="phone" name="phone"></ion-input>
@@ -32,13 +32,13 @@
     </ion-col>
 
     <ion-col col-3>
-      <ion-item >
+      <ion-item>
         <ion-input type="tel" placeholder="00" maxlength="2" [(ngModel)]="month"> </ion-input>
       </ion-item>
     </ion-col>
 
     <ion-col col-3>
-      <ion-item >
+      <ion-item>
         <ion-input type="tel" placeholder="00" maxlength="2" [(ngModel)]="day"> </ion-input>
       </ion-item>
 
@@ -46,9 +46,21 @@
   </ion-row>
 
   <div class="padder">
-    <button ion-button block outline color="light" (click)="checkUser()">
-      <b>확인</b>
-    </button>
+    <div class="m-b-lg">
+      <button ion-button block outline color="light" (click)="checkUser()">
+        <b>확인</b>
+      </button>
+    </div>
+    <div class="color-white" text-center>
+      위의 버튼을 누르는 것으로 해당 앱의 이용약관에 동의 하는 것으로 간주합니다.
+      <br>
+      <ion-col text-right>
+        <button ion-button outline small color="light" href="#" onclick="window.open('http://www.dongil.org/page_mxcC75', 'location=yes'); return false;">
+          이용약관 자세히 보기
+        </button>
+      </ion-col>
+    </div>
+
   </div>
 
 </ion-content>

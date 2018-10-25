@@ -8,7 +8,7 @@ page-home {
 .home-image{
     margin: auto;
     width: 40%;
-    padding: 40px;
+    //  padding: 10px;
     display: block;
 }
 
@@ -25,10 +25,13 @@ page-home {
 }
 .main-body{
     background-color: rgb(170, 170, 170);
-    background-image: url('../assets/imgs/button-2.png') ;
-    background-size: 100%;
+    background-image: url('../assets/imgs/home-menu.png') ;
+    background-position:center;
+    background-repeat: no-repeat;
+    background-size: cover;
     border-radius: 10px;
-    margin:2%; 
+    margin: 20px 2%; 
+    // margin:0% ; 
 
 // background: linear-gradient(to right, 
 // 	                              transparent 0%, 
