@@ -46,6 +46,13 @@
       <div class="span text-xs text-muted m-t-xs">{{data.registered_date}}</div>
     </ion-col>
   </ion-row> -->
+  <div class="text-center m-t text-1x" *ngIf="pushDataArray==null">밑으로 내려 새로고치기</div>
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content>
+        pullingText="Pull to refresh..."
+        refreshingText="Refreshing...">
+    </ion-refresher-content>
+  </ion-refresher>
 
   <ion-list line (click)="showDetail(data)" *ngFor="let data of pushDataArray">
     <ion-item >

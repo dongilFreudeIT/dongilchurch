@@ -18,18 +18,28 @@ export class AlarmPage {
   pushDataArray: any; //서버에서 받아온 푸쉬 메세지 리스트 저장 array
 
   constructor(
-    public navCtrl: NavController, 
-    private storage: Storage, 
+    public navCtrl: NavController,
+    private storage: Storage,
     public http: HTTP,
     platform: Platform,
     private nativeStorage: NativeStorage
-    ) {
+  ) {
 
     platform.ready().then(() => {
-        this.getPushMessage();
+      this.getPushMessage();
     });
     moment.lang("ko");
   }
+  doRefresh(refresher) {
+    console.log('Begin async operation', refresher);
+    this.getPushMessage();
+
+    setTimeout(() => {
+      console.log('Async operation has ended');
+      refresher.complete();
+    }, 2000);
+  }
+
   showDetail(data) {
     this.navCtrl.push(PushShowPage, data);
   }
@@ -70,9 +80,9 @@ export class AlarmPage {
     //   this.pushDataArray = _pushDataArray;
     // });
     this.nativeStorage.getItem('pushDataArray2').then(data => {
-        this.pushDataArray = data;
-      }
-    )
+      this.pushDataArray = data;
+    }
+    );
 
 
   }
