@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, Platform } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 
 import { HTTP } from '@ionic-native/http';
@@ -17,12 +17,17 @@ export class AlarmPage {
   url: string = 'http://13.125.35.123/api';
   pushDataArray: any; //서버에서 받아온 푸쉬 메세지 리스트 저장 array
 
-  constructor(public navCtrl: NavController, private storage: Storage, public http: HTTP
-    , private nativeStorage: NativeStorage) {
+  constructor(
+    public navCtrl: NavController, 
+    private storage: Storage, 
+    public http: HTTP,
+    platform: Platform,
+    private nativeStorage: NativeStorage
+    ) {
 
-    // 뱃지(숫자 보여주는거) 클리어
-    // this.badge.clear();
-    this.getPushMessage();
+    platform.ready().then(() => {
+        this.getPushMessage();
+    });
     moment.lang("ko");
   }
   showDetail(data) {
@@ -34,8 +39,6 @@ export class AlarmPage {
 
     //저장 된 user serial 가져와서 서버에 푸쉬 리스트 요청
     this.storage.get('user_serial').then((value) => {
-
-
       var param = { serial: value };
       this.http.post(this.url + '/user/get_push_list', param, {}).then(data => {
         if (data.status == 200) {
