@@ -24,12 +24,19 @@ export class AlarmPage {
     platform: Platform,
     private nativeStorage: NativeStorage
   ) {
+    this.nativeStorage.getItem('pushDataArray2').then(data => {
+      this.pushDataArray = data;
+      console.log("native storage : ");
+      console.log(data);
+    });
 
     platform.ready().then(() => {
       this.getPushMessage();
     });
     moment.lang("ko");
+
   }
+
   doRefresh(refresher) {
     console.log('Begin async operation', refresher);
     this.getPushMessage();
@@ -45,8 +52,6 @@ export class AlarmPage {
   }
 
   getPushMessage() {
-
-
     //저장 된 user serial 가져와서 서버에 푸쉬 리스트 요청
     this.storage.get('user_serial').then((value) => {
       var param = { serial: value };
@@ -68,8 +73,6 @@ export class AlarmPage {
             console.log(obj.message);
           }
         }
-
-
         this.addMoment();
         // console.log("th : " +moment(this.pushDataArray[1]["registered_date"]).fromNow());
 
@@ -79,10 +82,7 @@ export class AlarmPage {
     // this.storage.get('pushDataArray').then((_pushDataArray) => {
     //   this.pushDataArray = _pushDataArray;
     // });
-    this.nativeStorage.getItem('pushDataArray2').then(data => {
-      this.pushDataArray = data;
-    }
-    );
+   
 
 
   }
