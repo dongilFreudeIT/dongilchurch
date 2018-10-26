@@ -425,5 +425,11 @@ export class MyApp {
     alert.present();
 
   }
-
+  sendPush(){
+    console.log("푸시보내기");
+    this.storage.get('user_serial').then((localSerial) => {
+      const browser = this.iab.create('http://13.125.35.123/api/SendPush?serial='+localSerial,"target='_blank'");
+      browser.show();
+    });
+  }
 }
