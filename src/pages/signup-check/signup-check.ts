@@ -66,7 +66,8 @@ export class SignupCheckPage {
               if(obj2.code == "S01"){
                 this.modal = this.modalCtrl.create(RegisteruserPage,obj2.value, {cssClass: 'modal-gradient'});
               }else{
-                this.modal = this.modalCtrl.create(SignupPage, {}, {cssClass: 'modal-gradient'});
+                // this.modal = this.modalCtrl.create(SignupPage, {}, {cssClass: 'modal-gradient'});
+                this.modal = this.modalCtrl.create(RegisteruserPage,{}, {cssClass: 'modal-gradient'});
               }
             }else {
               // this.showAlert("안내","일치하는 정보가 없습니다. 회원가입 화면으로 이동합니다.")
