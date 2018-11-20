@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, NgZone } from '@angular/core';
 import { NavController, Platform } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 
@@ -22,18 +22,24 @@ export class AlarmPage {
     private storage: Storage,
     public http: HTTP,
     platform: Platform,
-    private nativeStorage: NativeStorage
+    private nativeStorage: NativeStorage,
+    private _zone: NgZone
   ) {
     this.nativeStorage.getItem('pushDataArray2').then(data => {
       this.pushDataArray = data;
       console.log("native storage : ");
-      console.log(data);
+      // console.log(data);
     });
 
-    platform.ready().then(() => {
-      this.getPushMessage();
-    });
+
     moment.lang("ko");
+
+    document.addEventListener('resume', () => {
+      console.log("document.addEventListener('resume' ");
+        this._zone.run(() => {
+          this.getPushMessage();
+        });
+    });
 
   }
 
@@ -44,7 +50,7 @@ export class AlarmPage {
     setTimeout(() => {
       console.log('Async operation has ended');
       refresher.complete();
-    }, 2000);
+    }, 1000);
   }
 
   showDetail(data) {
@@ -57,7 +63,7 @@ export class AlarmPage {
       var param = { serial: value };
       this.http.post(this.url + '/user/get_push_list', param, {}).then(data => {
         if (data.status == 200) {
-          console.log(data.data);
+          // console.log(data.data);
           var obj = JSON.parse(data.data);
           //로그인 성공이면
           if (obj.code == "S01") {
@@ -117,5 +123,13 @@ export class AlarmPage {
       .then(
         data => { console.log(data.anotherProperty) }
       )
+  }
+
+  ionViewDidLeave(){
+    console.log("leave");
+  }
+  ionViewDidLoad(){
+    console.log("ionViewDidLoad");
+      this.getPushMessage();
   }
 }
