@@ -6,46 +6,23 @@
     <ion-title>
       요람
     </ion-title>
-    <ion-buttons *ngIf="flagSlide" end>
+    <ion-buttons *ngIf="flagSlideHide" end>
       <button ion-button (click)="showSlide()">도움말</button>
     </ion-buttons>
   </ion-navbar>
 </ion-header>
 <!-- <div style="position:absolute; top:0px; left:0px; width: 500px; height: 500px; background-color:aqua">  -->
 
-<ion-content style="z-index: 1;">
-    <div *ngIf="!flagSlide" id="divCanvas" style="position:absolute; z-index: 2; width: 500PX; "[ngStyle]="{'height': _height}" >
-        <canvas #canvas></canvas>
-      </div>
-
-  <ion-slides *ngIf="!flagSlide" pager>
-    <ion-slide *ngFor="let slide of slides" [ngStyle]="{'background-color': color1}">
-
-      <!-- <img [src]="slide.image" class="slide-image" />
-      <h2 class="slide-title" [innerHTML]="slide.title"></h2>
-      <p [innerHTML]="slide.description"></p>
-      <ion-toolbar>
-        <ion-buttons left>
-          <button (click)="btnSlideRemove();" ion-button color="primary">다시 보지 않기</button>
-        </ion-buttons>
-        <ion-buttons end>
-          <button (click)="btnSlideNext();" ion-button color="primary">다음</button>
-        </ion-buttons>
-      </ion-toolbar>
-    </ion-slide>
+<ion-content>
+  <ion-slides *ngIf="!flagSlideHide" pager>
     <ion-slide>
-      <img src="assets/imgs/home_back.jpg" class="slide-image" />
-      <h2 class="slide-title"></h2>
-      <button (click)='btnStart();' ion-button large clear icon-end color="primary">
-        시작하기
+      <img src="assets/imgs/slide_start.png" class="slide-image" />
+      <h2 class="slide-title">동일교회 전자 요람입니다.</h2>
+      <p>성도의 이름을 통해 <br>정보를 열람할 수 있습니다.<br><br> 화면을 오른쪽으로 넘기며 <br>사용방법을 확인해주세요</p>
+      <button ion-button large clear icon-end color="primary" (click)="btnSlideNext();">
         <ion-icon name="arrow-forward"></ion-icon>
       </button>
-      <ion-toolbar>
-      </ion-toolbar> -->
-
-      <ion-footer [ngStyle]="{'background-color': color1}"  >
-        <h2 class="slide-title" [innerHTML]="slide.title"></h2>
-        <p [innerHTML]="slide.description"></p>
+      <ion-footer>
         <ion-toolbar position="bottom" transparent>
           <ion-buttons left>
             <button (click)="btnSlideRemove();" ion-button color="primary">다시 보지 않기</button>
@@ -56,12 +33,196 @@
         </ion-toolbar>
       </ion-footer>
     </ion-slide>
+
+    <ion-slide>
+      <img src="assets/imgs/yoram-1.png" class="slide-zoom" imageViewer />
+      <ion-footer>
+        <ion-toolbar position="bottom" transparent>
+          <ion-buttons left>
+            <button (click)="btnSlideRemove();" ion-button color="primary">다시 보지 않기</button>
+          </ion-buttons>
+          <ion-buttons end>
+            <button (click)="btnSlideNext();" ion-button color="primary">다음</button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-footer>
+    </ion-slide>
+
+    <ion-slide>
+      <img src="assets/imgs/yoram-2.png" class="slide-zoom" imageViewer />
+      <ion-footer>
+        <ion-toolbar position="bottom" transparent>
+          <ion-buttons left>
+            <button (click)="btnSlideRemove();" ion-button color="primary">다시 보지 않기</button>
+          </ion-buttons>
+          <ion-buttons end>
+            <button (click)="btnSlideNext();" ion-button color="primary">다음</button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-footer>
+    </ion-slide>
+    <!-- <ion-slide>
+      <ion-item id="slide1" class="b-b b-light"  style="border: solid 3px red; border-radius: 40px;">
+        <ion-input type="text" placeholder="검색할 이름을 입력하세요"> </ion-input>
+        <button ion-button item-end >검색</button>
+      </ion-item>
+
+      <ion-footer>
+        <h2 class="slide-title">이름 입력</h2>
+        <p>성도의 이름을 입력하는 부분입니다.</p>
+        <ion-toolbar position="bottom" transparent>
+          <ion-buttons left>
+            <button (click)="btnSlideRemove();" ion-button color="primary">다시 보지 않기</button>
+          </ion-buttons>
+          <ion-buttons end>
+            <button (click)="btnSlideNext();" ion-button color="primary">다음</button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-footer>
+    </ion-slide> -->
+
+    <!-- 
+    <ion-slide>
+      <ion-item id="slide2" class="b-b b-light" style="border: solid 3px red; border-radius: 40px;">
+        <ion-input type="text" style="color:seagreen " value="박찬양"> </ion-input>
+        <button ion-button item-end>검색</button>
+      </ion-item>
+      <div class="speech-bubble">
+        <h2 class=""> 이름 검색</h2>
+        <p> 성도의 이름을 입력하는 <br>부분입니다.<br><br> 찾을 성도의 이름을 입력한 후<br> 검색 버튼을 누릅니다.</p>
+      </div>
+      <ion-footer>
+
+        <ion-toolbar position="bottom" transparent>
+          <ion-buttons left>
+            <button (click)="btnSlideRemove();" ion-button color="primary">다시 보지 않기</button>
+          </ion-buttons>
+          <ion-buttons end>
+            <button (click)="btnSlideNext();" ion-button color="primary">
+              다음
+            </button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-footer>
+    </ion-slide>
+
+    <ion-slide>
+      <ion-item id="search" class="b-b b-light">
+        <ion-input type="text" value="박찬양"></ion-input>
+        <button ion-button item-end>검색</button>
+      </ion-item>
+
+      <ion-row id="slide3" class="wrapper-sm b-b b-light" style="align-items: center; border: solid 3px red; border-radius: 40px;">
+        <ion-col class="text-ellipsis-flex">
+          <div class="text-ellipsis-flex v-align-middle pull-left">박찬양</div>
+        </ion-col>
+        <ion-col col-auto>
+          <button ion-button color="noti">정보 요청</button>
+        </ion-col>
+      </ion-row>
+      <div class="speech-bubble">
+        <h2 class="slide-title">가입 확인 및 요청</h2>
+        <p>동일교회 앱에 가입되어 있다면 <br>이름과 정보 요청 버튼이 보입니다.<br><br>정보 요청 버튼을 눌러 요청하면 대상 성도는 알림 메시지를 <br>받습니다.</p>
+      </div>
+      <ion-footer>
+        <ion-toolbar position="bottom" transparent>
+          <ion-buttons left>
+            <button (click)="btnSlideRemove();" ion-button color="primary">다시 보지 않기</button>
+          </ion-buttons>
+          <ion-buttons end>
+            <button (click)="btnSlideNext();" ion-button color="primary">
+              다음
+            </button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-footer>
+    </ion-slide> -->
+
+    <ion-slide>
+      <img src="assets/imgs/message.jpg" class="slide-image" />
+      <div class="speech-bubble">
+        <h2 class="slide-title">요청 승인 및 대기</h2>
+        <p> 정보 요청을 받은 성도는 <br>알림 메시지를 받습니다. <br>알림 메시지는 정보를 제공 여부를 묻습니다.<br> 대상 성도가 수락을 누른 <br>후에 정보 열람이 가능합니다.</p>
+      </div>
+      <ion-footer>
+        <ion-toolbar position="bottom" transparent>
+          <ion-buttons left>
+            <button (click)="btnSlideRemove();" ion-button color="primary">다시 보지 않기</button>
+          </ion-buttons>
+          <ion-buttons end>
+            <button (click)="btnSlideNext();" ion-button color="primary">다음</button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-footer>
+    </ion-slide>
+
+
+    <ion-slide>
+      <img src="assets/imgs/yoram-3.png" class="slide-zoom" imageViewer />
+      <ion-footer>
+        <ion-toolbar position="bottom" transparent>
+          <ion-buttons left>
+            <button (click)="btnSlideRemove();" ion-button color="primary">다시 보지 않기</button>
+          </ion-buttons>
+          <ion-buttons end>
+            <button (click)="btnSlideNext();" ion-button color="primary">다음</button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-footer>
+    </ion-slide>
+    <!--       
+    <ion-slide>
+      <ion-item id="search" class="b-b b-light">
+        <ion-input type="text" value="박찬양"></ion-input>
+        <button ion-button item-end>검색</button>
+      </ion-item>
+
+      <ion-row id="slide4" class="wrapper-sm b-b b-light" style="border: solid 3px red; border-radius: 40px;">
+        <ion-col>
+          <ion-row><b>박찬양</b></ion-row>
+          <ion-row class="text-sm text-muted">2지역/6남전도회/집사</ion-row>
+          <ion-row class="text-sm text-muted">19850417/01011112222</ion-row>
+        </ion-col>
+        <ion-col col-auto>
+          <button ion-button>통화</button>
+          <button ion-button color="sms">문자</button>
+        </ion-col>
+      </ion-row>
+
+      <div class="speech-bubble">
+        <h2 class="slide-title"> 정보 열람</h2>
+        <p>요청 받은 성도가 정보 제공 하기를 승인하면 정보가 보입니다.<br> 오른쪽의 버튼을 눌러 전화와 문자를 보낼 수 있습니다.</p>
+      </div>
+
+      <ion-footer>
+        <ion-toolbar position="bottom" transparent>
+          <ion-buttons left>
+            <button (click)="btnSlideRemove();" ion-button color="primary">다시 보지 않기</button>
+          </ion-buttons>
+          <ion-buttons end>
+            <button (click)="btnSlideNext();" ion-button color="primary">
+              다음
+            </button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-footer>
+    </ion-slide> -->
+
+    <ion-slide>
+      <img src="assets/imgs/slide_end.png" class="slide-image" />
+      <h2 class="slide-title"></h2>
+      <button ion-button large clear icon-end color="primary" (click)="btnSlideRemove();">
+        시작하기
+        <ion-icon name="arrow-forward"></ion-icon>
+      </button>
+    </ion-slide>
   </ion-slides>
 
   <!-- <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar> -->
-  <div *ngIf="flagSlide" padding>
-    <ion-item id="search" class="b-b b-light">
-      <ion-input type="text" (keypress)="eventHandler($event.keyCode)" [(ngModel)]="name" placeholder="검색할 이름을 입력하세요"> </ion-input>
+  <div *ngIf="flagSlideHide">
+    <ion-item id="search1" class="b-b b-light">
+      <ion-input type="text" (keypress)="eventHandler($event.keyCode)" [(ngModel)]="name" placeholder="검색할 이름을 입력하세요">
+      </ion-input>
       <button ion-button item-end (click)="searchName()">검색</button>
     </ion-item>
 
@@ -70,11 +231,21 @@
         <b>{{user.name}}</b>
       </ion-col>
       <ion-col col-auto>
-        <button ion-button color="noti">연락처 요청</button>
+        <button ion-button color="noti">정보 요청</button>
       </ion-col>
     </ion-row>
+    <ion-row class="wrapper-sm b-b b-light" *ngIf="searchResult==0">
+      <ion-col class="text-ellipsis-flex">
+        <h5>해당 성도는 '동일교회' 앱에 가입되어 있지 않습니다. <br>정보를 받기 원하시면 교회 사무실<a href="tel:053-755-6003">(053-755-6003)</a>로 연락
+          바랍니다. </h5>
+      </ion-col>
 
-    <ion-row class="wrapper-sm b-b b-light" *ngFor="let user of usersInfo">
+    </ion-row>
+
+    <div class="b-light" *ngIf="usersInfo.length" style="padding-top: 20px; text-align: center">
+      <h4>나의 요람 리스트</h4>
+    </div>
+    <!-- <ion-row class="wrapper-sm b-b b-light" *ngFor="let user of usersInfo">
       <ion-col class="text-ellipsis-flex" (click)="goToInfoShow(user)">
         <div class="l-h">
           <div class=""><b>{{user.name}}</b></div>
@@ -86,9 +257,37 @@
       <ion-col col-auto>
         <button ion-button (click)="phoneCall(user)">통화</button>
         <button ion-button color="sms" (click)="phoneSms(user)">문자</button>
-
-        <!-- <div class="" style="color:rgb(224, 33, 33)" ><b>{{user.grade}}</b></div> -->
       </ion-col>
-    </ion-row>
+    </ion-row> -->
+    <ion-list>
+
+      <ion-item-sliding *ngFor="let user of usersInfo" #item>
+        <ion-item>
+          <ion-row class=" b-b b-light">
+            <ion-col class="text-ellipsis-flex" (click)="goToInfoShow(user)">
+              <div class="l-h">
+                <div class=""><b>{{user.name}}</b></div>
+                <div class="text-sm text-muted text-ellipsis">{{user.place}}/{{user.subgroup}}/{{user.title}}</div>
+                <div class="text-sm text-muted text-ellipsis">{{user.birthday}}/{{user.phone}}</div>
+              </div>
+
+            </ion-col>
+            <ion-col col-auto>
+              <button ion-button (click)="phoneCall(user)">통화</button>
+              <button ion-button color="sms" (click)="phoneSms(user)">문자</button>
+            </ion-col>
+          </ion-row>
+        </ion-item>
+
+        <ion-item-options class="wrapper-v-sm" >
+
+          <button ion-button color="danger" (click)="delete(item)">
+            <ion-icon name="trash"></ion-icon>
+            지우기
+          </button>
+        </ion-item-options>
+      </ion-item-sliding>
+    </ion-list>
+
   </div>
 </ion-content>

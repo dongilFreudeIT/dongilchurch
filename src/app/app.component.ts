@@ -26,6 +26,7 @@ import { SignupCheckPage } from '../pages/signup-check/signup-check';
 
 import { AppVersion } from '@ionic-native/app-version';
 import { Market } from '@ionic-native/market';
+import { Subscription } from 'rxjs';
 
 // import * as firebase from "firebase";
 // var config = {
@@ -47,6 +48,8 @@ export class MyApp {
   @ViewChild(Nav) navCtrl: Nav;
   rootPage: any = HomePage;
   myName: string;
+  private onResumeSubscription: Subscription;
+
   constructor(
     platform: Platform,
     statusBar: StatusBar,
@@ -149,7 +152,10 @@ export class MyApp {
           });
 
         }
-        this.checkRequest()
+        this.checkRequest();
+        this.onResumeSubscription = platform.resume.subscribe(() => {
+          this.checkRequest();
+        });
       });
 
       storage.get('get_user').then((obj) => {
@@ -168,6 +174,11 @@ export class MyApp {
     //   }
     // });
   }
+  ngOnDestroy() {
+    // always unsubscribe your subscriptions to prevent leaks
+    this.onResumeSubscription.unsubscribe();
+  }
+  
   checkRequest() {
     this.storage.get('user_serial').then((localSerial) => {
 
@@ -198,7 +209,6 @@ export class MyApp {
                       }
                     }
                   ]
-
                 });
                 alert.present();
               }
@@ -225,7 +235,6 @@ export class MyApp {
     });
 
     //push 메세지 도착하면
-    var tempThis = this;
     fcm.onNotification().subscribe(data => {
       let alert;
       if (data.req == 'update') {
@@ -244,10 +253,10 @@ export class MyApp {
       if (data.wasTapped) { //백그라운드 모드이면
         console.log("Received in background:" + data);
         if (data.req == "1" || data.req == "2") {
-          this.checkRequest();
-          this.navCtrl.push(GetUserInfoPage);
+          this.navCtrl.push(GetUserInfoPage,{slide:true});
         } else {
-          tempThis.navCtrl.push(AlarmPage);
+          // this.checkRequest();
+          this.navCtrl.push(AlarmPage);
         }
       } else {
         console.log("Received in foreground:");
@@ -264,41 +273,29 @@ export class MyApp {
           //     }
           //   }]
           // });
-        } else if (data.req == "2") {
+        } else if (data.req == "allow") {
           alert = this.alertCtrl.create({
             title: "안내",
             subTitle: data.sname + "님으로부터 정보 요청이 승인되었습니다.",
-            // buttons: ['OK']
-
-            buttons: [{
-              text: '확인',
-              handler: () => {
-                // console.log(this.navCtrl.getActive().name);
-                console.log(this.navCtrl.getActive());
-                if (this.navCtrl.getActive().name == 'GetUserInfoPage') {
-                  this.navCtrl.pop();
-                  // this.navCtrl.pop().then(()=>{
-                  //   this.navCtrl.push(GetUserInfoPage);
-                  // this.navCtrl.setRoot(this.navCtrl.getActive().component);
-                  // });
-                  // this.navCtrl.getActive().component
-                }
-                // let view = this.nav.getActive();
-              }
-            }]
-          });
+            buttons: [{ text: '확인'}]
+          }).present();
+        }else if (data.req == "deny") {
+          alert = this.alertCtrl.create({
+            title: "안내",
+            subTitle: data.sname + "님께서 정보 열람을 거부하였습니다.",
+            buttons: [{ text: '확인'}]
+          }).present();
         } else {
           alert = this.alertCtrl.create({
             title: "안내",
             subTitle: "알림 메시지가 도착했습니다.",
             buttons: ['OK']
-          });
+          }).present();
         }
-        alert.present();
       };
     })
-
   }
+
   //홈페이지 이동(메뉴에서 선택 가능)
   goToHome(params) {
     const browser = this.iab.create('http://www.dongil.org/', "target='_black'");
@@ -311,7 +308,6 @@ export class MyApp {
     if (!params) params = {};
     this.navCtrl.push(AlarmPage);
   }
-
 
   //내 정보 수정으로 이동(메뉴에서 선택 가능)
   goToMyinfo(params) {
@@ -410,7 +406,7 @@ export class MyApp {
     modal.present();
   }
   goToGetUserInfo() {
-    this.storage.get('flagSlide').then((flag) => {
+    this.storage.get('flagSlideHide').then((flag) => {
       this.navCtrl.push(GetUserInfoPage, { slide: flag });
     });
 

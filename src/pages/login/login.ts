@@ -117,9 +117,6 @@ export class LoginPage {
     this.navCtrl.push(FindPasswordPage);
   }
 
-
-
-
   showAlert(title, msg){
     console.log(title+","+msg);
       let alert = this.alertCtrl.create({

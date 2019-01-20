@@ -28,9 +28,7 @@ export class AlarmPage {
     this.nativeStorage.getItem('pushDataArray2').then(data => {
       this.pushDataArray = data;
       console.log("native storage : ");
-      // console.log(data);
     });
-
 
     moment.lang("ko");
 
@@ -40,7 +38,6 @@ export class AlarmPage {
           this.getPushMessage();
         });
     });
-
   }
 
   doRefresh(refresher) {
@@ -80,17 +77,8 @@ export class AlarmPage {
           }
         }
         this.addMoment();
-        // console.log("th : " +moment(this.pushDataArray[1]["registered_date"]).fromNow());
-
-      });//http 부분
-
+      });
     });
-    // this.storage.get('pushDataArray').then((_pushDataArray) => {
-    //   this.pushDataArray = _pushDataArray;
-    // });
-   
-
-
   }
 
   /**
