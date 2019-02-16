@@ -1,9 +1,9 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.dongil.church" version="1.0.44" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="com.dongil.church" version="1.0.46" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>동일교회</name>
     <description>동일 교회교인을 위한 앱</description>
     <author email="cmbosszz@gmail.com" href="http://dongil.org">동일교회</author>
-    <content src="index.html" />
+    <content original-src="index.html" src="http://192.168.100.43:8100" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
@@ -119,4 +119,5 @@
     <plugin name="cordova-plugin-nativestorage" spec="~2.3.2" />
     <plugin name="cordova-plugin-app-version" spec="~0.1.9" />
     <plugin name="cordova-plugin-screen-orientation" spec="~3.0.1" />
+    <allow-navigation href="http://192.168.100.43:8101" />
 </widget>

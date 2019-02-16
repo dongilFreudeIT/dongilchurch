@@ -1,0 +1,83 @@
+<!--
+  Generated template for the GetUserInfoModalPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar no-border-bottom>
+
+
+    <ion-buttons start>
+      <button ion-button (click)="dismiss()">취소</button>
+    </ion-buttons>
+    <ion-buttons end>
+      <button ion-button (click)="applyFilter()">적용</button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+  <ion-card >
+    <ion-item >
+      <ion-label color="primary">
+        지역
+      </ion-label>
+      <ion-select [(ngModel)]="data.place">
+        <ion-option value="">선택안함</ion-option>
+        <ion-option value="1지역">1지역</ion-option>
+        <ion-option value="2지역">2지역</ion-option>
+        <ion-option value="3지역">3지역</ion-option>
+        <ion-option value="4지역">4지역</ion-option>
+        <ion-option value="5지역">5지역</ion-option>
+        <ion-option value="6지역">6지역</ion-option>
+        <ion-option value="7지역">7지역</ion-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item >
+      <ion-label color="primary">
+        기관
+      </ion-label>
+      <ion-select [(ngModel)]="data.subgroup">
+        <ion-option value="">선택안함</ion-option>
+        <ion-option value="영아부">영아부</ion-option>
+        <ion-option value="유치부">유치부</ion-option>
+        <ion-option value="유년부">유년부</ion-option>
+        <ion-option value="초등부">초등부</ion-option>
+        <ion-option value="중등부">중등부</ion-option>
+        <ion-option value="고등부">고등부</ion-option>
+        <ion-option value="1청년부">1청년부</ion-option>
+        <ion-option value="2청년부">2청년부</ion-option>
+        <ion-option value="3청년부">3청년부</ion-option>
+        <ion-option value="신혼청년부">신혼청년부</ion-option>
+        <ion-option value="에녹소망회">에녹소망회</ion-option>
+        <ion-option value="갈렙회">갈렙회</ion-option>
+        <ion-option value="사라회">사라회</ion-option>
+        <ion-option value="나오미회">나오미회</ion-option>
+        <ion-option value="1남전도회">1남전도회</ion-option>
+        <ion-option value="2남전도회">2남전도회</ion-option>
+        <ion-option value="3남전도회">3남전도회</ion-option>
+        <ion-option value="4남전도회">4남전도회</ion-option>
+        <ion-option value="5남전도회">5남전도회</ion-option>
+        <ion-option value="6남전도회">6남전도회</ion-option>
+        <ion-option value="1여전도회">1여전도회</ion-option>
+        <ion-option value="2여전도회">2여전도회</ion-option>
+        <ion-option value="3여전도회">3여전도회</ion-option>
+        <ion-option value="4여전도회">4여전도회</ion-option>
+        <ion-option value="5여전도회">5여전도회</ion-option>
+        <ion-option value="6여전도회">6여전도회</ion-option>
+        <ion-option value="7여전도회">7여전도회</ion-option>
+        <ion-option value="8여전도회">8여전도회</ion-option>
+        <ion-option value="9여전도회">9여전도회</ion-option>
+        <ion-option value="10여전도회">10여전도회</ion-option>
+      </ion-select>
+    </ion-item>
+  </ion-card>
+
+
+  <div class="bg-white wrapper text-center l-h m-b">
+    <div class="">정렬할 기준을 선택해 주세요. 여러 조건을 중복해서 적용할 수 있습니다.</div>
+  </div>
+</ion-content>

@@ -1,0 +1,19 @@
+<ion-header>
+  <ion-navbar color="primary" no-border-bottom>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title style="left:20%">
+      요람
+    </ion-title>
+    <ion-buttons end>
+      <button ion-button (click)="showSlide()">도움말</button>
+      <button ion-button (click)="yoramProvider.showModalSearchGroup()">그룹 검색</button>    
+      <button ion-button (click)="yoramProvider.showModalSearchOne()">이름 검색</button>
+
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+<ion-content padding>
+
+</ion-content>

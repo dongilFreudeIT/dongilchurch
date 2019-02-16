@@ -27,6 +27,16 @@ import { SignupCheckPage } from '../pages/signup-check/signup-check';
 import { WeeklyPage } from '../pages/weekly/weekly';
 import { GetUserInfoPage } from '../pages/get-user-info/get-user-info';
 import { MyinfoShowPage } from '../pages/myinfo-show/myinfo-show';
+import { GetUserInfoModalPage } from '../pages/get-user-info-modal/get-user-info-modal';
+import { YoramPage } from '../pages/yoram/yoram';
+import { YoramAllPage } from '../pages/yoram-all/yoram-all';
+import { YoramAgreePage } from '../pages/yoram-agree/yoram-agree';
+import { YoramWaitPage } from '../pages/yoram-wait/yoram-wait';
+import { YoramDisagreePage } from '../pages/yoram-disagree/yoram-disagree'
+import { YoramModalSearchGroupPage } from '../pages/yoram-modal-search-group/yoram-modal-search-group';
+import { YoramModalSearchOnePage } from '../pages/yoram-modal-search-one/yoram-modal-search-one';
+
+
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -51,6 +61,8 @@ import {PhotoViewer} from '@ionic-native/photo-viewer';
 import { AppVersion } from '@ionic-native/app-version';
 import { Clipboard } from '@ionic-native/clipboard';
 import { Market } from '@ionic-native/market';
+import { YoramProvider } from '../providers/yoram/yoram';
+import { YoramHttpProvider } from '../providers/yoram-http/yoram-http';
 
 @NgModule({
   //page 선언
@@ -77,7 +89,15 @@ import { Market } from '@ionic-native/market';
     SignupCheckPage,
     WeeklyPage,
     GetUserInfoPage,
-    MyinfoShowPage
+    MyinfoShowPage,
+    GetUserInfoModalPage,
+    YoramPage,
+    YoramAllPage,
+    YoramAgreePage,
+    YoramDisagreePage,
+    YoramWaitPage,
+    YoramModalSearchGroupPage,
+    YoramModalSearchOnePage,
   ],
   imports: [
     BrowserModule, 
@@ -85,7 +105,9 @@ import { Market } from '@ionic-native/market';
     BrowserAnimationsModule,
     ZoomAreaModule.forRoot(),
     // HttpClientModule, //http 통신을 위해
-    IonicModule.forRoot(MyApp),
+    IonicModule.forRoot(MyApp,{
+      tabsPlacement:'top',
+    }),
     IonicStorageModule.forRoot() //앱 내에 데이터를 저장하기 위해
     
   ],
@@ -112,7 +134,16 @@ import { Market } from '@ionic-native/market';
     SignupCheckPage,
     WeeklyPage,
     GetUserInfoPage,
-    MyinfoShowPage
+    MyinfoShowPage,
+    GetUserInfoModalPage,
+    YoramPage,
+    YoramAllPage,
+    YoramAgreePage,
+    YoramDisagreePage,
+    YoramWaitPage,
+    YoramModalSearchGroupPage,
+    YoramModalSearchOnePage,
+
   ],
   //사용되는 프로바이더(라이브러리 또는 플러그인)
   providers: [
@@ -133,7 +164,9 @@ import { Market } from '@ionic-native/market';
     PhotoViewer,
     AppVersion,
     Clipboard,
-    Market
+    Market,
+    YoramProvider,
+    YoramHttpProvider
   ]
 })
 export class AppModule {}

@@ -17,6 +17,7 @@ import { FamilysitePage } from '../pages/familysite/familysite';
 import { RegisteruserPage } from '../pages/registeruser/registeruser';
 import { WeeklyPage } from '../pages/weekly/weekly';
 import { GetUserInfoPage } from '../pages/get-user-info/get-user-info';
+import { YoramPage } from '../pages/yoram/yoram';
 import { Storage } from '@ionic/storage';
 import { HTTP } from '@ionic-native/http';
 import { FCM } from '@ionic-native/fcm'
@@ -407,7 +408,7 @@ export class MyApp {
   }
   goToGetUserInfo() {
     this.storage.get('flagSlideHide').then((flag) => {
-      this.navCtrl.push(GetUserInfoPage, { slide: flag });
+      this.navCtrl.push(YoramPage, { slide: flag });
     });
 
   }

@@ -1,13 +1,14 @@
-import { Component, ViewChild, ElementRef, NgZone} from '@angular/core';
-import { NavController, NavParams, AlertController, ViewController, Slides } from 'ionic-angular';
+// import { Component, ViewChild, ElementRef, NgZone} from '@angular/core';
+import { Component, ViewChild, NgZone} from '@angular/core';
+import { NavController, NavParams, AlertController, ViewController, Slides, ModalController } from 'ionic-angular';
 import { HTTP } from '@ionic-native/http';
 import { Storage } from '@ionic/storage';
 import { Subscription } from 'rxjs';
 import { Platform } from 'ionic-angular';
-import { Device } from '@ionic-native/device';
+// import { Device } from '@ionic-native/device';
 
 import { MyinfoShowPage } from '../myinfo-show/myinfo-show';
-
+import { GetUserInfoModalPage } from '../get-user-info-modal/get-user-info-modal';
 
 @Component({
   selector: 'page-get-user-info',
@@ -16,17 +17,15 @@ import { MyinfoShowPage } from '../myinfo-show/myinfo-show';
 
 export class GetUserInfoPage {
   @ViewChild(Slides) slides2: Slides;
-  @ViewChild('canvas') canvasEl : ElementRef;
-  private _CANVAS : any;
-  private _CONTEXT : any;
-  _width = '1000px';
-  _height = '1000px';
-  color1 = "bisque";
-  private rect :any;
-  rectId = ['','slide1','slide2','slide3','slide4','slide5','slide6'];
-  rectAdj = false;
-  rectAdjRateAnroid = 56;
-  rectAdjRateIos = 40;
+  // @ViewChild('canvas') canvasEl : ElementRef;
+  // _width = '1000px';
+  // _height = '1000px';
+  // color1 = "bisque";
+  // private rect :any;
+  // rectId = ['','slide1','slide2','slide3','slide4','slide5','slide6'];
+  // rectAdj = false;
+  // rectAdjRateAnroid = 56;
+  // rectAdjRateIos = 40;
 
   url: string = 'http://13.125.35.123/api';
   userArray: any;
@@ -38,30 +37,9 @@ export class GetUserInfoPage {
   myName: string;
   private onResumeSubscription: Subscription;
   flagSlideHide: boolean = true;
-
+  flagSendAllHide:boolean = true;
   eventId : any;
 
-  // slides = [
-  //   {
-  //     title: "사용방법 안내",
-  //     description: "동일교회 앱에 가입되어 있는 회원의 정보를 열람할 수 있습니다.",
-  //     image: "assets/imgs/home_back.jpg",
-  //   },
-  //   {
-  //     title: "성도 찾기",
-  //     description: "찾을 성도의 이름을 검색합니다. 연락처 요청 버튼을 눌러 요청하게 되고 대상 성도는 알림 메시지를 받게 됩니다.",
-  //     image: "assets/imgs/requestInfo1.png",
-  //   },
-  //   {
-  //     title: "승인 대기",
-  //     description: "상대방이 승인을 하면 연락처를 볼 수 있습니다.",
-  //     image: "assets/imgs/requestInfo2.png",
-  //   }, {
-  //     title: "정보 열람",
-  //     description: "전화와 문자를 보낼 수 있습니다.<br> 리스트를 누르면 가입정보를 볼 수 있습니다.",
-  //     image: "assets/imgs/requestInfo3.png",
-  //   }
-  // ];
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -71,8 +49,8 @@ export class GetUserInfoPage {
     public viewCtrl: ViewController,
     platform: Platform,
     private _zone: NgZone,
-    private device: Device
-
+    // private device: Device,
+    private modal: ModalController
   ) {
     this.flagSlideHide = navParams.get('slide');
     this.onResumeSubscription = platform.resume.subscribe(() => {
@@ -84,7 +62,7 @@ export class GetUserInfoPage {
     this.http.post(this.url + '/user/get_user_by_type', { flag: true }, {}).then(data => {
       if (data.status == 200) {
         var obj = JSON.parse(data.data);
-        // console.log(data.data);
+        console.log(data.data);
         if (obj.code == "S01") {
           this.userArray = obj.value;
         }
@@ -98,12 +76,12 @@ export class GetUserInfoPage {
       this.viewCtrl.dismiss();
     });
 
-    platform.ready().then(() => {
-      this._width = platform.width().toString();
-      this._height = (platform.height()/2).toString();
-      // this._height = platform.width().toString();
-      console.log(this._height,this._width);
-    });
+    // platform.ready().then(() => {
+    //   this._width = platform.width().toString();
+    //   this._height = (platform.height()/2).toString();
+    //   // this._height = platform.width().toString();
+    //   console.log(this._height,this._width);
+    // });
 
     this.eventId = setInterval(()=>{
         this.getUsersInfo();
@@ -221,11 +199,11 @@ export class GetUserInfoPage {
       var param = {
         serial: this.mySerial
       };
-      console.log("myName : " + this.myName);
+      console.log("getUsersInfo myName : " + this.myName);
       this.http.post(this.url + '/push/getReqUsersInfo', param, {}).then(data => {
         if (data.status == 200) {
           var obj = JSON.parse(data.data);
-          console.log(data.data);
+          console.log("getUsersInfo "+data.data);
           if (obj.code == "S01") {
             this._zone.run(() => {
               this.usersInfo = obj.value;
@@ -320,9 +298,94 @@ export class GetUserInfoPage {
     alert.present();
 
   }
+
+  sendRequestAll(){
+    let alert = this.alertCtrl.create({
+      title: '알림',
+      subTitle: '아래의 모든 성도에게 연락처 요청을 보냅니다.<br> 상대방이 승인해야 정보를 열람할 수 있습니다.',
+      buttons: [
+        {
+          text: '취소',
+          handler: () => {
+          }
+        },
+        {
+          text: '요청',
+          handler: () => {
+            this.http.post(this.url + '/push/sendRequestAll/',{serial: this.mySerial, sname: this.myName, jsonString :JSON.stringify(this.searchArray)}, {}).then(data => {
+              if (data.status == 200) {
+                var obj = JSON.parse(data.data);
+                console.log(data.data);
+                if (obj.code.includes("S")) {
+                  this.showAlert("알림", obj.message);
+                  this.userArray = obj.value;
+                } else if (obj.code.includes("E")) {
+                  this.showAlert("알림", obj.message);
+
+                }
+              }
+            })
+            // .catch(error => {
+            //   console.error(error.error);
+            //   this.showAlert("알림", "in app <br>연락처 요청에 실패하였습니다.<br>상대방이 앱을 재시작 하거나 업데이트를 해야합니다.");
+            //   // this.showAlert("알림",error.error);
+            // });
+          }
+        }
+      ]
+
+    });
+    alert.present();
+  }
   goToInfoShow(user) {
     this.navCtrl.push(MyinfoShowPage, user);
   }
+
+  showSortModal(){
+    this.flagSendAllHide = true;
+
+    this.searchArray = [];
+    const myModal = this.modal.create(GetUserInfoModalPage, null, { cssClass: 'inset-modal' });
+    myModal.present();
+    myModal.onDidDismiss((data) => {
+      console.log(JSON.stringify(data));
+      if(!data){return;}
+      this.searchArray = this.userArray.filter((item)=>{
+        if(data.place =="" && data.subgroup ==""){
+          return false;
+        }
+        if( ((data.place =="")?true: item.place == data.place)
+        &&((data.subgroup =="")?true: item.subgroup == data.subgroup) ){
+          return true;
+        }else{
+          return false;
+        }
+      });
+      // data.place
+      // data.subgroup
+      if(this.searchArray.length > 1){
+        this.flagSendAllHide = false;
+      }
+      console.log(JSON.stringify(this.searchArray));
+    });
+  }
+
+  deleteUser(user){
+    console.log("DELETE : " + user.serial);
+    this.http.post(this.url + '/push/hideUser/', { serial: user.serial }, {}).then(data => {
+      if (data.status == 200) {
+        var obj = JSON.parse(data.data);
+        console.log(data.data);
+        if (obj.code.includes("S")) {
+          this.usersInfo = this.usersInfo.filter(item => item !== user);
+          // this.getUsersInfo();
+        } else if (obj.code.includes("E")) {
+          
+        }
+      }
+    });
+  }
+
   showAlert(title, msg) {
     console.log(title + "," + msg);
     let alert = this.alertCtrl.create({
@@ -331,7 +394,6 @@ export class GetUserInfoPage {
       buttons: ['OK']
     });
     alert.present();
-
   }
   getItems(ev: any) {
     // Reset items back to all of the items
@@ -352,6 +414,8 @@ export class GetUserInfoPage {
       this.searchName();
   }
   searchName() {
+    this.flagSendAllHide = true;
+
     this.searchResult=1;
     this.searchArray = [];
     //모든 유저의 serial, name 받기
