@@ -41,13 +41,6 @@ export class YoramHttpProvider {
       } 
     });
     console.log('YoramProvider getAllUserInfo end');
-  }
 
-  sendRequest(user){
-    console.log("sendRequest "+JSON.stringify(user));
-
-  }
-  sendRequestAll(searchArray){
-    console.log("sendRequestAll "+JSON.stringify(searchArray));
   }
 }

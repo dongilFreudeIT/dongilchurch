@@ -1,19 +1,25 @@
+
 <ion-header>
   <ion-navbar no-border-bottom>
     <ion-title>그룹 검색</ion-title>
+
+
     <ion-buttons start>
-      <button ion-button (click)="viewController.dismiss()">닫기</button>
+      <button ion-button (click)="viewController.dismiss()">취소</button>
+    </ion-buttons>
+    <ion-buttons end>
+      <button ion-button (click)="applyFilter()">적용</button>
     </ion-buttons>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  <ion-card>
-    <ion-item>
+  <ion-card >
+    <ion-item >
       <ion-label color="primary">
         지역
       </ion-label>
-      <ion-select [(ngModel)]="data.place" (ionChange)="selectPlace($event)">
+      <ion-select [(ngModel)]="data.place">
         <ion-option value="">선택안함</ion-option>
         <ion-option value="1지역">1지역</ion-option>
         <ion-option value="2지역">2지역</ion-option>
@@ -25,11 +31,11 @@
       </ion-select>
     </ion-item>
 
-    <ion-item>
+    <ion-item >
       <ion-label color="primary">
         기관
       </ion-label>
-      <ion-select [(ngModel)]="data.subgroup" (ionChange)="selectSubgroup($event)">
+      <ion-select [(ngModel)]="data.subgroup">
         <ion-option value="">선택안함</ion-option>
         <ion-option value="영아부">영아부</ion-option>
         <ion-option value="유치부">유치부</ion-option>
@@ -69,24 +75,4 @@
   <div class="bg-white wrapper text-center l-h m-b">
     <div class="">정렬할 기준을 선택해 주세요. 여러 조건을 중복해서 적용할 수 있습니다.</div>
   </div>
-
-  <ion-row class="wrapper-sm b-b b-light" (click)="sendRequestAll()">
-    <ion-col class="text-ellipsis-flex">
-
-    </ion-col>
-    <ion-col col-auto>
-      <button ion-button color="noti">정보 모두 요청</button>
-    </ion-col>
-  </ion-row>
-
-  <ion-row class="wrapper-sm b-b b-light" *ngFor="let user of searchArray" (click)="yoramHttpProvider.sendRequest(user)">
-    <ion-col class="text-ellipsis-flex">
-      <b>{{user.name}}</b>
-    </ion-col>
-    <ion-col col-auto>
-      <button ion-button color="noti">정보 요청</button>
-    </ion-col>
-  </ion-row>
-
-
 </ion-content>

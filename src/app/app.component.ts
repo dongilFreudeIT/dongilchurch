@@ -183,7 +183,7 @@ export class MyApp {
   checkRequest() {
     this.storage.get('user_serial').then((localSerial) => {
 
-      this.http.post(this.url + '/yoram/checkRequest', { user_serial: localSerial }, {}).then(data => {
+      this.http.post(this.url + '/push/checkRequest', { user_serial: localSerial }, {}).then(data => {
         if (data.status == 200) {
           var obj = JSON.parse(data.data);
           console.log(obj);
@@ -192,6 +192,7 @@ export class MyApp {
             if (obj.hasOwnProperty(key)) {
               const element = obj[key];
               console.log(element);
+              if (element.allow == null) {
                 let alert = this.alertCtrl.create({
                   title: '개인정보 열람요청',
                   subTitle: '[' + element.sname + ']님께서 개인정보 열람을 요청하셨습니다. <br>아래 [승인]을 누르시면 연락처를 보냅니다.',
@@ -211,7 +212,7 @@ export class MyApp {
                   ]
                 });
                 alert.present();
-              
+              }
             }
           }
 
@@ -407,8 +408,7 @@ export class MyApp {
   }
   goToGetUserInfo() {
     this.storage.get('flagSlideHide').then((flag) => {
-      // this.navCtrl.push(YoramPage, { slide: flag });
-      this.navCtrl.push(GetUserInfoPage, { slide: flag });
+      this.navCtrl.push(YoramPage, { slide: flag });
     });
 
   }
