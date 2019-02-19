@@ -5,48 +5,33 @@
 
 
     <ion-buttons start>
-      <button ion-button (click)="viewController.dismiss()">취소</button>
-    </ion-buttons>
-    <ion-buttons end>
-      <button ion-button (click)="viewController.dismiss()">적용</button>
+      <button ion-button (click)="viewController.dismiss()">닫기</button>
     </ion-buttons>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
 
-    <div *ngFor="let user of yoramHttpProvider.allUsersInfo">{{ user.name }}</div>
+    <!-- <div *ngFor="let user of yoramHttpProvider.allUsersInfo">{{ user.name }}</div> -->
 
 
   <ion-item id="search1" class="b-b b-light">
     <ion-input type="text" (keypress)="eventHandler($event.keyCode)" [(ngModel)]="name" placeholder="검색할 이름을 입력하세요">
     </ion-input>
-    <!-- <button ion-button item-end (click)="searchName()">검색</button> -->
-    <button ion-button item-end>검색</button>
+    <button ion-button item-end (click)="searchName()">검색</button>
   </ion-item>
-  
-  <!-- <ion-row class="wrapper-sm b-b b-light" *ngIf="!flagSendAllHide" (click)="sendRequestAll()"> -->
-  <ion-row class="wrapper-sm b-b b-light">
+
+
+  <ion-row class="wrapper-sm b-b b-light" *ngFor="let user of searchArray" (click)="yoramHttpProvider.sendRequest(user)">
     <ion-col class="text-ellipsis-flex">
-
-    </ion-col>
-    <ion-col col-auto>
-      <button ion-button color="noti">정보 모두 요청</button>
-    </ion-col>
-  </ion-row>
-
-
-  <!-- <ion-row class="wrapper-sm b-b b-light" *ngFor="let user of searchArray" (click)="sendRequest(user)"> -->
-  <ion-row class="wrapper-sm b-b b-light">
-    <ion-col class="text-ellipsis-flex">
-      <b>이름</b>
+        <b>{{user.name}}</b>
     </ion-col>
     <ion-col col-auto>
       <button ion-button color="noti">정보 요청</button>
     </ion-col>
   </ion-row>
-  <!-- <ion-row class="wrapper-sm b-b b-light" *ngIf="searchResult==0"> -->
-  <ion-row class="wrapper-sm b-b b-light" >
+
+  <ion-row class="wrapper-sm b-b b-light" *ngIf="isSearchNull">
     <ion-col class="text-ellipsis-flex">
       <h5>해당 성도는 '동일교회' 앱에 가입되어 있지 않습니다. <br>정보를 받기 원하시면 교회 사무실<a href="tel:053-755-6003">(053-755-6003)</a>로 연락
         바랍니다. </h5>
