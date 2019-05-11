@@ -48,6 +48,8 @@ export class SignupCheckPage {
           // this.viewCtrl.dismiss();
           if(this.phone && this.phone.length ==11){
             _phone= this.phone.substring(0,3)+'-'+this.phone.substring(3,7)+'-'+this.phone.substring(7,11);
+          }else{
+            _phone=this.phone;
           }
           if(this.month && this.month.length == 1){
             this.month = '0'+this.month;
@@ -67,7 +69,7 @@ export class SignupCheckPage {
                 this.modal = this.modalCtrl.create(RegisteruserPage,obj2.value, {cssClass: 'modal-gradient'});
               }else{
                 // this.modal = this.modalCtrl.create(SignupPage, {}, {cssClass: 'modal-gradient'});
-                this.modal = this.modalCtrl.create(RegisteruserPage,{}, {cssClass: 'modal-gradient'});
+                this.modal = this.modalCtrl.create(RegisteruserPage, info, {cssClass: 'modal-gradient'});
               }
             }else {
               // this.showAlert("안내","일치하는 정보가 없습니다. 회원가입 화면으로 이동합니다.")

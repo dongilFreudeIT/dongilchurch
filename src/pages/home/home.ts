@@ -102,6 +102,10 @@ export class HomePage {
     // if (!params) params = {};
     // this.navCtrl.setRoot(HomePage);
   }
+  goToDongilTV(){
+    const browser = this.iab.create('http://dongil.tv/',"target='_black'");
+    browser.show();
+  }
   showAlert(title, msg) {
     console.log(title + "," + msg);
     let alert = this.alertCtrl.create({

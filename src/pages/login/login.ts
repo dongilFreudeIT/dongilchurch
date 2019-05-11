@@ -109,8 +109,10 @@ export class LoginPage {
   goSignUp() {
     // this.viewCtrl.dismiss();
     // let modal = this.modalCtrl.create(SignupPage, {}, {cssClass: 'modal-gradient'});
+    this.viewCtrl.dismiss()
     let modal = this.modalCtrl.create(SignupCheckPage, {}, {cssClass: 'modal-gradient'});
     modal.present();
+    
   }
 
   goPasswordSet() {

@@ -4,7 +4,7 @@
       <ion-icon name="menu"></ion-icon>
     </button>
     <ion-title>
-      요람
+      스마트 요람
     </ion-title>
     <ion-buttons *ngIf="flagSlideHide" end>
       <button ion-button (click)="showSortModal()">그룹</button>    
@@ -17,13 +17,13 @@
 
 <ion-content>
   <ion-slides *ngIf="!flagSlideHide" pager>
-    <ion-slide>
+    <ion-slide style="overflow-y: scroll;
+    display: block;">
       <img src="assets/imgs/slide_start.png" class="slide-image" />
       <h2 class="slide-title">동일교회 전자 요람입니다.</h2>
-      <p>성도의 이름을 통해 <br>정보를 열람할 수 있습니다.<br><br> 화면을 오른쪽으로 넘기며 <br>사용방법을 확인해주세요</p>
-      <button ion-button large clear icon-end color="primary" (click)="btnSlideNext();">
-        <ion-icon name="arrow-forward"></ion-icon>
-      </button>
+      <p>성도의 이름을 통해 <br>정보를 열람할 수 있습니다.<br><br> 화면을 오른쪽으로 넘기며 <br>사용방법을 확인해주세요
+        <ion-icon color="primary" large name="arrow-forward" (click)="btnSlideNext();"></ion-icon>
+      </p>
       <ion-footer>
         <ion-toolbar position="bottom" transparent>
           <ion-buttons left>
@@ -51,7 +51,7 @@
     </ion-slide>
 
     <ion-slide>
-      <img src="assets/imgs/yoram-2.png" class="slide-zoom" imageViewer />
+      <img src="assets/imgs/yoram-4.png" class="slide-zoom" imageViewer />
       <ion-footer>
         <ion-toolbar position="bottom" transparent>
           <ion-buttons left>
@@ -83,7 +83,7 @@
       </ion-footer>
     </ion-slide> -->
 
-    <!-- 
+<!--     
     <ion-slide>
       <ion-item id="slide2" class="b-b b-light" style="border: solid 3px red; border-radius: 40px;">
         <ion-input type="text" style="color:seagreen " value="박찬양"> </ion-input>
@@ -119,12 +119,12 @@
           <div class="text-ellipsis-flex v-align-middle pull-left">박찬양</div>
         </ion-col>
         <ion-col col-auto>
-          <button ion-button color="noti">정보 요청</button>
+          <button ion-button color="noti">연락처 요청</button>
         </ion-col>
       </ion-row>
       <div class="speech-bubble">
         <h2 class="slide-title">가입 확인 및 요청</h2>
-        <p>동일교회 앱에 가입되어 있다면 <br>이름과 정보 요청 버튼이 보입니다.<br><br>정보 요청 버튼을 눌러 요청하면 대상 성도는 알림 메시지를 <br>받습니다.</p>
+        <p>동일교회 앱에 가입되어 있다면 <br>이름과 연락처 요청 버튼이 <br>보입니다.<br><br>연락처 요청 버튼을 눌러 요청하면 대상 성도는 알림 메시지를 <br>받습니다.</p>
       </div>
       <ion-footer>
         <ion-toolbar position="bottom" transparent>
@@ -138,13 +138,14 @@
           </ion-buttons>
         </ion-toolbar>
       </ion-footer>
-    </ion-slide> -->
+    </ion-slide>
 
-    <ion-slide>
+    <ion-slide style="overflow-y: scroll;
+    display: block;">
       <img src="assets/imgs/message.jpg" class="slide-image" />
       <div class="speech-bubble">
         <h2 class="slide-title">요청 승인 및 대기</h2>
-        <p> 정보 요청을 받은 성도는 <br>알림 메시지를 받습니다. <br>알림 메시지는 정보를 제공 여부를 묻습니다.<br> 대상 성도가 수락을 누른 <br>후에 정보 열람이 가능합니다.</p>
+        <p> 연락처 요청을 받은 성도는 <br>알림 메시지를 받습니다. <br>알림 메시지는 정보를 제공 여부를 묻습니다.<br> 대상 성도가 수락을 누른 <br>후에 정보 열람이 가능합니다.</p>
       </div>
       <ion-footer>
         <ion-toolbar position="bottom" transparent>
@@ -156,11 +157,11 @@
           </ion-buttons>
         </ion-toolbar>
       </ion-footer>
-    </ion-slide>
+    </ion-slide> -->
 
 
     <ion-slide>
-      <img src="assets/imgs/yoram-3.png" class="slide-zoom" imageViewer />
+      <img src="assets/imgs/yoram-5.png" class="slide-zoom" imageViewer />
       <ion-footer>
         <ion-toolbar position="bottom" transparent>
           <ion-buttons left>
@@ -172,8 +173,8 @@
         </ion-toolbar>
       </ion-footer>
     </ion-slide>
-    <!--       
-    <ion-slide>
+          
+    <!-- <ion-slide>
       <ion-item id="search" class="b-b b-light">
         <ion-input type="text" value="박찬양"></ion-input>
         <button ion-button item-end>검색</button>
@@ -182,8 +183,8 @@
       <ion-row id="slide4" class="wrapper-sm b-b b-light" style="border: solid 3px red; border-radius: 40px;">
         <ion-col>
           <ion-row><b>박찬양</b></ion-row>
-          <ion-row class="text-sm text-muted">2지역/6남전도회/집사</ion-row>
-          <ion-row class="text-sm text-muted">19850417/01011112222</ion-row>
+          <ion-row class="text-sm text-muted">2지역 6남전도회 집사</ion-row>
+          <ion-row class="text-sm text-muted">전화번호 : 01011112222</ion-row>
         </ion-col>
         <ion-col col-auto>
           <button ion-button>통화</button>
@@ -228,21 +229,21 @@
       <button ion-button item-end (click)="searchName()">검색</button>
     </ion-item>
 
-    <ion-row class="wrapper-sm b-b b-light" *ngIf="!flagSendAllHide" (click)="sendRequestAll()">
+    <!-- <ion-row class="wrapper-sm b-b b-light" *ngIf="!flagSendAllHide" (click)="sendRequestAll()">
       <ion-col class="text-ellipsis-flex">
 
       </ion-col>
       <ion-col col-auto>
         <button ion-button color="noti">정보 모두 요청</button>
       </ion-col>
-    </ion-row>
+    </ion-row> -->
 
     <ion-row class="wrapper-sm b-b b-light" *ngFor="let user of searchArray" (click)="sendRequest(user)">
-      <ion-col class="text-ellipsis-flex">
+      <ion-col class="text-ellipsis-flex" style="display: flex; align-items: center;">
         <b>{{user.name}}</b>
       </ion-col>
       <ion-col col-auto>
-        <button ion-button color="noti">정보 요청</button>
+        <button ion-button color="noti">연락처 요청</button>
       </ion-col>
     </ion-row>
     <ion-row class="wrapper-sm b-b b-light" *ngIf="searchResult==0">
@@ -280,7 +281,7 @@
               <div class="l-h">
                 <div class=""><b>{{user.name}}</b></div>
                 <div class="text-sm text-muted text-ellipsis">{{user.place}} {{user.subgroup}} {{user.title}}</div>
-                <div class="text-sm text-muted text-ellipsis">{{user.birthday}} {{user.phone}}</div>
+                <div class="text-sm text-muted text-ellipsis">전화번호 : {{user.phone}}</div>
               </div>
 
             </ion-col>

@@ -51,6 +51,10 @@ export class FamilysitePage {
     const browser = this.iab.create('http://dongil.tv',"target='_blank'");
     browser.show();
   }
+  gofamilysite_love() {
+    const browser = this.iab.create('https://m.blog.naver.com/dongilove2019?suggestAddBuddy=true',"target='_blank'");
+    browser.show();
+  }
   gofamilysite_lib() {
     const browser = this.iab.create('http://dongil.egentouch.com/',"target='_blank'");
     browser.show();

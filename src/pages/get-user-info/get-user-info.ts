@@ -10,6 +10,9 @@ import { Platform } from 'ionic-angular';
 import { MyinfoShowPage } from '../myinfo-show/myinfo-show';
 import { GetUserInfoModalPage } from '../get-user-info-modal/get-user-info-modal';
 
+import { CheckNetworkProvider } from '../../providers/check-network/check-network';
+import { Network } from '@ionic-native/network'
+
 @Component({
   selector: 'page-get-user-info',
   templateUrl: 'get-user-info.html',
@@ -40,6 +43,9 @@ export class GetUserInfoPage {
   flagSendAllHide:boolean = true;
   eventId : any;
 
+  subscribeNet1 : any;
+  subscribeNet2 : any;
+
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -50,14 +56,24 @@ export class GetUserInfoPage {
     platform: Platform,
     private _zone: NgZone,
     // private device: Device,
-    private modal: ModalController
+    private modal: ModalController,
+    private network: Network,
+    private chechNetwork : CheckNetworkProvider
   ) {
     this.flagSlideHide = navParams.get('slide');
     this.onResumeSubscription = platform.resume.subscribe(() => {
       console.log("onResumeSubscription")
             this.getUsersInfo();
     });
+    this.subscribeNet1 = this.network.onDisconnect().subscribe((data)=>{
+      console.log("network disconnected");
+      this.chechNetwork.display(data.type);
+    });
+    this.subscribeNet2 = this.network.onConnect().subscribe((data)=> {
+      console.log("network connected");
+      this.chechNetwork.display(data.type);
 
+    });
     //모든 유저의 serial, name 받기
     this.http.post(this.url + '/user/get_user_by_type', { flag: true }, {}).then(data => {
       if (data.status == 200) {
@@ -67,12 +83,12 @@ export class GetUserInfoPage {
           this.userArray = obj.value;
         }
       } else {
-        this.showAlert("알림", "서버 접속에 실패하였습니다.");
+        // this.showAlert("알림", "서버 접속에 실패하였습니다.");
         this.viewCtrl.dismiss();
       }
 
     }).catch(() => {
-      this.showAlert("알림", "서버 접속에 실패하였습니다.");
+      // this.showAlert("알림", "서버 접속에 실패하였습니다.");
       this.viewCtrl.dismiss();
     });
 
@@ -106,7 +122,10 @@ export class GetUserInfoPage {
     // always unsubscribe your subscriptions to prevent leaks
     this.onResumeSubscription.unsubscribe();
     clearInterval(this.eventId);
+    this.subscribeNet1.unsubscribe();
+    this.subscribeNet2.unsubscribe();
   }
+
   phoneCall(user) {
     window.open("tel:" + user.phone);
   }
@@ -210,12 +229,12 @@ export class GetUserInfoPage {
             });
           }
         } else {
-          this.showAlert("알림", "서버 접속에 실패하였습니다.");
+          // this.showAlert("알림", "서버 접속에 실패하였습니다.");
           this.viewCtrl.dismiss();
         }
 
       }).catch(() => {
-        this.showAlert("알림", "서버 접속에 실패하였습니다.");
+        // this.showAlert("알림", "서버 접속에 실패하였습니다.");
         this.viewCtrl.dismiss();
       });
       //요청 체크
@@ -426,7 +445,7 @@ export class GetUserInfoPage {
         if (obj.code == "S01") {
           this.userArray = obj.value;
           this.userArray.forEach(element => {
-            if (element['name'] == this.name) {
+            if (element['name'] == this.name && this.name !='오현기') {
               console.log(element['serial']);
 
               this.searchArray.push(element);

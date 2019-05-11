@@ -194,8 +194,8 @@ export class MyApp {
               console.log(element);
               if (element.allow == null) {
                 let alert = this.alertCtrl.create({
-                  title: '개인정보 열람요청',
-                  subTitle: '[' + element.sname + ']님께서 개인정보 열람을 요청하셨습니다. <br>아래 [승인]을 누르시면 연락처를 보냅니다.',
+                  title: '연락처 요청',
+                  subTitle: '[' + element.sname + ']님께서 연락처를 알고 싶어 하십니다. <br>아래 [승인]을 누르시면 연락처를 보냅니다.',
                   buttons: [
                     {
                       text: '거절',
@@ -408,7 +408,8 @@ export class MyApp {
   }
   goToGetUserInfo() {
     this.storage.get('flagSlideHide').then((flag) => {
-      this.navCtrl.push(YoramPage, { slide: flag });
+      // this.navCtrl.push(YoramPage, { slide: flag });
+      this.navCtrl.push(GetUserInfoPage, { slide: flag });
     });
 
   }
