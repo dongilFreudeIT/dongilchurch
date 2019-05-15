@@ -66,6 +66,7 @@
     "ionic": "^3.20.1",
     "ionic-angular": "^3.9.2",
     "ionic-img-viewer": "^2.9.0",
+    "ionic-long-press": "^1.5.0",
     "ionic-plugin-keyboard": "^2.2.1",
     "ionic2-zoom-area": "^1.0.16",
     "ionicons": "3.0.0",

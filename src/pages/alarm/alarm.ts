@@ -16,6 +16,7 @@ import { NativeStorage } from '@ionic-native/native-storage';
 export class AlarmPage {
   url: string = 'http://13.125.35.123/api';
   pushDataArray: any; //서버에서 받아온 푸쉬 메세지 리스트 저장 array
+  bInfinite:boolean = true;
 
   constructor(
     public navCtrl: NavController,
@@ -39,11 +40,25 @@ export class AlarmPage {
         });
     });
   }
+  doInfinite(): Promise<any> {
+    console.log('Begin async operation');
+    this.getPushMessageAll()
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        
+
+        console.log('Async operation has ended');
+        resolve();
+        this.bInfinite=false;
+      }, 10000);
+    })
+  }
+
 
   doRefresh(refresher) {
     console.log('Begin async operation', refresher);
     this.getPushMessage();
-
+    this.bInfinite=true;
     setTimeout(() => {
       console.log('Async operation has ended');
       refresher.complete();
@@ -80,7 +95,32 @@ export class AlarmPage {
       });
     });
   }
-
+  getPushMessageAll() {
+    //저장 된 user serial 가져와서 서버에 푸쉬 리스트 요청
+    this.storage.get('user_serial').then((value) => {
+      var param = { serial: value };
+      this.http.post(this.url + '/user/get_push_list_all', param, {}).then(data => {
+        if (data.status == 200) {
+          // console.log(data.data);
+          var obj = JSON.parse(data.data);
+          //로그인 성공이면
+          if (obj.code == "S01") {
+            this.pushDataArray = obj.value;
+            //this.new_pushData = obj.value;
+            // this.storage.set("pushDataArray", this.pushDataArray);
+            this.nativeStorage.setItem('pushDataArray2', this.pushDataArray)
+              .then(
+                () => console.log('Stored item!'),
+                error => console.error('Error storing item', error)
+              );
+          } else {
+            console.log(obj.message);
+          }
+        }
+        this.addMoment();
+      });
+    });
+  }
   /**
    * 건호 추가
    * 날짜 변환 코드
