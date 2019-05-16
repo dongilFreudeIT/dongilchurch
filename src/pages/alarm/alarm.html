@@ -81,7 +81,7 @@
 
     </ion-item-sliding>
   </ion-list>
-  <ion-infinite-scroll (ionInfinite)="doInfinite($event)" *ngIf="bInfinite">
+  <ion-infinite-scroll (ionInfinite)="doInfinite($event)" *ngIf="nPushList > nCurPush">
     <ion-infinite-scroll-content></ion-infinite-scroll-content>
   </ion-infinite-scroll>
 
