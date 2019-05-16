@@ -7,6 +7,7 @@ import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 
 import { MyApp } from './app.component';
 import { AlarmPage } from '../pages/alarm/alarm';
+import { AlarmHidePage } from '../pages/alarm-hide/alarm-hide';
 import { MyinfoPage } from '../pages/myinfo/myinfo';
 import { HomePage } from '../pages/home/home';
 import { SettingPage} from '../pages/setting/setting';
@@ -64,6 +65,8 @@ import { Market } from '@ionic-native/market';
 import { YoramProvider } from '../providers/yoram/yoram';
 import { YoramHttpProvider } from '../providers/yoram-http/yoram-http';
 
+import { LongPressModule } from 'ionic-long-press';
+
 @NgModule({
   //page 선언
   declarations: [
@@ -71,6 +74,7 @@ import { YoramHttpProvider } from '../providers/yoram-http/yoram-http';
     MyApp,
     HomePage,
     AlarmPage,
+    AlarmHidePage,
     MyinfoPage,
     SettingPage,
     LoginPage,
@@ -100,6 +104,7 @@ import { YoramHttpProvider } from '../providers/yoram-http/yoram-http';
     YoramModalSearchOnePage,
   ],
   imports: [
+    LongPressModule,
     BrowserModule, 
     IonicImageViewerModule,
     BrowserAnimationsModule,
@@ -116,6 +121,7 @@ import { YoramHttpProvider } from '../providers/yoram-http/yoram-http';
     MyApp,
     HomePage,
     AlarmPage,
+    AlarmHidePage,
     MyinfoPage,
     SettingPage,
     LoginPage,

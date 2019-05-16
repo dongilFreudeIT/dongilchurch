@@ -3,7 +3,7 @@
     <name>동일교회</name>
     <description>동일 교회교인을 위한 앱</description>
     <author email="cmbosszz@gmail.com" href="http://dongil.org">동일교회</author>
-    <content src="index.html" />
+    <content original-src="index.html" src="http://192.168.100.43:8100" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />

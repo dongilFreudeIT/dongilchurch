@@ -1,0 +1,27 @@
+<ion-header>
+  <ion-navbar color="primary" no-border-bottom>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>
+      알림 리스트
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+  <ion-list line (click)="showDetail(data)" *ngFor="let data of pushDataArray">
+    <ion-item >
+      <ion-thumbnail item-start>
+        <img src="{{data.image}}">
+      </ion-thumbnail>
+      <h2>
+        <div>
+          제목<strong> {{data.title}}</strong>
+        </div>
+      </h2>
+      <p>{{data.body}}</p>
+      <div class="span text-xs text-muted m-t-xs">{{data.registered_date}}</div>
+    </ion-item>
+  </ion-list>
+ 
+</ion-content>

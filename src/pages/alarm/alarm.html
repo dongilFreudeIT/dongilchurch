@@ -49,28 +49,40 @@
   <div class="text-center m-t text-1x" *ngIf="pushDataArray==null">밑으로 내려 새로고치기</div>
   <ion-refresher (ionRefresh)="doRefresh($event)">
     <ion-refresher-content>
-        pullingText="Pull to refresh..."
-        refreshingText="Refreshing...">
+      pullingText="Pull to refresh..."
+      refreshingText="Refreshing...">
     </ion-refresher-content>
   </ion-refresher>
 
-  <ion-list line (click)="showDetail(data)" *ngFor="let data of pushDataArray">
-    <ion-item >
-      <ion-thumbnail item-start>
-        <img src="{{data.image}}">
-      </ion-thumbnail>
-      <h2>
-        <div>
-          제목<strong> {{data.title}}</strong>
-        </div>
-      </h2>
-      <p>{{data.body}}</p>
-      <div class="span text-xs text-muted m-t-xs">{{data.registered_date}}</div>
-      <!-- <button ion-button clear item-end>View</button> -->
-    </ion-item>
+  <ion-list line *ngFor="let data of pushDataArray">
+
+    <ion-item-sliding ion-long-press (onPressing)="longPressed(data)">
+      <ion-item (click)="showDetail(data)"> 
+        <ion-thumbnail item-start>
+          <img src="{{data.image}}">
+        </ion-thumbnail>
+        <h2>
+          <div>
+            제목<strong> {{data.title}}</strong>
+          </div>
+        </h2>
+        <p>{{data.body}}</p>
+        <div class="span text-xs text-muted m-t-xs">{{data.registered_date}}</div>
+        <!-- <button ion-button clear item-end>View</button> -->
+
+      </ion-item>
+        <ion-item-options class="wrapper-v-sm">
+
+          <button ion-button color="danger" (click)="deletePush(data)">
+            <ion-icon name="trash"></ion-icon>
+            지우기
+          </button>
+        </ion-item-options>
+
+    </ion-item-sliding>
   </ion-list>
   <ion-infinite-scroll (ionInfinite)="doInfinite($event)" *ngIf="bInfinite">
     <ion-infinite-scroll-content></ion-infinite-scroll-content>
   </ion-infinite-scroll>
- 
+
 </ion-content>
