@@ -14,13 +14,13 @@ import { HTTP } from "@ionic-native/http";
 import { PushShowPage } from "../pushShow/pushShow";
 import * as moment from "moment";
 import { NativeStorage } from "@ionic-native/native-storage";
-
+import { ServerProvider } from "../../providers/server/server";
 @Component({
   selector: "page-alarm",
   templateUrl: "alarm.html"
 })
 export class AlarmPage {
-  url: string = "http://13.125.35.123/api";
+  url: string;
   pushDataArray: any; //서버에서 받아온 푸쉬 메세지 리스트 저장 array
   bShowAlert: boolean = false;
   nPushList: number;
@@ -34,8 +34,10 @@ export class AlarmPage {
     public http: HTTP,
     platform: Platform,
     private nativeStorage: NativeStorage,
-    private _zone: NgZone
+    private _zone: NgZone,
+    private server:ServerProvider,
   ) {
+    this.url = this.server.url;
     this.nativeStorage.getItem("pushDataArray2").then(data => {
       this.pushDataArray = data;
       console.log("native storage : ");

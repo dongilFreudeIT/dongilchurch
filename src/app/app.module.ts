@@ -66,6 +66,7 @@ import { YoramProvider } from '../providers/yoram/yoram';
 import { YoramHttpProvider } from '../providers/yoram-http/yoram-http';
 
 import { LongPressModule } from 'ionic-long-press';
+import { ServerProvider } from '../providers/server/server';
 
 @NgModule({
   //page 선언
@@ -172,7 +173,8 @@ import { LongPressModule } from 'ionic-long-press';
     Clipboard,
     Market,
     YoramProvider,
-    YoramHttpProvider
+    YoramHttpProvider,
+    ServerProvider
   ]
 })
 export class AppModule {}

@@ -9,6 +9,7 @@ import { HTTP } from "@ionic-native/http";
 import { PushShowPage } from "../pushShow/pushShow";
 import * as moment from "moment";
 
+import { ServerProvider } from "../../providers/server/server";
 @Component({
   selector: "page-alarm-hide",
   templateUrl: "alarm-hide.html"
@@ -24,7 +25,9 @@ export class AlarmHidePage {
     private storage: Storage,
     public http: HTTP,
     platform: Platform,
+    private server:ServerProvider,
   ) {
+    this.url = this.server.url;
     this.getPushMessageHided();
     moment.lang("ko");
   }

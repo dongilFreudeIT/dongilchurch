@@ -29,6 +29,7 @@ import { AppVersion } from '@ionic-native/app-version';
 import { Market } from '@ionic-native/market';
 import { Subscription } from 'rxjs';
 
+import { ServerProvider } from "../providers/server/server";
 // import * as firebase from "firebase";
 // var config = {
 //   apiKey: "AIzaSyCihLx56ZVvhnUlP_-1dkSNTDNLlAAy1XQ",
@@ -63,9 +64,10 @@ export class MyApp {
     private iab: InAppBrowser,
     public modalCtrl: ModalController,
     private appVersion: AppVersion,
-    private market: Market
+    private market: Market,
+    private server:ServerProvider,
   ) {
-
+    this.url = this.server.url;
     platform.ready().then(() => {
 
       splashScreen.hide();
@@ -426,7 +428,7 @@ export class MyApp {
   sendPush(){
     console.log("푸시보내기");
     this.storage.get('user_serial').then((localSerial) => {
-      const browser = this.iab.create('http://13.125.35.123/api/SendPush?serial='+localSerial,"target='_blank'");
+      const browser = this.iab.create(this.url+'/SendPush?serial='+localSerial,"target='_blank'");
       browser.show();
     });
   }

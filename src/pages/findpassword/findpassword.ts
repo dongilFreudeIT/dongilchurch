@@ -8,6 +8,7 @@ import { Device } from '@ionic-native/device';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { PasswordsetPage } from '../passwordset/passwordset';
 
+import { ServerProvider } from "../../providers/server/server";
 @Component({
   templateUrl: 'findpassword.html'
 })
@@ -21,8 +22,10 @@ export class FindPasswordPage {
   
   contactTell =false;
 
-  constructor(public navCtrl: NavController, public alertCtrl: AlertController, public http: HTTP, public iab: InAppBrowser, private device: Device, public viewCtrl: ViewController) {
-
+  constructor(public navCtrl: NavController, public alertCtrl: AlertController, public http: HTTP, public iab: InAppBrowser, private device: Device, public viewCtrl: ViewController,
+    private server:ServerProvider,
+  ) {
+    this.url = this.server.url;
   }
 
   showAlert(title, msg) {

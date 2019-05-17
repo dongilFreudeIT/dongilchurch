@@ -8,6 +8,7 @@ import { MenuController } from 'ionic-angular';
 import { FindPasswordPage } from '../findpassword/findpassword';
 import { SignupCheckPage } from '../signup-check/signup-check';
 
+import { ServerProvider } from "../../providers/server/server";
 @Component({
   selector: 'page-login',
   templateUrl: 'login.html'
@@ -19,8 +20,10 @@ export class LoginPage {
   password : string; //사용자 비밀번호
   response : any;
   
-  constructor(public navCtrl: NavController, public alertCtrl: AlertController, public http : HTTP, public menuCtrl: MenuController, private storage: Storage,public viewCtrl: ViewController, public modalCtrl: ModalController ) {
-     
+  constructor(public navCtrl: NavController, public alertCtrl: AlertController, public http : HTTP, public menuCtrl: MenuController, private storage: Storage,public viewCtrl: ViewController, public modalCtrl: ModalController ,
+    private server:ServerProvider,
+  ) {
+    this.url = this.server.url;
   }
   dismiss() {
     this.viewCtrl.dismiss();

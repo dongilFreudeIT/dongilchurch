@@ -13,6 +13,7 @@ import { GetUserInfoModalPage } from '../get-user-info-modal/get-user-info-modal
 import { CheckNetworkProvider } from '../../providers/check-network/check-network';
 import { Network } from '@ionic-native/network'
 
+import { ServerProvider } from "../../providers/server/server";
 @Component({
   selector: 'page-get-user-info',
   templateUrl: 'get-user-info.html',
@@ -58,8 +59,10 @@ export class GetUserInfoPage {
     // private device: Device,
     private modal: ModalController,
     private network: Network,
-    private chechNetwork : CheckNetworkProvider
+    private chechNetwork : CheckNetworkProvider,
+    private server:ServerProvider,
   ) {
+    this.url = this.server.url;
     this.flagSlideHide = navParams.get('slide');
     this.onResumeSubscription = platform.resume.subscribe(() => {
       console.log("onResumeSubscription")
