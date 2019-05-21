@@ -35,7 +35,7 @@ export class AlarmPage {
     platform: Platform,
     private nativeStorage: NativeStorage,
     private _zone: NgZone,
-    private server:ServerProvider,
+    private server: ServerProvider
   ) {
     this.url = this.server.url;
     this.nativeStorage.getItem("pushDataArray2").then(data => {
@@ -46,12 +46,10 @@ export class AlarmPage {
     moment.lang("ko");
 
     this.getNumberOfPush();
-
+    this.getPushMessage();
     document.addEventListener("resume", () => {
       console.log("document.addEventListener('resume' ");
-      this._zone.run(() => {
-        this.getPushMessage();
-      });
+      this.getPushMessage();
     });
   }
 
@@ -81,13 +79,18 @@ export class AlarmPage {
     //저장 된 user serial 가져와서 서버에 푸쉬 리스트 요청
     this.storage.get("user_serial").then(value => {
       var param = { serial: value };
+      console.log("storage.get");
       this.http.post(this.url + "/user/get_push_list", param, {}).then(data => {
         if (data.status == 200) {
+          console.log("http.post");
           // console.log(data.data);
           var obj = JSON.parse(data.data);
           //로그인 성공이면
           if (obj.code == "S01") {
-            this.pushDataArray = obj.value;
+            this._zone.run(() => {
+              this.pushDataArray = obj.value;
+              console.log("this._zone.run");
+            });
             //this.new_pushData = obj.value;
             // this.storage.set("pushDataArray", this.pushDataArray);
             this.nativeStorage
@@ -120,7 +123,10 @@ export class AlarmPage {
             var obj = JSON.parse(data.data);
             //로그인 성공이면
             if (obj.code == "S01") {
-              this.pushDataArray = obj.value;
+              this._zone.run(() => {
+                this.pushDataArray = obj.value;
+                console.log("this._zone.run");
+              });
               //this.new_pushData = obj.value;
               // this.storage.set("pushDataArray", this.pushDataArray);
               this.nativeStorage
@@ -273,7 +279,7 @@ export class AlarmPage {
           if (obj.code == "S01") {
             this.nPushList = obj.value[0].number;
             // console.log(JSON.stringify(obj.value[0].number))
-            // console.log(this.nPushList);
+            console.log(this.nPushList + " " + this.nCurPush);
           } else {
             console.log(obj.message);
           }
