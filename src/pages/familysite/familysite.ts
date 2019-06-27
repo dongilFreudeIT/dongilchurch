@@ -48,7 +48,7 @@ export class FamilysitePage {
     browser.show();
   }
   gofamilysite_dongiltv() {
-    const browser = this.iab.create('http://dongil.tv',"target='_blank'");
+    const browser = this.iab.create('http://www.dongil.org/index.php?mid=dongilTV',"target='_blank'");
     browser.show();
   }
   gofamilysite_love() {
@@ -56,7 +56,7 @@ export class FamilysitePage {
     browser.show();
   }
   gofamilysite_lib() {
-    const browser = this.iab.create('http://dongil.egentouch.com/',"target='_blank'");
+    const browser = this.iab.create('http://dongilpl.com/',"target='_blank'");
     browser.show();
   }
 

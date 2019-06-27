@@ -112,7 +112,7 @@ export class HomePage {
     // this.navCtrl.setRoot(HomePage);
   }
   goToDongilTV() {
-    const browser = this.iab.create("http://dongil.tv/", "target='_black'");
+    const browser = this.iab.create("http://www.dongil.org/index.php?mid=dongilTV", "target='_black'");
     browser.show();
   }
   showAlert(title, msg) {

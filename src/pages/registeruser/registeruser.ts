@@ -10,7 +10,7 @@ import { HTTP } from "@ionic-native/http";
 import { InAppBrowser } from "@ionic-native/in-app-browser";
 import { Storage } from "@ionic/storage";
 import { MenuController } from "ionic-angular";
-import { HomePage } from "../home/home";
+import { LoginPage } from "../login/login";
 
 import { ServerProvider } from "../../providers/server/server";
 @Component({
@@ -59,11 +59,18 @@ export class RegisteruserPage {
       if (navParams.get("place").length == 1) {
         this.user_place = navParams.get("place") + "지역";
       }
-    } else {
+    } else if (navParams.get("phone")) {
       this.user_name = navParams.get("name");
       this.user_phone = navParams.get("phone").replace(/\D/g, "");
       this.user_birth = navParams.get("birthday");
     }
+
+    console.log(
+      "serial",
+      JSON.stringify(
+        this.storage.get("user_serial").then(val => console.log(val))
+      )
+    );
   }
 
   //회원가입
@@ -142,9 +149,35 @@ export class RegisteruserPage {
           var obj = JSON.parse(data.data);
           //로그인 성공이면
           if (obj.code == "S01") {
-            // this.showAlert("회원가입 성공", "가입하신 아이디로 로그인해주세요.");
-            // this.viewCtrl.dismiss();
-            this.login();
+            
+            this.viewCtrl.dismiss();
+            this.storage.get("user_serial").then(val => {
+              if (val == null || val == "") {
+                this.login();
+
+                // let modal = this.modalCtrl.create(
+                //   LoginPage,
+                //   {},
+                //   { cssClass: "modal-gradient" }
+                // );
+                // modal.onDidDismiss(data => {
+                //   if (data) {
+                //     this.showAlert(
+                //       "<strong>" +
+                //         data +
+                //         "</strong>님 로그인 되었습니다.<br>사랑하며 축복합니다!",
+                //       ""
+                //     );
+                //   }
+                // });
+                // modal.present();
+              }else{
+                this.showAlert(
+                  "회원가입 성공",
+                  "가입하신 아이디로 로그인해주세요."
+                );
+              }
+            });
           } else {
             var errorMsg = obj.message;
             this.showAlert("회원가입 실패", errorMsg);
@@ -233,7 +266,6 @@ export class RegisteruserPage {
                 "</strong>님 로그인 되었습니다.<br>사랑하며 축복합니다!",
               ""
             );
-            this.navCtrl.pop();
           } else {
             var errorMsg = obj.message;
             this.showAlert("로그인 실패", errorMsg);
