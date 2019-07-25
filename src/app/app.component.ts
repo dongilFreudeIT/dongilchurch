@@ -30,7 +30,9 @@ import { Market } from '@ionic-native/market';
 import { Subscription } from 'rxjs';
 
 import { ServerProvider } from "../providers/server/server";
-// import * as firebase from "firebase";
+import * as firebaseui from 'firebaseui'
+
+import * as firebase from "firebase";
 // var config = {
 //   apiKey: "AIzaSyCihLx56ZVvhnUlP_-1dkSNTDNLlAAy1XQ",
 //   authDomain: "dongilchurch-b89c0.firebaseapp.com",
@@ -69,7 +71,7 @@ export class MyApp {
   ) {
     this.url = this.server.url;
     platform.ready().then(() => {
-
+      
       splashScreen.hide();
       statusBar.styleDefault();
       statusBar.overlaysWebView(false);
@@ -431,5 +433,18 @@ export class MyApp {
       const browser = this.iab.create(this.url+'/SendPush?serial='+localSerial,"target='_blank'");
       browser.show();
     });
+  }
+
+  smsAuth(){
+    var ui = new firebaseui.auth.AuthUI(firebase.auth());
+ 
+    ui.start('#firebaseui-auth-container', {
+      signInOptions: [
+        {
+          provider: firebaseui.auth.AnonymousAuthProvider.PROVIDER_ID
+        }
+      ]
+    });
+    
   }
 }
