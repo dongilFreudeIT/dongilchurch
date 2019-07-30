@@ -1,29 +1,43 @@
-import { Component } from '@angular/core';
+import { Component } from "@angular/core";
+import { NavController, ViewController, AlertController } from "ionic-angular";
+import { HTTP } from "@ionic-native/http";
+import { Device } from "@ionic-native/device";
+import { InAppBrowser } from "@ionic-native/in-app-browser";
 
-import { NavController, ViewController, AlertController } from 'ionic-angular';
-
-import { HTTP } from '@ionic-native/http';
-import { Device } from '@ionic-native/device';
-
-import { InAppBrowser } from '@ionic-native/in-app-browser';
-import { PasswordsetPage } from '../passwordset/passwordset';
-
+import { PasswordsetPage } from "../passwordset/passwordset";
 import { ServerProvider } from "../../providers/server/server";
+
+import * as firebaseui from "firebaseui";
+import * as firebase from "firebase";
+var config = {
+  apiKey: "AIzaSyCihLx56ZVvhnUlP_-1dkSNTDNLlAAy1XQ",
+  authDomain: "dongilchurch-b89c0.firebaseapp.com",
+  databaseURL: "https://dongilchurch-b89c0.firebaseio.com",
+  projectId: "dongilchurch-b89c0",
+  storageBucket: "dongilchurch-b89c0.appspot.com",
+  messagingSenderId: "521875318610"
+};
+firebase.initializeApp(config);
 @Component({
-  templateUrl: 'findpassword.html'
+  templateUrl: "findpassword.html"
 })
 export class FindPasswordPage {
-
-  url: string = 'http://13.125.35.123/api';
+  url: string = "http://13.125.35.123/api";
   browserRef: any;
   phone: string;
   static cerPhone: string;
   user_id: any;
-  
-  contactTell =false;
 
-  constructor(public navCtrl: NavController, public alertCtrl: AlertController, public http: HTTP, public iab: InAppBrowser, private device: Device, public viewCtrl: ViewController,
-    private server:ServerProvider,
+  contactTell = false;
+
+  constructor(
+    public navCtrl: NavController,
+    public alertCtrl: AlertController,
+    public http: HTTP,
+    public iab: InAppBrowser,
+    private device: Device,
+    public viewCtrl: ViewController,
+    private server: ServerProvider
   ) {
     this.url = this.server.url;
   }
@@ -33,12 +47,23 @@ export class FindPasswordPage {
     let alert = this.alertCtrl.create({
       title: title,
       subTitle: msg,
-      buttons: ['OK']
+      buttons: ["OK"]
     });
     alert.present();
   }
+  smsAuth() {
+    var ui = new firebaseui.auth.AuthUI(firebase.auth());
 
+    ui.start("#firebaseui-auth-container", {
+      signInOptions: [
+        {
+          provider: firebaseui.auth.AnonymousAuthProvider.PROVIDER_ID
+        }
+      ]
+    });
+  }
   next() {
+    this.smsAuth()
     // console.log("cer phone=" + FindPasswordPage.cerPhone);
     // if (this.phone == null || this.phone == '') {
     //   this.showAlert("안내", "휴대폰 번호를 입력해 주세요.");
@@ -76,7 +101,7 @@ export class FindPasswordPage {
     //   .catch(error => {
     //     console.log(error.error);
     //   });
-    this.contactTell=true;
+    this.contactTell = true;
   }
 
   cancel() {
@@ -84,7 +109,6 @@ export class FindPasswordPage {
   }
 
   // mobileAuth() {
-
 
   //   console.log("mobileAuth");
 
@@ -98,7 +122,7 @@ export class FindPasswordPage {
   //   }
   //   this.browserRef.on("exit").subscribe((event) => {
   //     console.log("InAppBrowserEvent(exit):" + JSON.stringify(event));
-  //     // if(event.url.startsWith("http://13.125.35.123/checkplus_success.php")){ // Just testing. Please add success and failure into server 
+  //     // if(event.url.startsWith("http://13.125.35.123/checkplus_success.php")){ // Just testing. Please add success and failure into server
   //     //           console.log("cert success");
   //     //           thisPage.is_certificated = true;
   //     //           thisPage.showAlert("안내", "본인인증 성공했습니다. 나머지 정보를 입력해 주세요.");
@@ -119,7 +143,7 @@ export class FindPasswordPage {
 
   //   this.browserRef.on("loadstart").subscribe(function (e) {
 
-  //     if (e.url.startsWith("http://13.125.35.123/success.php")) { // Just testing. Please add success and failure into server 
+  //     if (e.url.startsWith("http://13.125.35.123/success.php")) { // Just testing. Please add success and failure into server
   //       console.log("cert success");
   //       var tempUrl = e.url;
   //       var urlArr = tempUrl.split("?phone=");
@@ -137,11 +161,10 @@ export class FindPasswordPage {
   //       return;
   //     }
 
-
   //   });
   //   this.browserRef.on("loaderror").subscribe((event) => {
   //     console.log("loaderror:" + event.url);
-  //     if (event.url.startsWith("http://13.125.35.123/success.php")) { // Just testing. Please add success and failure into server 
+  //     if (event.url.startsWith("http://13.125.35.123/success.php")) { // Just testing. Please add success and failure into server
   //       console.log("cert success");
   //       var tempUrl = event.url;
   //       var urlArr = tempUrl.split("?phone=");
@@ -162,7 +185,7 @@ export class FindPasswordPage {
   //   this.browserRef.on("loadstop").subscribe((event) => {
   //     console.log("loadstop event comes " + event.url);
   //     //본인인증 성공했으면
-  //     if (event.url.startsWith("http://13.125.35.123/success.php")) { // Just testing. Please add success and failure into server 
+  //     if (event.url.startsWith("http://13.125.35.123/success.php")) { // Just testing. Please add success and failure into server
   //       console.log("cert success");
   //       var tempUrl = event.url;
   //       var urlArr = tempUrl.split("?phone=");
@@ -181,7 +204,5 @@ export class FindPasswordPage {
 
   //   });
 
-
   // }
-
 }
