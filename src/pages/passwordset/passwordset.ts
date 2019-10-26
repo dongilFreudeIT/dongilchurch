@@ -10,6 +10,7 @@ import {
 
 import { HTTP } from "@ionic-native/http";
 import { MenuController } from "ionic-angular";
+import { Storage } from "@ionic/storage";
 
 import { ServerProvider } from "../../providers/server/server";
 @Component({
@@ -30,10 +31,12 @@ export class PasswordsetPage {
     public menuCtrl: MenuController,
     public viewCtrl: ViewController,
     public modalCtrl: ModalController,
+    private storage: Storage,
     private server: ServerProvider
   ) {
     this.url = this.server.url;
-    this.user_id = this.navParams.data;
+    console.log("this.navParams.data" + JSON.stringify(this.navParams.data));
+    this.user_id = this.navParams.data.id;
   }
 
   changepw() {
@@ -66,6 +69,7 @@ export class PasswordsetPage {
           //로그인 성공이면
           if (obj.code == "S01") {
             this.showAlert("안내", "비밀번호 변경 성공");
+            this.login();
             this.navCtrl.pop();
           } else {
             var errorMsg = obj.message;
@@ -92,11 +96,90 @@ export class PasswordsetPage {
     this.navCtrl.pop();
   }
 
-  chkPwd(str) {
-    var reg_pwd = /^.*(?=.{6,20})(?=.*[0-9])(?=.*[a-zA-Z]).*$/;
-    if (!reg_pwd.test(str)) {
-      return false;
-    }
-    return true;
+  login() {
+    console.log(this.user_id + " " + this.password);
+    var accountInfo = { id: this.user_id, pw: this.password };
+    //입력 받은 id, pw로 로그인 시도
+    this.http
+      .post(this.url + "/user/login", accountInfo, {})
+      .then(data => {
+        if (data.status == 200) {
+          console.log(data.data);
+          var obj = JSON.parse(data.data);
+          //로그인 성공이면
+          if (obj.code == "S01") {
+            //user_serial, 등급을 내부 저장소에 저장하고 메뉴를 로그인 메뉴로 바꾸고 홈으로 이동
+            this.storage.set("user_serial", obj.user_serial);
+            console.log(
+              "login page store user serial : " +
+                this.storage.get("user_serial")
+            );
+            this.storage.set("grade", obj.grade);
+            if (obj.grade == "관리자") {
+              this.menuCtrl.enable(true, "master");
+              this.menuCtrl.enable(false, "authenticated");
+              this.menuCtrl.enable(false, "unauthenticated");
+              this.menuCtrl.enable(false, "parking_manager");
+            } else if (obj.grade == "주차장매니저") {
+              this.menuCtrl.enable(true, "parking_manager");
+              this.menuCtrl.enable(false, "master");
+              this.menuCtrl.enable(false, "authenticated");
+              this.menuCtrl.enable(false, "unauthenticated");
+            } else {
+              this.menuCtrl.enable(false, "master");
+              this.menuCtrl.enable(true, "authenticated");
+              this.menuCtrl.enable(false, "unauthenticated");
+              this.menuCtrl.enable(false, "parking_manager");
+            }
+            //만약 storage에 저장된 push_token이 있으면 서버에 등록 시킨다.
+            //일반적으로 앱 실행시 이미 push_token이 이미 생성되어 storage에 저장되어 있다.
+            this.storage.get("push_token").then(value => {
+              console.log("start save token :" + value);
+              var param = { push_token: value, serial: obj.user_serial };
+              this.http
+                .post(this.url + "/user/update_token", param, {})
+                .then(data => {
+                  if (data.status == 200) {
+                    console.log(data.data);
+                    // var obj = JSON.parse(data.data);
+                  }
+                });
+            });
+
+            this.showAlert(
+              "<strong>" +
+                obj.name +
+                "</strong>님 로그인 되었습니다.<br>사랑하며 축복합니다!",
+              ""
+            );
+          } else {
+            var errorMsg = obj.message;
+            this.showAlert("로그인 실패", errorMsg);
+          }
+
+          this.http
+            .post(
+              this.url + "/user/get_user",
+              { user_serial: obj.user_serial },
+              {}
+            )
+            .then(data => {
+              if (data.status == 200) {
+                console.log(data.data);
+                var obj = JSON.parse(data.data);
+                //로그인 성공이면
+                if (obj.code == "S01") {
+                  var user = obj.value;
+                  this.storage.set("get_user", user);
+                  // this.navCtrl.push(MyinfoPage, user);
+                } else {
+                }
+              }
+            }); //http end
+        }
+      })
+      .catch(error => {
+        console.log(error.error);
+      });
   }
 }

@@ -25,12 +25,17 @@ export class MyinfoPage {
     this.url = this.server.url;
     //전달받은 data(유저 정보)를 user 객체로 대입
     this.user = this.navParams.data;
-    this.birthdate =
+    try {
+      this.birthdate =
       this.user.birthday.substring(0, 4) +
       "-" +
       this.user.birthday.substring(4, 6) +
       "-" +
       this.user.birthday.substring(6, 8);
+    } catch (error) {
+      
+    }
+   
 
     // console.log("birth 1 : " +this.birthdate);
   }

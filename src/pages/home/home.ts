@@ -112,7 +112,10 @@ export class HomePage {
     // this.navCtrl.setRoot(HomePage);
   }
   goToDongilTV() {
-    const browser = this.iab.create("http://www.dongil.org/index.php?mid=dongilTV", "target='_black'");
+    const browser = this.iab.create(
+      "http://www.dongil.org/index.php?mid=dongilTV",
+      "target='_black'"
+    );
     browser.show();
   }
   showAlert(title, msg) {
@@ -128,7 +131,17 @@ export class HomePage {
     this.navCtrl.push(FamilysitePage);
   }
   goToWeekly() {
-    this.navCtrl.push(WeeklyPage);
+    // this.navCtrl.push(WeeklyPage);
+    this.http.post("http://dongil.org/data/weekly.php", {}, {}).then(data => {
+      // console.log(data.data);
+      var regex = /.*?src="(.*?)"/;
+      let img = regex.exec(data.data)[1];
+      console.log(img);
+      const browser = this.iab.create(img, "target='_blank'", {
+        enableViewportScale: "yes"
+      });
+      browser.show();
+    });
   }
   goToSignupCheck() {
     this.navCtrl.push(SignupCheckPage);

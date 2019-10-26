@@ -26,12 +26,14 @@ export class UserdetailPage {
     this.url = this.server.url;
     this.user = this.navParams.data;
     if (this.user.birthday) {
-      this.birthdate =
-        this.user.birthday.substring(0, 4) +
-        "-" +
-        this.user.birthday.substring(4, 6) +
-        "-" +
-        this.user.birthday.substring(6, 8);
+      try {
+        this.birthdate =
+          this.user.birthday.substring(0, 4) +
+          "-" +
+          this.user.birthday.substring(4, 6) +
+          "-" +
+          this.user.birthday.substring(6, 8);
+      } catch (error) {}
     }
     console.log("received = " + this.user.name);
   }
@@ -43,7 +45,7 @@ export class UserdetailPage {
     }
     //생년월일 체크
     if (this.birthdate) {
-      console.log("birth 2 : " +this.birthdate);
+      console.log("birth 2 : " + this.birthdate);
       var today = new Date();
       var birth = new Date(this.birthdate);
       if (birth >= today) {

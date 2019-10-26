@@ -5,7 +5,7 @@ import { NavController,ViewController, ModalController,AlertController  } from '
 import { HTTP } from '@ionic-native/http';
 import { Storage } from '@ionic/storage';
 import { MenuController } from 'ionic-angular';
-import { FindPasswordPage } from '../findpassword/findpassword';
+import { FindpasswordNewPage } from "../findpassword-new/findpassword-new";
 import { SignupCheckPage } from '../signup-check/signup-check';
 
 import { ServerProvider } from "../../providers/server/server";
@@ -112,14 +112,15 @@ export class LoginPage {
   goSignUp() {
     // this.viewCtrl.dismiss();
     // let modal = this.modalCtrl.create(SignupPage, {}, {cssClass: 'modal-gradient'});
-    this.viewCtrl.dismiss()
+    this.viewCtrl.dismiss();
     let modal = this.modalCtrl.create(SignupCheckPage, {}, {cssClass: 'modal-gradient'});
     modal.present();
     
   }
 
   goPasswordSet() {
-    this.navCtrl.push(FindPasswordPage);
+    this.viewCtrl.dismiss()
+    this.navCtrl.push(FindpasswordNewPage);
   }
 
   showAlert(title, msg){

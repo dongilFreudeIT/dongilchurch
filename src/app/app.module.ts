@@ -21,6 +21,7 @@ import { ParkingManagerPage } from "../pages/parkingmanager/parkingmanager";
 import { PushShowPage } from "../pages/pushShow/pushShow";
 import { PasswordsetPage } from "../pages/passwordset/passwordset";
 import { FindPasswordPage } from "../pages/findpassword/findpassword";
+import { FindpasswordNewPage } from "../pages/findpassword-new/findpassword-new";
 import { FamilysitePage } from "../pages/familysite/familysite";
 import { RegisteruserPage } from "../pages/registeruser/registeruser";
 import { SignupCheckPage } from "../pages/signup-check/signup-check";
@@ -117,6 +118,7 @@ const firebaseUiAuthConfig: firebaseui.auth.Config = {
     PushShowPage,
     PasswordsetPage,
     FindPasswordPage,
+    FindpasswordNewPage,
     FamilysitePage,
     RegisteruserPage,
     SignupCheckPage,
@@ -173,6 +175,7 @@ const firebaseUiAuthConfig: firebaseui.auth.Config = {
     PushShowPage,
     PasswordsetPage,
     FindPasswordPage,
+    FindpasswordNewPage,
     FamilysitePage,
     RegisteruserPage,
     SignupCheckPage,

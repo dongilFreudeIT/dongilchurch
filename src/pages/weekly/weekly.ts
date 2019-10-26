@@ -1,36 +1,42 @@
-import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { Component } from "@angular/core";
+import { NavController, NavParams } from "ionic-angular";
 
-import { HTTP } from '@ionic-native/http';
-import { InAppBrowser } from '@ionic-native/in-app-browser';
-
+import { HTTP } from "@ionic-native/http";
+import { InAppBrowser } from "@ionic-native/in-app-browser";
 
 @Component({
-  selector: 'page-weekly',
-  templateUrl: 'weekly.html',
+  selector: "page-weekly",
+  templateUrl: "weekly.html"
 })
 export class WeeklyPage {
-  url: string = 'http://dongil.org/data/weekly.php';
+  url: string = "http://dongil.org/data/weekly.php";
   img: string;
-  flagGetImage:boolean = false;
+  flagGetImage: boolean = false;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public http : HTTP
-    ,private iab: InAppBrowser) {
-    this.http.post(this.url ,{}, {}).then(data => {
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    public http: HTTP,
+    private iab: InAppBrowser
+  ) {
+    this.http.post(this.url, {}, {}).then(data => {
       // console.log(data.data);
       var regex = /.*?src="(.*?)"/;
       this.img = regex.exec(data.data)[1];
-      console.log(this.img);    
-      this.flagGetImage=true;
+      console.log(this.img);
+      this.flagGetImage = true;
+      const browser = this.iab.create(this.img, "target='_blank'", {
+        enableViewportScale: "yes"
+      });
+      browser.show();
     });
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad WeeklyPage');
+    console.log("ionViewDidLoad WeeklyPage");
   }
-  showWeekly(){
-    const browser = this.iab.create(this.img,"target='_blank'"  );
+  showWeekly() {
+    const browser = this.iab.create(this.img, "target='_blank'");
     browser.show();
-    
   }
 }

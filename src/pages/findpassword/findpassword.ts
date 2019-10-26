@@ -7,6 +7,12 @@ import { InAppBrowser } from "@ionic-native/in-app-browser";
 import { PasswordsetPage } from "../passwordset/passwordset";
 import { ServerProvider } from "../../providers/server/server";
 
+import { OnInit } from "@angular/core";
+import { AngularFireAuth } from "@angular/fire/auth";
+import {
+  FirebaseUISignInSuccessWithAuthResult,
+  FirebaseUISignInFailure
+} from "firebaseui-angular";
 import * as firebaseui from "firebaseui";
 import * as firebase from "firebase";
 var config = {
@@ -37,7 +43,8 @@ export class FindPasswordPage {
     public iab: InAppBrowser,
     private device: Device,
     public viewCtrl: ViewController,
-    private server: ServerProvider
+    private server: ServerProvider,
+    private afAuth: AngularFireAuth
   ) {
     this.url = this.server.url;
   }
@@ -63,7 +70,7 @@ export class FindPasswordPage {
     });
   }
   next() {
-    this.smsAuth()
+    this.smsAuth();
     // console.log("cer phone=" + FindPasswordPage.cerPhone);
     // if (this.phone == null || this.phone == '') {
     //   this.showAlert("안내", "휴대폰 번호를 입력해 주세요.");
